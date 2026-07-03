@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Margin &amp; Markup Calculator — WorkTools</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📈</text></svg>">
+  <style>
+    .calc-panel {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 110px 1fr 44px;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .field-row label {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    .input-group {
+      display: flex;
+      align-items: center;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .input-group:focus-within {
+      border-color: var(--accent);
+    }
+
+    .input-group .affix {
+      padding: 0 10px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      user-select: none;
+    }
+
+    .input-group input {
+      flex: 1;
+      min-width: 0;
+      border: none;
+      background: transparent;
+      color: var(--text);
+      font: inherit;
+      font-size: 1.05rem;
+      padding: 10px 12px;
+      outline: none;
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
+
+    .input-group input::-webkit-outer-spin-button,
+    .input-group input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+
+    .input-group input:disabled {
+      color: var(--text-muted);
+    }
+
+    .field-row.is-locked .input-group {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .field-row.is-derived .input-group {
+      opacity: 0.65;
+    }
+
+    .lock-btn {
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface-2);
+      cursor: pointer;
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    .lock-btn[aria-pressed="true"] {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .field-error {
+      grid-column: 2;
+      color: var(--danger);
+      font-size: 0.82rem;
+      margin: -8px 0 12px;
+      display: none;
+    }
+
+    .field-error.show {
+      display: block;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 20px 0;
+    }
+
+    .tax-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .tax-row .controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .tax-row select {
+      flex: 1;
+      min-width: 0;
+      font: inherit;
+      padding: 10px 8px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface-2);
+      color: var(--text);
+    }
+
+    .tax-row .input-group {
+      width: 120px;
+      flex: none;
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 6px 0;
+    }
+
+    .result-row .label {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    .result-row .value {
+      font-variant-numeric: tabular-nums;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .result-row.total .value {
+      font-size: 1.45rem;
+      color: var(--accent);
+    }
+
+    .hint {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      margin: 16px 0 0;
+    }
+
+    /* Preset dialog */
+    dialog {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text);
+      padding: 20px;
+      width: min(360px, 90vw);
+      box-shadow: var(--shadow);
+    }
+
+    dialog::backdrop {
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    dialog h2 {
+      margin: 0 0 14px;
+      font-size: 1.1rem;
+    }
+
+    .preset-list {
+      list-style: none;
+      margin: 0 0 14px;
+      padding: 0;
+    }
+
+    .preset-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--border);
+      gap: 8px;
+    }
+
+    .preset-list .name {
+      flex: 1;
+    }
+
+    .preset-list .rate {
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .preset-list .delete {
+      border: none;
+      background: none;
+      color: var(--danger);
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 2px 6px;
+    }
+
+    .preset-add {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .preset-add input {
+      font: inherit;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface-2);
+      color: var(--text);
+      min-width: 0;
+    }
+
+    .preset-add input[name="name"] {
+      flex: 1;
+    }
+
+    .preset-add input[name="rate"] {
+      width: 80px;
+    }
+
+    .dialog-actions {
+      display: flex;
+      justify-content: flex-end;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="site-header">
+      <a class="back-link" href="../../">&larr; WorkTools</a>
+      <h1 class="site-title">Margin &amp; Markup Calculator</h1>
+    </header>
+
+    <main class="panel calc-panel">
+      <div class="field-row" data-field="cost">
+        <label for="cost">Cost</label>
+        <div class="input-group">
+          <span class="affix">$</span>
+          <input type="number" id="cost" inputmode="decimal" step="0.01" min="0" placeholder="0.00">
+        </div>
+        <button type="button" class="lock-btn" data-lock="cost" aria-pressed="false" title="Lock cost">🔓</button>
+      </div>
+
+      <div class="field-row" data-field="markup">
+        <label for="markup">Markup</label>
+        <div class="input-group">
+          <input type="number" id="markup" inputmode="decimal" step="0.01" placeholder="0">
+          <span class="affix">%</span>
+        </div>
+        <button type="button" class="lock-btn" data-lock="markup" aria-pressed="false" title="Lock markup">🔓</button>
+      </div>
+
+      <div class="field-row" data-field="margin">
+        <label for="margin">Margin</label>
+        <div class="input-group">
+          <input type="number" id="margin" inputmode="decimal" step="0.01" max="99.99" placeholder="0">
+          <span class="affix">%</span>
+        </div>
+        <button type="button" class="lock-btn" data-lock="margin" aria-pressed="false" title="Lock margin">🔓</button>
+      </div>
+      <p class="field-error" id="marginError">Margin must be less than 100%.</p>
+
+      <div class="field-row" data-field="sell">
+        <label for="sell">Sell price</label>
+        <div class="input-group">
+          <span class="affix">$</span>
+          <input type="number" id="sell" inputmode="decimal" step="0.01" min="0" placeholder="0.00">
+        </div>
+        <button type="button" class="lock-btn" data-lock="sell" aria-pressed="false" title="Lock sell price">🔓</button>
+      </div>
+
+      <hr class="section-divider">
+
+      <div class="tax-row">
+        <label for="taxPreset">Tax preset</label>
+        <div class="controls">
+          <select id="taxPreset" aria-label="Tax rate preset"></select>
+          <button type="button" class="btn" id="managePresets">Manage</button>
+        </div>
+      </div>
+
+      <div class="tax-row">
+        <label for="taxRate">Tax rate</label>
+        <div class="controls">
+          <div class="input-group">
+            <input type="number" id="taxRate" inputmode="decimal" step="0.001" min="0" placeholder="0">
+            <span class="affix">%</span>
+          </div>
+        </div>
+      </div>
+
+      <hr class="section-divider">
+
+      <div class="result-row">
+        <span class="label">Tax</span>
+        <span class="value" id="taxDollars">—</span>
+      </div>
+      <div class="result-row total">
+        <span class="label">Total (sell + tax)</span>
+        <span class="value" id="totalDollars">—</span>
+      </div>
+
+      <p class="hint">🔒 locks a value in place — type in any other field and the rest recalculate around it.</p>
+    </main>
+  </div>
+
+  <dialog id="presetDialog">
+    <h2>Tax rate presets</h2>
+    <ul class="preset-list" id="presetList"></ul>
+    <form class="preset-add" id="presetAddForm">
+      <input name="name" type="text" placeholder="Name (e.g. PA)" required>
+      <input name="rate" type="number" step="0.001" min="0" placeholder="%" required>
+      <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+    <div class="dialog-actions">
+      <button type="button" class="btn" id="closePresets">Done</button>
+    </div>
+  </dialog>
+
+  <script src="calc.js"></script>
+</body>
+</html>
