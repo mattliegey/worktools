@@ -15,8 +15,20 @@
 
   const FIELDS = ["cost", "markup", "margin", "sell"];
   const LS_PRESETS = "worktools.taxPresets";
+  const LS_PRESETS_SEED = "worktools.taxPresetsSeed";
   const LS_TAX_RATE = "worktools.lastTaxRate";
   const LS_LOCK = "worktools.mm.lock";
+
+  // Baked-in presets, merged into saved presets once per seed version.
+  // Bump SEED_VERSION when adding new defaults so existing browsers
+  // pick them up, while still letting deletions stick afterwards.
+  const SEED_VERSION = "2";
+  const DEFAULT_PRESETS = [
+    { name: "None", rate: 0 },
+    { name: "NYC", rate: 8.875 },
+    { name: "Nassau", rate: 8.625 },
+    { name: "Suffolk", rate: 8.75 },
+  ];
 
   const inputs = {};
   FIELDS.forEach((f) => (inputs[f] = document.getElementById(f)));
@@ -188,6 +200,7 @@
   // ---------- tax presets ----------
 
   function loadPresets() {
+    let saved = null;
     try {
       const raw = JSON.parse(localStorage.getItem(LS_PRESETS));
       if (
@@ -196,12 +209,22 @@
           (p) => p && typeof p.name === "string" && Number.isFinite(p.rate)
         )
       ) {
-        return raw;
+        saved = raw;
       }
     } catch (_) {
-      /* fall through to seed */
+      /* treat as unseeded */
     }
-    return [{ name: "None", rate: 0 }];
+
+    const list = saved ?? [];
+    if (localStorage.getItem(LS_PRESETS_SEED) !== SEED_VERSION) {
+      const names = new Set(list.map((p) => p.name));
+      for (const d of DEFAULT_PRESETS) {
+        if (!names.has(d.name)) list.push({ ...d });
+      }
+      localStorage.setItem(LS_PRESETS_SEED, SEED_VERSION);
+      localStorage.setItem(LS_PRESETS, JSON.stringify(list));
+    }
+    return list;
   }
 
   let presets = loadPresets();
