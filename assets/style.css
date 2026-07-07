@@ -53,10 +53,11 @@ body {
 /* Header */
 .site-header {
   display: flex;
-  align-items: baseline;
-  gap: 12px;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
   padding: 8px 0 20px;
-  flex-wrap: wrap;
 }
 
 .site-title {
