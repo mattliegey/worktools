@@ -14,6 +14,7 @@
   const LS_GAP = "worktools.deck.gap";
   const LS_CUSTOM_GAP = "worktools.deck.customGap";
   const LS_WASTE = "worktools.deck.waste";
+  const LS_BOARD_LENGTH = "worktools.deck.boardLength";
 
   const GAP_OPTIONS = [
     { label: "None (0\")", value: 0 },
@@ -39,6 +40,8 @@
   const widthInput = document.getElementById("widthFt");
   const sqftInput = document.getElementById("sqft");
   const lfInput = document.getElementById("lf");
+  const boardLengthInput = document.getElementById("boardLength");
+  const piecesEl = document.getElementById("pieces");
   const coverageNote = document.getElementById("coverageNote");
 
   // Which of sqft / lf the user last entered; the other side is derived.
@@ -120,6 +123,16 @@
       const lf = num(lfInput);
       sqftInput.value = lf === null ? "" : fmt((lf / wasteMult) * cov);
     }
+    updatePieces();
+  }
+
+  function updatePieces() {
+    const lf = num(lfInput);
+    const len = num(boardLengthInput);
+    piecesEl.textContent =
+      lf !== null && lf >= 0 && len !== null && len > 0
+        ? String(Math.ceil(lf / len))
+        : "—";
   }
 
   // ---------- events ----------
@@ -177,6 +190,11 @@
     recalc();
   });
 
+  boardLengthInput.addEventListener("input", () => {
+    localStorage.setItem(LS_BOARD_LENGTH, boardLengthInput.value);
+    updatePieces();
+  });
+
   // ---------- init ----------
 
   const savedWidth = localStorage.getItem(LS_WIDTH);
@@ -200,6 +218,14 @@
   const savedWaste = localStorage.getItem(LS_WASTE);
   if (savedWaste !== null && Number.isFinite(parseFloat(savedWaste))) {
     wasteInput.value = savedWaste;
+  }
+
+  const savedBoardLength = localStorage.getItem(LS_BOARD_LENGTH);
+  if (
+    savedBoardLength !== null &&
+    Number.isFinite(parseFloat(savedBoardLength))
+  ) {
+    boardLengthInput.value = savedBoardLength;
   }
 
   syncCustomVisibility();
