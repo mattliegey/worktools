@@ -19,7 +19,7 @@
         { name: "Timberline HDZ", bps: 3 },
         { name: "Timberline UHDZ", bps: 3 },
         { name: "Timberline AS II (impact)", bps: 3 },
-        { name: "Slateline", bps: 4 },
+        { name: "Slateline", bps: 3 },
         { name: "Camelot II", bps: 4 },
         { name: "Woodland", bps: 4 },
         { name: "Grand Sequoia", bps: 5 },
@@ -50,7 +50,7 @@
         { name: "Nordic", bps: 3 },
         { name: "Royal Estate", bps: 3 },
         { name: "Crowne Slate", bps: 4 },
-        { name: "Armourshake", bps: 4 },
+        { name: "Armourshake", bps: 5 },
       ],
     },
     {
@@ -68,6 +68,8 @@
       lines: [
         { name: "GlassMaster (3-tab)", bps: 3 },
         { name: "ProLam", bps: 3 },
+        { name: "Briarwood Pro", bps: 3 },
+        { name: "Castlebrook", bps: 3 },
         { name: "Pinnacle Pristine", bps: 3 },
         { name: "Pinnacle Impact (Sun)", bps: 3 },
         { name: "StormMaster Shake", bps: 3 },
