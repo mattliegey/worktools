@@ -128,6 +128,7 @@
   const bundlesEl = document.getElementById("bundles");
   const exactNote = document.getElementById("exactNote");
   const capSel = document.getElementById("hrSelect");
+  const capStatic = document.getElementById("hrStatic");
   const ridgeInput = document.getElementById("ridgeFeet");
   const hrNoteEl = document.getElementById("hrNote");
   const hrBundlesEl = document.getElementById("hrBundles");
@@ -188,6 +189,13 @@
       if (found >= 0) idx = found;
     }
     capSel.value = String(idx);
+
+    // Only offer a dropdown when there's an actual choice; otherwise show
+    // the single matched cap as plain text.
+    const multiple = line.hrs.length > 1;
+    capSel.style.display = multiple ? "" : "none";
+    capStatic.style.display = multiple ? "none" : "";
+    capStatic.textContent = multiple ? "" : line.hrs[idx].name;
   }
 
   function recalc() {
