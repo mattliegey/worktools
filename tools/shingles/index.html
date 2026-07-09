@@ -136,6 +136,12 @@
       font-variant-numeric: tabular-nums;
     }
 
+    .hr-name {
+      color: var(--text);
+      font-size: 0.95rem;
+      font-variant-numeric: tabular-nums;
+    }
+
     .hint {
       color: var(--text-muted);
       font-size: 0.82rem;
@@ -180,12 +186,37 @@
       </div>
 
       <div class="result-row">
-        <span class="label">Bundles needed</span>
+        <span class="label">Field bundles needed</span>
         <span class="value" id="bundles">—</span>
       </div>
       <p class="exact-note" id="exactNote"></p>
 
-      <p class="hint">Bundle counts are the manufacturers' standard packaging (a square = 100 sq ft). Premium and designer lines take more bundles per square than standard architectural shingles — always confirm coverage with your distributor before ordering.</p>
+      <hr class="section-divider">
+
+      <div class="field-row">
+        <label>Hip &amp; ridge cap</label>
+        <div class="controls">
+          <span class="hr-name" id="hrName"></span>
+        </div>
+      </div>
+
+      <div class="field-row primary">
+        <label for="ridgeFeet">Hip / ridge length</label>
+        <div class="controls">
+          <div class="input-group">
+            <input type="number" id="ridgeFeet" inputmode="decimal" step="0.1" min="0" placeholder="0">
+            <span class="affix">lin ft</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-row">
+        <span class="label">Hip &amp; ridge bundles</span>
+        <span class="value" id="hrBundles">—</span>
+      </div>
+      <p class="exact-note" id="hrExactNote"></p>
+
+      <p class="hint">Bundle counts are the manufacturers' standard packaging (a square = 100 sq ft). The hip &amp; ridge cap shown is the manufacturer's matching product for the selected line; premium and designer lines take more bundles per square than standard architectural shingles — always confirm coverage with your distributor before ordering.</p>
     </main>
   </div>
 
