@@ -5,10 +5,10 @@
  * Hip/ridge bundles = ceil(linealFeet ÷ capCoveragePerBundle).
  * Both round up (bundles are sold whole). A square = 100 sq ft.
  *
- * Each line names its manufacturer-matched hip & ridge cap and that cap's
+ * Each line lists its manufacturer-matched hip & ridge cap(s) and each cap's
  * lineal-feet-per-bundle coverage (verified against manufacturer/distributor
- * listings, July 2026). Standard 3-tab/architectural lines pair with the
- * brand's standard cap; designer/premium lines pair with the premium cap.
+ * listings, July 2026). When a line offers more than one compatible cap, the
+ * cap becomes a selectable choice; the first entry is the default.
  */
 
 (() => {
@@ -16,6 +16,7 @@
 
   const LS_BRAND = "worktools.shingles.brand";
   const LS_LINE = "worktools.shingles.line";
+  const LS_CAP = "worktools.shingles.cap";
   const LS_RIDGE = "worktools.shingles.ridgeFeet";
 
   // Hip & ridge caps, keyed for reuse: { name, lf } (lf = lineal ft per bundle)
@@ -46,76 +47,76 @@
     {
       name: "GAF",
       lines: [
-        { name: "Royal Sovereign (3-tab)", bps: 3, hr: HR.sealARidge },
-        { name: "Timberline HDZ", bps: 3, hr: HR.timberTex },
-        { name: "Timberline UHDZ", bps: 3, hr: HR.timberTex },
-        { name: "Timberline AS II (impact)", bps: 3, hr: HR.sealARidgeAS },
-        { name: "Slateline", bps: 3, hr: HR.timberTex },
-        { name: "Camelot II", bps: 4, hr: HR.timberTex },
-        { name: "Woodland", bps: 4, hr: HR.timberTex },
-        { name: "Grand Sequoia", bps: 5, hr: HR.timberTex },
-        { name: "Grand Canyon", bps: 6, hr: HR.timberCrest },
-        { name: "Glenwood", bps: 6, hr: HR.timberTex },
+        { name: "Royal Sovereign (3-tab)", bps: 3, hrs: [HR.sealARidge] },
+        { name: "Timberline HDZ", bps: 3, hrs: [HR.timberTex, HR.sealARidge] },
+        { name: "Timberline UHDZ", bps: 3, hrs: [HR.timberTex] },
+        { name: "Timberline AS II (impact)", bps: 3, hrs: [HR.sealARidgeAS] },
+        { name: "Slateline", bps: 3, hrs: [HR.timberTex] },
+        { name: "Camelot II", bps: 4, hrs: [HR.timberTex] },
+        { name: "Woodland", bps: 4, hrs: [HR.timberTex] },
+        { name: "Grand Sequoia", bps: 5, hrs: [HR.timberTex] },
+        { name: "Grand Canyon", bps: 6, hrs: [HR.timberCrest] },
+        { name: "Glenwood", bps: 6, hrs: [HR.timberTex] },
       ],
     },
     {
       name: "Owens Corning",
       lines: [
-        { name: "Supreme (3-tab)", bps: 3, hr: HR.proEdge },
-        { name: "Oakridge", bps: 3, hr: HR.proEdge },
-        { name: "TruDefinition Duration", bps: 3, hr: HR.proEdge },
-        { name: "Duration Flex", bps: 3, hr: HR.proEdge },
-        { name: "Duration Storm", bps: 3, hr: HR.proEdge },
-        { name: "Duration Designer", bps: 3, hr: HR.decoRidge },
-        { name: "Berkshire", bps: 5, hr: HR.ocBerkshire },
-        { name: "Woodcrest", bps: 6, hr: HR.decoRidge },
-        { name: "Woodmoor", bps: 6, hr: HR.decoRidge },
+        { name: "Supreme (3-tab)", bps: 3, hrs: [HR.proEdge] },
+        { name: "Oakridge", bps: 3, hrs: [HR.proEdge] },
+        { name: "TruDefinition Duration", bps: 3, hrs: [HR.proEdge] },
+        { name: "Duration Flex", bps: 3, hrs: [HR.proEdge] },
+        { name: "Duration Storm", bps: 3, hrs: [HR.proEdge] },
+        { name: "Duration Designer", bps: 3, hrs: [HR.decoRidge] },
+        { name: "Berkshire", bps: 5, hrs: [HR.ocBerkshire] },
+        { name: "Woodcrest", bps: 6, hrs: [HR.decoRidge] },
+        { name: "Woodmoor", bps: 6, hrs: [HR.decoRidge] },
       ],
     },
     {
       name: "IKO",
       lines: [
-        { name: "Marathon Plus AR (3-tab)", bps: 3, hr: HR.ikoHR12 },
-        { name: "Cambridge", bps: 3, hr: HR.ikoHR12 },
-        { name: "Dynasty", bps: 3, hr: HR.ikoHR12 },
-        { name: "Nordic", bps: 3, hr: HR.ikoHR12 },
-        { name: "Royal Estate", bps: 3, hr: HR.ikoUltraHP },
-        { name: "Crowne Slate", bps: 4, hr: HR.ikoUltraHP },
-        { name: "Armourshake", bps: 5, hr: HR.ikoUltraHP },
+        { name: "Marathon Plus AR (3-tab)", bps: 3, hrs: [HR.ikoHR12] },
+        { name: "Cambridge", bps: 3, hrs: [HR.ikoHR12] },
+        { name: "Dynasty", bps: 3, hrs: [HR.ikoHR12] },
+        { name: "Nordic", bps: 3, hrs: [HR.ikoHR12] },
+        { name: "Royal Estate", bps: 3, hrs: [HR.ikoUltraHP] },
+        { name: "Crowne Slate", bps: 4, hrs: [HR.ikoUltraHP] },
+        { name: "Armourshake", bps: 5, hrs: [HR.ikoUltraHP] },
       ],
     },
     {
       name: "TAMKO",
       lines: [
-        { name: "Elite Glass-Seal (3-tab)", bps: 3, hr: HR.tamkoHR },
-        { name: "Heritage", bps: 3, hr: HR.tamkoHR },
-        { name: "Heritage Proline Titan XT", bps: 3, hr: HR.tamkoHR },
-        { name: "StormFighter Flex", bps: 3, hr: HR.tamkoHRir },
-        { name: "StormFighter IR", bps: 3, hr: HR.tamkoHRir },
+        { name: "Elite Glass-Seal (3-tab)", bps: 3, hrs: [HR.tamkoHR] },
+        { name: "Heritage", bps: 3, hrs: [HR.tamkoHR] },
+        { name: "Heritage Proline Titan XT", bps: 3, hrs: [HR.tamkoHR] },
+        { name: "StormFighter Flex", bps: 3, hrs: [HR.tamkoHRir] },
+        { name: "StormFighter IR", bps: 3, hrs: [HR.tamkoHRir] },
       ],
     },
     {
       name: "Atlas",
       lines: [
-        { name: "GlassMaster (3-tab)", bps: 3, hr: HR.proCut },
-        { name: "ProLam", bps: 3, hr: HR.proCut },
-        { name: "Briarwood Pro", bps: 3, hr: HR.proCut },
-        { name: "Castlebrook", bps: 3, hr: HR.proCut },
-        { name: "Pinnacle Pristine", bps: 3, hr: HR.proCut },
-        { name: "Pinnacle Impact (Sun)", bps: 3, hr: HR.proCut },
-        { name: "StormMaster Shake", bps: 3, hr: HR.proCut },
-        { name: "StormMaster Slate", bps: 3, hr: HR.proCut },
-        { name: "Legend", bps: 3, hr: HR.proCut },
+        { name: "GlassMaster (3-tab)", bps: 3, hrs: [HR.proCut] },
+        { name: "ProLam", bps: 3, hrs: [HR.proCut] },
+        { name: "Briarwood Pro", bps: 3, hrs: [HR.proCut] },
+        { name: "Castlebrook", bps: 3, hrs: [HR.proCut] },
+        { name: "Pinnacle Pristine", bps: 3, hrs: [HR.proCut] },
+        { name: "Pinnacle Impact (Sun)", bps: 3, hrs: [HR.proCut] },
+        { name: "StormMaster Shake", bps: 3, hrs: [HR.proCut] },
+        { name: "StormMaster Slate", bps: 3, hrs: [HR.proCut] },
+        { name: "Legend", bps: 3, hrs: [HR.proCut] },
       ],
     },
     {
       name: "Malarkey",
       lines: [
-        { name: "Dura-Seal (3-tab)", bps: 3, hr: HR.ridgeFlex },
-        { name: "Vista", bps: 3, hr: HR.ridgeFlex },
-        { name: "Highlander NEX", bps: 3, hr: HR.ridgeFlex },
-        { name: "Legacy", bps: 4, hr: HR.ridgeFlex },
-        { name: "Windsor", bps: 5, hr: HR.ezRidge },
+        { name: "Dura-Seal (3-tab)", bps: 3, hrs: [HR.ridgeFlex] },
+        { name: "Vista", bps: 3, hrs: [HR.ridgeFlex] },
+        { name: "Highlander NEX", bps: 3, hrs: [HR.ridgeFlex] },
+        { name: "Legacy", bps: 4, hrs: [HR.ridgeFlex] },
+        { name: "Windsor", bps: 5, hrs: [HR.ezRidge] },
       ],
     },
   ];
@@ -126,8 +127,9 @@
   const squaresInput = document.getElementById("squares");
   const bundlesEl = document.getElementById("bundles");
   const exactNote = document.getElementById("exactNote");
+  const capSel = document.getElementById("hrSelect");
   const ridgeInput = document.getElementById("ridgeFeet");
-  const hrNameEl = document.getElementById("hrName");
+  const hrNoteEl = document.getElementById("hrNote");
   const hrBundlesEl = document.getElementById("hrBundles");
   const hrExactNote = document.getElementById("hrExactNote");
 
@@ -146,6 +148,12 @@
     return currentBrand().lines[Number(lineSel.value)] ?? null;
   }
 
+  function currentCap() {
+    const line = currentLine();
+    if (!line) return null;
+    return line.hrs[Number(capSel.value)] ?? line.hrs[0];
+  }
+
   function renderLines(preferredName) {
     const brand = currentBrand();
     lineSel.innerHTML = "";
@@ -159,6 +167,27 @@
       const idx = brand.lines.findIndex((l) => l.name === preferredName);
       if (idx >= 0) lineSel.value = String(idx);
     }
+  }
+
+  // Populate the cap dropdown for the current line. A single-cap line still
+  // renders (as one non-interactive-looking option); multi-cap lines let you
+  // choose. Restores a previously chosen cap name when this line offers it.
+  function renderCaps(preferredName) {
+    const line = currentLine();
+    if (!line) return;
+    capSel.innerHTML = "";
+    line.hrs.forEach((cap, i) => {
+      const opt = document.createElement("option");
+      opt.value = String(i);
+      opt.textContent = cap.name;
+      capSel.appendChild(opt);
+    });
+    let idx = 0;
+    if (preferredName) {
+      const found = line.hrs.findIndex((c) => c.name === preferredName);
+      if (found >= 0) idx = found;
+    }
+    capSel.value = String(idx);
   }
 
   function recalc() {
@@ -182,10 +211,9 @@
   }
 
   function updateHipRidge() {
-    const line = currentLine();
-    if (!line) return;
-    const cap = line.hr;
-    hrNameEl.textContent = `${cap.name} — ${cap.lf} lin ft per bundle`;
+    const cap = currentCap();
+    if (!cap) return;
+    hrNoteEl.textContent = `${cap.lf} lin ft per bundle`;
 
     const lf = parseFloat(ridgeInput.value);
     if (!Number.isFinite(lf) || lf < 0) {
@@ -204,12 +232,20 @@
     localStorage.setItem(LS_BRAND, currentBrand().name);
     renderLines();
     localStorage.setItem(LS_LINE, currentLine().name);
+    renderCaps(localStorage.getItem(LS_CAP));
     recalc();
   });
 
   lineSel.addEventListener("change", () => {
     localStorage.setItem(LS_LINE, currentLine().name);
+    renderCaps(localStorage.getItem(LS_CAP));
     recalc();
+  });
+
+  capSel.addEventListener("change", () => {
+    const cap = currentCap();
+    if (cap) localStorage.setItem(LS_CAP, cap.name);
+    updateHipRidge();
   });
 
   squaresInput.addEventListener("input", recalc);
@@ -218,11 +254,12 @@
     updateHipRidge();
   });
 
-  // init: restore last brand/line/ridge length
+  // init: restore last brand/line/cap/ridge length
   const savedBrand = localStorage.getItem(LS_BRAND);
   const brandIdx = BRANDS.findIndex((b) => b.name === savedBrand);
   if (brandIdx >= 0) brandSel.value = String(brandIdx);
   renderLines(localStorage.getItem(LS_LINE));
+  renderCaps(localStorage.getItem(LS_CAP));
   const savedRidge = localStorage.getItem(LS_RIDGE);
   if (savedRidge !== null && Number.isFinite(parseFloat(savedRidge))) {
     ridgeInput.value = savedRidge;
