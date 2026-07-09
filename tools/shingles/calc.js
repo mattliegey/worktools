@@ -47,7 +47,7 @@
       name: "GAF",
       lines: [
         { name: "Royal Sovereign (3-tab)", bps: 3, hr: HR.sealARidge },
-        { name: "Timberline HDZ", bps: 3, hr: HR.sealARidge },
+        { name: "Timberline HDZ", bps: 3, hr: HR.timberTex },
         { name: "Timberline UHDZ", bps: 3, hr: HR.timberTex },
         { name: "Timberline AS II (impact)", bps: 3, hr: HR.sealARidgeAS },
         { name: "Slateline", bps: 3, hr: HR.timberTex },
