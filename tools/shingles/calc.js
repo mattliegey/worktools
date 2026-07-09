@@ -28,6 +28,7 @@
     timberCrest: { name: "GAF TimberCrest", lf: 20 },
     // Owens Corning
     proEdge: { name: "OC ProEdge", lf: 33 },
+    impactRidge: { name: "OC ImpactRidge", lf: 33 },
     decoRidge: { name: "OC DecoRidge", lf: 20 },
     ocBerkshire: { name: "OC Berkshire Hip & Ridge", lf: 21.3 },
     // IKO
@@ -65,7 +66,7 @@
         { name: "Supreme (3-tab)", bps: 3, hrs: [HR.proEdge] },
         { name: "Oakridge", bps: 3, hrs: [HR.proEdge] },
         { name: "TruDefinition Duration", bps: 3, hrs: [HR.proEdge] },
-        { name: "Duration Flex", bps: 3, hrs: [HR.proEdge] },
+        { name: "Duration Flex", bps: 3, hrs: [HR.impactRidge] },
         { name: "Duration Storm", bps: 3, hrs: [HR.proEdge] },
         { name: "Duration Designer", bps: 3, hrs: [HR.decoRidge] },
         { name: "Berkshire", bps: 5, hrs: [HR.ocBerkshire] },
