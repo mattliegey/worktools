@@ -31,9 +31,9 @@
   // unusable drops near the peak); multiple gables/dormers/complex rooflines
   // push waste higher still.
   const WASTE_PRESETS = [
-    { label: "Simple walls — 10%", value: 10 },
-    { label: "Gables / many openings — 15%", value: 15 },
-    { label: "Multiple gables / complex — 20%", value: 20 },
+    { label: "Simple walls", value: 10 },
+    { label: "Gables / openings", value: 15 },
+    { label: "Multiple gables", value: 20 },
   ];
 
   const PRODUCTS = [
