@@ -244,8 +244,9 @@
       </div>
 
       <div class="field-row">
-        <label for="waste">Waste factor</label>
+        <label for="wastePreset">Waste factor</label>
         <div class="controls">
+          <select id="wastePreset" aria-label="Waste factor preset"></select>
           <div class="input-group narrow">
             <input type="number" id="waste" inputmode="decimal" step="1" min="0" value="10">
             <span class="affix">%</span>
@@ -260,6 +261,7 @@
       <p class="exact-note" id="exactNote"></p>
 
       <p class="hint">Lap products overlap 1.25" minimum, so max exposure is plank width − 1.25". HardieShingle panels are 48" wide (7" max exposure straight edge, 6" staggered); HardiePanel sheets install with no exposure. Enter wall length &times; height or square feet directly — the total includes your waste factor.</p>
+      <p class="hint">Waste guide: 10% covers simple rectangular walls with few openings. Go 15% when gable ends, dormers, or lots of windows/doors force short angled cuts — gables waste the most near the peak, where drops are too short to reuse. Use 20%+ for multiple gables or complex rooflines.</p>
     </main>
   </div>
 

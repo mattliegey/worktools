@@ -26,6 +26,16 @@
 
   const OVERLAP = 1.25; // minimum lap overlap in inches
 
+  // Waste guidance from James Hardie estimating practice: simple rectangular
+  // walls cut clean; gable ends force an angled cut on every course (short,
+  // unusable drops near the peak); multiple gables/dormers/complex rooflines
+  // push waste higher still.
+  const WASTE_PRESETS = [
+    { label: "Simple walls — 10%", value: 10 },
+    { label: "Gables / many openings — 15%", value: 15 },
+    { label: "Multiple gables / complex — 20%", value: 20 },
+  ];
+
   const PRODUCTS = [
     {
       id: "plank",
@@ -82,6 +92,7 @@
   const lengthInput = $("lengthFt");
   const heightInput = $("heightFt");
   const sqftInput = $("sqft");
+  const wastePresetSel = $("wastePreset");
   const wasteInput = $("waste");
   const piecesEl = $("pieces");
   const exactNote = $("exactNote");
@@ -100,6 +111,22 @@
     opt.textContent = p.name;
     productSel.appendChild(opt);
   });
+
+  WASTE_PRESETS.forEach((w, i) => {
+    const opt = document.createElement("option");
+    opt.value = String(i);
+    opt.textContent = w.label;
+    wastePresetSel.appendChild(opt);
+  });
+  const customWasteOpt = document.createElement("option");
+  customWasteOpt.value = "custom";
+  customWasteOpt.textContent = "Custom…";
+  wastePresetSel.appendChild(customWasteOpt);
+
+  function selectMatchingWaste(value) {
+    const idx = WASTE_PRESETS.findIndex((w) => w.value === value);
+    wastePresetSel.value = idx >= 0 ? String(idx) : "custom";
+  }
 
   function currentProduct() {
     return PRODUCTS[Number(productSel.value)] ?? PRODUCTS[0];
@@ -274,7 +301,21 @@
     recalc();
   });
 
+  wastePresetSel.addEventListener("change", () => {
+    if (wastePresetSel.value === "custom") {
+      wasteInput.focus();
+      return;
+    }
+    const preset = WASTE_PRESETS[Number(wastePresetSel.value)];
+    if (preset) {
+      wasteInput.value = String(preset.value);
+      localStorage.setItem(LS.waste, wasteInput.value);
+      recalc();
+    }
+  });
+
   wasteInput.addEventListener("input", () => {
+    selectMatchingWaste(num(wasteInput));
     localStorage.setItem(LS.waste, wasteInput.value);
     recalc();
   });
@@ -289,6 +330,7 @@
   if (savedWaste !== null && Number.isFinite(parseFloat(savedWaste))) {
     wasteInput.value = savedWaste;
   }
+  selectMatchingWaste(num(wasteInput));
 
   renderProductControls();
   recalc();
