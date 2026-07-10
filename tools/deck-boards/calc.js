@@ -131,7 +131,7 @@
     const len = num(boardLengthInput);
     piecesEl.textContent =
       lf !== null && lf >= 0 && len !== null && len > 0
-        ? String(Math.ceil(lf / len))
+        ? String(Math.ceil(Math.round((lf / len) * 1e9) / 1e9))
         : "—";
   }
 

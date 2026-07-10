@@ -123,6 +123,9 @@
     },
   ];
 
+  // Squash float noise (e.g. 0.1*3 = 0.30000000000000004) before ceil/integer checks.
+  const tidy = (v) => Math.round(v * 1e9) / 1e9;
+
   const brandSel = document.getElementById("brand");
   const lineSel = document.getElementById("line");
   const lineNote = document.getElementById("lineNote");
@@ -210,7 +213,7 @@
       bundlesEl.textContent = "—";
       exactNote.textContent = "";
     } else {
-      const exact = v * line.bps;
+      const exact = tidy(v * line.bps);
       bundlesEl.textContent = String(Math.ceil(exact));
       exactNote.textContent = Number.isInteger(exact)
         ? ""
@@ -231,7 +234,7 @@
       hrExactNote.textContent = "";
       return;
     }
-    const exact = lf / cap.lf;
+    const exact = tidy(lf / cap.lf);
     hrBundlesEl.textContent = String(Math.ceil(exact));
     hrExactNote.textContent = Number.isInteger(exact)
       ? ""
