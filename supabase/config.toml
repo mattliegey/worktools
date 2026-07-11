@@ -1,0 +1,7 @@
+# Minimal Supabase CLI config so the GitHub integration recognizes this project.
+# Regenerate a full version anytime with `supabase init`.
+
+project_id = "worktools"
+
+[db]
+major_version = 15
