@@ -7,6 +7,6 @@
  * read it). See docs/feedback-setup.md for the one-time setup steps.
  */
 window.WORKTOOLS_SUPABASE = {
-  url: "https://YOUR-PROJECT.supabase.co",
-  anonKey: "YOUR-ANON-PUBLIC-KEY"
+  url: "https://pvfyceetxocuuexmagze.supabase.co",
+  anonKey: "sb_publishable_Y4lal-mdAouUzq7izH6b2g_AYnytPf4"
 };
