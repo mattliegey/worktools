@@ -22,7 +22,15 @@ read it.
 
 ## 2. Create the table + security rules (~1 min)
 
-Open **SQL Editor → New query**, paste this, and click **Run**:
+The schema lives in the repo at
+[`supabase/migrations/20260711130000_create_feedback.sql`](../supabase/migrations/20260711130000_create_feedback.sql).
+
+- **On the free plan:** open **SQL Editor → New query**, paste the block below (same as the
+  migration file), and click **Run**.
+- **On the Pro plan with the GitHub integration connected:** Supabase applies the migration
+  automatically on push — no manual step needed.
+
+Manual SQL (free plan):
 
 ```sql
 create table public.feedback (
