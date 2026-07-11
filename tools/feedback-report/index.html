@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback Report — WorkTools</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="stylesheet" href="../../assets/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📥</text></svg>">
+  <style>
+    .report-wrap { max-width: 860px; }
+
+    /* Login gate */
+    .login-card { max-width: 420px; margin: 40px auto 0; }
+    .login-card h2 { margin: 0 0 6px; font-size: 1.2rem; }
+    .login-card p { margin: 0 0 16px; color: var(--text-muted); font-size: 0.9rem; }
+    .login-card .field {
+      width: 100%; font: inherit; padding: 10px 12px;
+      border: 1px solid var(--border); border-radius: 8px;
+      background: var(--surface-2); color: var(--text); margin-bottom: 12px;
+    }
+    .login-card .field:focus { outline: none; border-color: var(--accent); }
+
+    /* Summary counts */
+    .summary { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+    .stat {
+      flex: 1; min-width: 110px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 12px 14px; box-shadow: var(--shadow);
+    }
+    .stat .num { font-size: 1.5rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .stat .lbl { color: var(--text-muted); font-size: 0.82rem; }
+
+    /* Filters */
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; align-items: center; }
+    .filters .group { display: flex; gap: 6px; flex-wrap: wrap; }
+    .chip {
+      font: inherit; font-size: 0.85rem; padding: 6px 12px; cursor: pointer;
+      border: 1px solid var(--border); border-radius: 999px;
+      background: var(--surface-2); color: var(--text);
+    }
+    .chip[aria-pressed="true"] {
+      background: var(--accent); border-color: var(--accent); color: var(--accent-text);
+    }
+    .filters .spacer { flex: 1; }
+
+    /* Feedback items */
+    .item { margin-bottom: 12px; }
+    .item.is-resolved { opacity: 0.62; }
+    .item-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+    .badge {
+      font-size: 0.75rem; font-weight: 600; padding: 3px 9px; border-radius: 999px;
+      border: 1px solid var(--border); background: var(--surface-2); color: var(--text-muted);
+    }
+    .badge.type-bug { color: var(--danger); border-color: var(--danger); }
+    .badge.type-idea { color: #b8860b; border-color: #b8860b; }
+    .badge.type-feedback { color: var(--accent); border-color: var(--accent); }
+    .badge.tool { background: var(--accent-soft); color: var(--text); border-color: var(--accent-soft); }
+    .item-date { color: var(--text-muted); font-size: 0.8rem; margin-left: auto; }
+    .item-msg { white-space: pre-wrap; margin: 0 0 10px; }
+    .item-meta { display: flex; gap: 14px; flex-wrap: wrap; font-size: 0.82rem; color: var(--text-muted); align-items: center; }
+    .item-meta a { color: var(--accent); text-decoration: none; }
+    .item-actions { margin-left: auto; }
+    .empty, .loading { text-align: center; color: var(--text-muted); padding: 40px 0; }
+    .note { font-size: 0.85rem; min-height: 1.2em; margin: 10px 0 0; }
+    .note.err { color: var(--danger); }
+    .note.ok { color: var(--accent); }
+    .topbar { display: flex; align-items: center; gap: 12px; }
+    .topbar .spacer { flex: 1; }
+  </style>
+</head>
+<body>
+  <div class="wrap report-wrap">
+    <header class="site-header">
+      <a class="back-link" href="../../">&larr; WorkTools</a>
+      <h1 class="site-title">Feedback Report</h1>
+    </header>
+
+    <main>
+      <!-- Login gate -->
+      <section id="loginView" class="panel login-card" hidden>
+        <h2>Sign in</h2>
+        <p>Enter your email to get a one-time sign-in link.</p>
+        <form id="loginForm">
+          <input id="loginEmail" class="field" type="email" placeholder="you@example.com" required autocomplete="email">
+          <button type="submit" class="btn btn-primary" id="loginBtn">Send magic link</button>
+          <p class="note" id="loginNote" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <!-- Report -->
+      <section id="reportView" hidden>
+        <div class="topbar" style="margin-bottom:16px;">
+          <span class="spacer"></span>
+          <button type="button" class="btn" id="refreshBtn">Refresh</button>
+          <button type="button" class="btn" id="signOutBtn">Sign out</button>
+        </div>
+
+        <div class="summary" id="summary"></div>
+
+        <div class="filters">
+          <div class="group" id="typeFilters">
+            <button type="button" class="chip" data-f="type" data-v="all" aria-pressed="true">All types</button>
+            <button type="button" class="chip" data-f="type" data-v="bug" aria-pressed="false">🐞 Bug</button>
+            <button type="button" class="chip" data-f="type" data-v="idea" aria-pressed="false">💡 Idea</button>
+            <button type="button" class="chip" data-f="type" data-v="feedback" aria-pressed="false">💬 Feedback</button>
+          </div>
+          <span class="spacer"></span>
+          <div class="group" id="statusFilters">
+            <button type="button" class="chip" data-f="status" data-v="all" aria-pressed="true">All</button>
+            <button type="button" class="chip" data-f="status" data-v="new" aria-pressed="false">New</button>
+            <button type="button" class="chip" data-f="status" data-v="resolved" aria-pressed="false">Resolved</button>
+          </div>
+        </div>
+        <div class="filters">
+          <div class="group" id="toolFilters"></div>
+        </div>
+
+        <div id="list"></div>
+      </section>
+
+      <div id="bootLoading" class="loading">Loading…</div>
+    </main>
+  </div>
+
+  <script src="../../assets/feedback-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="report.js"></script>
+</body>
+</html>
