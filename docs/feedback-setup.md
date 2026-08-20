@@ -117,3 +117,6 @@ This is optional and can be added later without changing anything on the site.
 | Widget | `assets/feedback.js` | Floating button + dialog; POSTs to Supabase |
 | Wiring | each page's `index.html` | Two `<script>` tags before `</body>` |
 | Report | `tools/feedback-report/` | Private, login-gated review page |
+
+Visit counting shares this same Supabase project and report page — see
+[`analytics-setup.md`](analytics-setup.md).

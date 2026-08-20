@@ -1,7 +1,7 @@
 /*
- * WorkTools feedback report.
+ * WorkTools reports.
  *
- * Private admin view of submitted feedback. Uses supabase-js for magic-link
+ * Private admin view of page visits and submitted feedback. Uses supabase-js for magic-link
  * auth and queries. Row Level Security means only an authenticated user can
  * read/update rows, so this page is safe to host publicly — without a valid
  * login it can't see any data.
@@ -33,9 +33,11 @@
   var summaryEl = document.getElementById("summary");
   var listEl = document.getElementById("list");
   var toolFiltersEl = document.getElementById("toolFilters");
+  var visitsBodyEl = document.getElementById("visitsBody");
 
   var allRows = [];
   var filters = { type: "all", status: "all", tool: "all" };
+  var visitRange = "30";   // "7" | "30" | "all"
 
   var TYPE_LABELS = { bug: "🐞 Bug", idea: "💡 Idea", feedback: "💬 Feedback" };
 
@@ -113,6 +115,7 @@
   // ---- Data ----------------------------------------------------------------
 
   function loadData() {
+    loadVisits();
     listEl.innerHTML = '<div class="loading">Loading…</div>';
     sb.from("feedback")
       .select("*")
@@ -150,6 +153,14 @@
     if (!chip) return;
     var f = chip.dataset.f, v = chip.dataset.v;
     if (!f) return;
+    if (f === "range") {
+      visitRange = v;
+      Array.prototype.forEach.call(chip.parentElement.querySelectorAll(".chip"), function (c) {
+        c.setAttribute("aria-pressed", String(c.dataset.v === v));
+      });
+      loadVisits();
+      return;
+    }
     filters[f] = v;
     // Update pressed state within the same group.
     var group = chip.parentElement;
@@ -167,6 +178,92 @@
       return true;
     });
   }
+
+  // ---- Page visits ---------------------------------------------------------
+
+  function fmtRelative(iso) {
+    var d = new Date(iso);
+    if (isNaN(d)) return "";
+    var mins = Math.round((Date.now() - d.getTime()) / 60000);
+    if (mins < 1) return "just now";
+    if (mins < 60) return mins + "m ago";
+    if (mins < 60 * 24) return Math.round(mins / 60) + "h ago";
+    var days = Math.round(mins / (60 * 24));
+    if (days < 30) return days + "d ago";
+    return fmtDate(iso).split(",")[0];
+  }
+
+  function loadVisits() {
+    visitsBodyEl.innerHTML = '<div class="loading">Loading…</div>';
+    var days = visitRange === "all" ? null : parseInt(visitRange, 10);
+    sb.rpc("page_view_stats", { days: days }).then(function (res) {
+      if (res.error) {
+        // Most likely cause: the page_views migration hasn't been run yet.
+        var msg = /page_view_stats|does not exist|schema cache/i.test(res.error.message || "")
+          ? "Visit tracking isn't set up in Supabase yet — run the SQL in " +
+            "supabase/migrations/20260820120000_create_page_views.sql. " +
+            "See docs/analytics-setup.md."
+          : "Error loading visits: " + esc(res.error.message);
+        visitsBodyEl.innerHTML = '<div class="empty">' + msg + "</div>";
+        return;
+      }
+      renderVisits(res.data || []);
+    });
+  }
+
+  function renderVisits(rows) {
+    if (!rows.length) {
+      visitsBodyEl.innerHTML = '<div class="empty">No visits recorded in this range yet.</div>';
+      return;
+    }
+
+    var totalViews = 0, totalVisits = 0, max = 0;
+    rows.forEach(function (r) {
+      totalViews += Number(r.views) || 0;
+      totalVisits += Number(r.visits) || 0;
+      if ((Number(r.views) || 0) > max) max = Number(r.views) || 0;
+    });
+
+    var stats = [
+      { num: totalViews, lbl: "Total views" },
+      { num: totalVisits, lbl: "Sessions" },
+      { num: rows.length, lbl: "Pages visited" }
+    ];
+    var html = '<div class="summary">' + stats.map(function (s) {
+      return '<div class="stat"><div class="num">' + s.num + '</div><div class="lbl">' +
+        s.lbl + "</div></div>";
+    }).join("") + "</div>";
+
+    html += '<p class="visit-note">Views are page loads. Sessions are distinct browser ' +
+      'sessions — someone opening three tools in one tab counts once.</p>';
+
+    html += '<div class="panel"><table class="visit-table">' +
+      "<thead><tr>" +
+        "<th>Tool page</th>" +
+        '<th class="num">Views</th>' +
+        '<th class="num">Sessions</th>' +
+        "<th>Last seen</th>" +
+      "</tr></thead><tbody>" +
+      rows.map(function (r) {
+        var views = Number(r.views) || 0;
+        var pct = max ? Math.max(7, Math.round((views / max) * 100)) : 0;
+        return "<tr>" +
+          '<td class="visit-name">' +
+            '<span class="bar" style="width:' + pct + '%"></span>' +
+            '<span class="label">' + esc(r.tool) + "</span>" +
+            (r.path ? '<span class="path">' + esc(r.path) + "</span>" : "") +
+          "</td>" +
+          '<td class="num"><span class="n">' + views + "</span></td>" +
+          '<td class="num">' + (Number(r.visits) || 0) + "</td>" +
+          '<td class="visit-when">' + esc(fmtRelative(r.last_seen)) + "</td>" +
+        "</tr>";
+      }).join("") +
+      "</tbody></table></div>";
+
+    visitsBodyEl.innerHTML = html;
+  }
+
+  // ---- Feedback summary ----------------------------------------------------
 
   function renderSummary() {
     var total = allRows.length;

@@ -19,6 +19,8 @@ create table if not exists public.feedback (
 alter table public.feedback enable row level security;
 
 -- Anyone (anon key) may submit, but not read.
+-- Dropped first so this file can be re-run without erroring on an existing policy.
+drop policy if exists "public can submit feedback" on public.feedback;
 create policy "public can submit feedback"
   on public.feedback for insert
   to anon
@@ -28,11 +30,13 @@ create policy "public can submit feedback"
   );
 
 -- Only logged-in users (Matt) can read / update.
+drop policy if exists "authed can read" on public.feedback;
 create policy "authed can read"
   on public.feedback for select
   to authenticated
   using (true);
 
+drop policy if exists "authed can update" on public.feedback;
 create policy "authed can update"
   on public.feedback for update
   to authenticated

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feedback Report — WorkTools</title>
+  <title>Reports — WorkTools</title>
   <meta name="robots" content="noindex,nofollow">
   <link rel="stylesheet" href="../../assets/style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📥</text></svg>">
@@ -67,13 +67,39 @@
     .note.ok { color: var(--accent); }
     .topbar { display: flex; align-items: center; gap: 12px; }
     .topbar .spacer { flex: 1; }
+
+    /* Visits */
+    .section-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 28px 0 12px; }
+    .section-head h2 { margin: 0; font-size: 1.05rem; }
+    .section-head .spacer { flex: 1; }
+    .visit-table { width: 100%; border-collapse: collapse; }
+    .visit-table th {
+      text-align: left; font-size: 0.76rem; text-transform: uppercase;
+      letter-spacing: 0.04em; color: var(--text-muted); font-weight: 600;
+      padding: 0 10px 8px; border-bottom: 1px solid var(--border);
+    }
+    .visit-table td { padding: 11px 10px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    .visit-table tr:last-child td { border-bottom: 0; }
+    .visit-table th.num, .visit-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .visit-table td.num .n { font-size: 1.05rem; font-weight: 700; }
+    /* Relative-share bar sits behind the tool name. */
+    .visit-name { position: relative; }
+    .visit-name .bar {
+      position: absolute; top: -5px; bottom: -5px; left: -6px;
+      background: var(--accent-soft); border-radius: 0 6px 6px 0; z-index: 0;
+    }
+    .visit-name .label, .visit-name .path { position: relative; z-index: 1; }
+    .visit-name .label { font-weight: 600; }
+    .visit-name .path { display: block; font-size: 0.78rem; color: var(--text-muted); }
+    .visit-note { margin: 0 0 12px; font-size: 0.82rem; color: var(--text-muted); }
+    .visit-when { color: var(--text-muted); font-size: 0.82rem; white-space: nowrap; }
   </style>
 </head>
 <body>
   <div class="wrap report-wrap">
     <header class="site-header">
       <a class="back-link" href="../../">&larr; WorkTools</a>
-      <h1 class="site-title">Feedback Report</h1>
+      <h1 class="site-title">Reports</h1>
     </header>
 
     <main>
@@ -96,8 +122,22 @@
           <button type="button" class="btn" id="signOutBtn">Sign out</button>
         </div>
 
-        <div class="summary" id="summary"></div>
+        <!-- Page visits -->
+        <section id="visitsSection">
+          <div class="section-head">
+            <h2>Page visits</h2>
+            <span class="spacer"></span>
+            <div class="group" id="rangeFilters">
+              <button type="button" class="chip" data-f="range" data-v="7" aria-pressed="false">7 days</button>
+              <button type="button" class="chip" data-f="range" data-v="30" aria-pressed="true">30 days</button>
+              <button type="button" class="chip" data-f="range" data-v="all" aria-pressed="false">All time</button>
+            </div>
+          </div>
+          <div id="visitsBody"><div class="loading">Loading…</div></div>
+        </section>
 
+        <div class="section-head"><h2>Feedback</h2></div>
+        <div class="summary" id="summary"></div>
         <div class="filters">
           <div class="group" id="typeFilters">
             <button type="button" class="chip" data-f="type" data-v="all" aria-pressed="true">All types</button>
