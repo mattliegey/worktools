@@ -93,6 +93,58 @@
     .visit-name .path { display: block; font-size: 0.78rem; color: var(--text-muted); }
     .visit-note { margin: 0 0 12px; font-size: 0.82rem; color: var(--text-muted); }
     .visit-when { color: var(--text-muted); font-size: 0.82rem; white-space: nowrap; }
+
+    /* Trend chart */
+    .trend-panel { padding: 14px 14px 10px; margin-bottom: 12px; position: relative; }
+    #trendChart { position: relative; }
+    .trend-svg { display: block; width: 100%; height: auto; overflow: visible; }
+    /* Recessive chrome: solid hairlines one step off the surface, never dashed. */
+    .trend-grid { stroke: var(--border); stroke-width: 1; }
+    .trend-axis { stroke: var(--border); stroke-width: 1; }
+    /* Text wears text tokens, never a series colour. */
+    .trend-ytick {
+      fill: var(--text-muted); font-size: 10px; text-anchor: end;
+      font-variant-numeric: tabular-nums;
+    }
+    .trend-xtick { fill: var(--text-muted); font-size: 10px; text-anchor: middle; }
+    .trend-peak {
+      fill: var(--text-muted); font-size: 10px; text-anchor: middle; font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+    .trend-day.is-hot { filter: brightness(1.08); }
+    .trend-hit { cursor: default; outline: none; }
+    .trend-hit:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+    .trend-legend {
+      display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 10px 0 2px;
+      font-size: 0.8rem; color: var(--text-muted);
+    }
+    .trend-legend-item { display: inline-flex; align-items: center; gap: 6px; }
+    .trend-swatch { width: 11px; height: 11px; border-radius: 2px; flex: none; }
+
+    .trend-tip {
+      position: absolute; z-index: 5; pointer-events: none;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; box-shadow: var(--shadow); padding: 8px 10px;
+      font-size: 0.8rem; min-width: 140px;
+    }
+    .trend-tip-day { color: var(--text-muted); font-size: 0.75rem; }
+    .trend-tip-total { font-weight: 700; margin-bottom: 5px; }
+    .trend-tip-row { display: flex; align-items: center; gap: 7px; margin-top: 2px; }
+    /* Line key, not a filled box — a box is data-weight ink at tooltip density. */
+    .trend-tip-key { width: 10px; height: 2px; border-radius: 1px; flex: none; }
+    .trend-tip-name { color: var(--text-muted); }
+    .trend-tip-val {
+      margin-left: auto; font-weight: 700; font-variant-numeric: tabular-nums;
+    }
+
+    .trend-table-wrap { margin-top: 10px; }
+    .trend-table-wrap summary {
+      cursor: pointer; font-size: 0.82rem; color: var(--text-muted); padding: 2px 0;
+    }
+    .trend-table-scroll { overflow-x: auto; margin-top: 8px; }
+    .trend-table { font-size: 0.85rem; }
+    .trend-table td, .trend-table th { padding: 7px 8px; white-space: nowrap; }
   </style>
 </head>
 <body>
