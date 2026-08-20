@@ -23,6 +23,10 @@ alter table public.page_views enable row level security;
 
 -- Anyone (anon key) may record a view, but not read them back.
 -- The length caps stop the endpoint being used as free text storage.
+--
+-- Dropped first so this whole file can be re-run safely: Postgres has no
+-- "create policy if not exists", and a re-run would otherwise fail here.
+drop policy if exists "public can record page views" on public.page_views;
 create policy "public can record page views"
   on public.page_views for insert
   to anon
@@ -35,6 +39,7 @@ create policy "public can record page views"
   );
 
 -- Only logged-in users (Matt) can read.
+drop policy if exists "authed can read page views" on public.page_views;
 create policy "authed can read page views"
   on public.page_views for select
   to authenticated
