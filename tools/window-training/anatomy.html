@@ -10,15 +10,15 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232f6fed' stroke-width='2'><rect x='3' y='3' width='18' height='18' rx='1.5'/><path d='M12 3v18M3 12h18'/></svg>">
   <style>
     /* Fig 1 — reveal the parts a group at a time */
-    @keyframes grp1 { 0%,29%{opacity:1} 33%,100%{opacity:0} }
-    @keyframes grp2 { 0%,29%{opacity:0} 33%,62%{opacity:1} 66%,100%{opacity:0} }
-    @keyframes grp3 { 0%,62%{opacity:0} 66%,100%{opacity:1} }
+    @keyframes grp1 { 0% { opacity: 1; } 50%, 100% { opacity: 0; } }
+    @keyframes grp2 { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes grp3 { 0%, 50% { opacity: 0; } 100% { opacity: 1; } }
 
     /* Fig 2 — strip the window back to a bare pocket, then dimension it */
-    @keyframes secSash  { 0%,22%{opacity:1} 40%,100%{opacity:0} }
-    @keyframes secBead  { 0%,34%{opacity:1} 50%,100%{opacity:0} }
-    @keyframes secVoid  { 0%,46%{opacity:0} 60%,100%{opacity:1} }
-    @keyframes secDim   { 0%,64%{opacity:0} 78%,100%{opacity:1} }
+    @keyframes secSash { 0% { opacity: 1; } 25%, 100% { opacity: 0; } }
+    @keyframes secBead { 0%, 25% { opacity: 1; } 50%, 100% { opacity: 0; } }
+    @keyframes secVoid { 0%, 50% { opacity: 0; } 75%, 100% { opacity: 1; } }
+    @keyframes secDim { 0%, 75% { opacity: 0; } 100% { opacity: 1; } }
 
     .lbl  { font-size: 15px; fill: var(--text); font-weight: 600; }
     .lbl-s{ font-size: 13px; fill: var(--text-muted); }
@@ -46,7 +46,7 @@
           beads are what come out; the trim is what you take off and put back.</p>
 
         <figure class="figure" data-dur="10s"
-                data-steps="0:The frame|0.33:The sashes|0.66:Stops &amp; trim">
+                data-steps="0:The frame|0.5:The sashes|1:Stops &amp; trim">
           <div class="stage">
             <svg viewBox="-20 0 800 510" role="img" aria-labelledby="anatT anatD">
               <title id="anatT">Labeled elevation of a wood double-hung window</title>
@@ -175,7 +175,7 @@
           shallow, an insert will not work here at all.</p>
 
         <figure class="figure" data-dur="10s"
-                data-steps="0:As it stands|0.3:Sashes out|0.5:Parting bead out|0.75:The pocket|1:Depth measured">
+                data-steps="0:As it stands|0.25:Sashes out|0.5:Parting bead out|0.75:The pocket|1:Depth measured">
           <div class="stage">
             <svg viewBox="0 0 760 400" role="img" aria-labelledby="secT secD">
               <title id="secT">Horizontal section through a window jamb</title>

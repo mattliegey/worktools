@@ -1,22 +1,24 @@
 /*
- * Window Training — diagram player.
+ * Window Training — diagram stepper.
  *
- * Drives the animated SVG figures. There is no timeline library and no
- * per-element JavaScript: every moving part in a figure is a normal CSS
- * animation that is permanently paused, and playback position is expressed as
- * a single custom property `--t` (0..1) on the figure's .stage.
+ * The animated SVG figures are stepped through by hand, one named stage at a
+ * time — back and forward arrows, plus a chip per stage. Nothing plays on its
+ * own and there is no scrubber: on a ladder with one hand free you want to
+ * land on "parting bead out" and stay there.
+ *
+ * There is no timeline library and no per-element JavaScript. Every moving
+ * part in a figure is a normal CSS animation that is permanently paused, and
+ * position is expressed as a single custom property `--t` (0..1) on .stage:
  *
  *   animation-play-state: paused;
  *   animation-delay: calc(var(--t) * var(--dur) * -1);
  *
- * A negative delay seeks an animation, so setting --t seeks every part of the
- * figure at once, in lockstep, for free. Scrubbing is therefore just writing a
- * number, and adding parts to a diagram costs no JS at all.
+ * A negative delay seeks an animation, so writing --t seeks every part of the
+ * figure at once, in lockstep. Adding parts to a diagram costs no JS at all.
  *
- * To play, we hand the animation back to the browser's own clock: --t0 records
- * where playback started, the .playing class switches the delay to --t0 and the
- * play-state to running, and a rAF loop mirrors the position back into --t (and
- * the slider) so that pausing is seamless.
+ * Moving between stages tweens --t across the gap rather than snapping, so you
+ * still see the bar lever and the sash lift — the motion is the teaching, the
+ * arrows just decide when it happens. Reduced motion jumps instead.
  *
  * Figure markup contract:
  *
@@ -27,8 +29,7 @@
  *     <figcaption>…</figcaption>
  *   </figure>
  *
- * The player row (play/pause, scrubber, step chips) is generated from those
- * attributes, so the page source stays readable.
+ * A figure with fewer than two stages is static and gets no controls.
  */
 (function () {
   "use strict";
@@ -40,19 +41,25 @@
     /* matchMedia missing — treat as motion allowed. */
   }
 
+  // How long a step transition runs: proportional to the distance travelled,
+  // but always long enough to read and short enough not to feel like waiting.
+  var MIN_MS = 320;
+  var MAX_MS = 1100;
+
   var SVG_NS = "http://www.w3.org/2000/svg";
 
-  function svgIcon(paths, extraClass) {
+  function chevron(dir) {
     var svg = document.createElementNS(SVG_NS, "svg");
     svg.setAttribute("viewBox", "0 0 16 16");
-    svg.setAttribute("fill", "currentColor");
+    svg.setAttribute("fill", "none");
+    svg.setAttribute("stroke", "currentColor");
+    svg.setAttribute("stroke-width", "2.2");
+    svg.setAttribute("stroke-linecap", "round");
+    svg.setAttribute("stroke-linejoin", "round");
     svg.setAttribute("aria-hidden", "true");
-    if (extraClass) svg.setAttribute("class", extraClass);
-    paths.forEach(function (d) {
-      var p = document.createElementNS(SVG_NS, "path");
-      p.setAttribute("d", d);
-      svg.appendChild(p);
-    });
+    var p = document.createElementNS(SVG_NS, "path");
+    p.setAttribute("d", dir < 0 ? "M10 3 L5 8 L10 13" : "M6 3 L11 8 L6 13");
+    svg.appendChild(p);
     return svg;
   }
 
@@ -82,6 +89,10 @@
       .filter(Boolean);
   }
 
+  function now() {
+    return window.performance && performance.now ? performance.now() : Date.now();
+  }
+
   function Player(figure) {
     this.figure = figure;
     this.stage = figure.querySelector(".stage");
@@ -89,15 +100,21 @@
 
     this.durMs = parseDuration(figure.getAttribute("data-dur"));
     this.steps = parseSteps(figure.getAttribute("data-steps"));
-    this.t = reduceMotion ? 1 : 0;
-    this.playing = false;
     this.rafId = 0;
-    this.hasAutoPlayed = false;
 
     this.stage.style.setProperty("--dur", this.durMs + "ms");
 
+    // A single-stage figure is just a drawing — no controls, no stepping.
+    if (this.steps.length < 2) {
+      this.static = true;
+      this.seek(this.steps.length ? this.steps[0].t : 0);
+      return;
+    }
+
+    this.idx = 0;
+    this.seek(this.steps[0].t);
     this.build();
-    this.seek(this.t);
+    this.render();
   }
 
   Player.prototype.build = function () {
@@ -105,179 +122,128 @@
     var row = document.createElement("div");
     row.className = "player";
 
-    // Play / pause
-    var play = document.createElement("button");
-    play.type = "button";
-    play.className = "play";
-    play.setAttribute("aria-label", "Play animation");
-    play.appendChild(svgIcon(["M4.5 2.7v10.6a.6.6 0 0 0 .93.5l8-5.3a.6.6 0 0 0 0-1l-8-5.3a.6.6 0 0 0-.93.5z"], "ico-play"));
-    play.appendChild(svgIcon(["M4 2.5h3v11H4zM9 2.5h3v11H9z"], "ico-pause"));
-    play.addEventListener("click", function () {
-      self.playing ? self.pause() : self.play();
-    });
-    row.appendChild(play);
-
-    // Scrubber
-    var scrub = document.createElement("input");
-    scrub.type = "range";
-    scrub.className = "scrub";
-    scrub.min = "0";
-    scrub.max = "1000";
-    scrub.step = "1";
-    scrub.value = String(Math.round(this.t * 1000));
-    scrub.setAttribute("aria-label", "Scrub through the animation");
-    scrub.addEventListener("input", function () {
-      self.pause();
-      self.seek(parseInt(scrub.value, 10) / 1000);
-    });
-    row.appendChild(scrub);
-
-    // Step chips
-    if (this.steps.length) {
-      var chips = document.createElement("div");
-      chips.className = "chips";
-      this.chipEls = this.steps.map(function (step) {
-        var chip = document.createElement("button");
-        chip.type = "button";
-        chip.className = "chip";
-        chip.textContent = step.label;
-        chip.addEventListener("click", function () {
-          self.pause();
-          self.seek(step.t);
-        });
-        chips.appendChild(chip);
-        return chip;
-      });
-      row.appendChild(chips);
+    function arrow(dir, label) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "nav";
+      b.setAttribute("aria-label", label);
+      b.appendChild(chevron(dir));
+      b.addEventListener("click", function () { self.step(dir); });
+      return b;
     }
 
-    this.playBtn = play;
-    this.scrubEl = scrub;
+    this.prevBtn = arrow(-1, "Previous stage");
+    this.nextBtn = arrow(1, "Next stage");
+
+    var readout = document.createElement("div");
+    readout.className = "readout";
+    this.nameEl = document.createElement("span");
+    this.nameEl.className = "stage-name";
+    this.countEl = document.createElement("span");
+    this.countEl.className = "stage-count";
+    readout.appendChild(this.nameEl);
+    readout.appendChild(this.countEl);
+
+    row.appendChild(this.prevBtn);
+    row.appendChild(readout);
+    row.appendChild(this.nextBtn);
+
+    var chips = document.createElement("div");
+    chips.className = "chips";
+    this.chipEls = this.steps.map(function (step, i) {
+      var chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = "chip";
+      chip.textContent = step.label;
+      chip.addEventListener("click", function () { self.goTo(i); });
+      chips.appendChild(chip);
+      return chip;
+    });
+    row.appendChild(chips);
+
     this.row = row;
 
+    // Left/right keys drive the figure once it has focus.
+    this.figure.setAttribute("tabindex", "0");
+    this.figure.setAttribute("role", "group");
+    this.figure.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft") { self.step(-1); e.preventDefault(); }
+      else if (e.key === "ArrowRight") { self.step(1); e.preventDefault(); }
+      else if (e.key === "Home") { self.goTo(0); e.preventDefault(); }
+      else if (e.key === "End") { self.goTo(self.steps.length - 1); e.preventDefault(); }
+    });
+
     var caption = this.figure.querySelector("figcaption");
-    if (caption) {
-      this.figure.insertBefore(row, caption);
-    } else {
-      this.figure.appendChild(row);
-    }
+    if (caption) this.figure.insertBefore(row, caption);
+    else this.figure.appendChild(row);
   };
 
-  /* Write a position without touching playback state. */
+  /* Write a position. This is the only thing that moves a diagram. */
   Player.prototype.seek = function (t) {
     this.t = Math.min(1, Math.max(0, t));
     this.stage.style.setProperty("--t", this.t);
-    if (this.scrubEl) this.scrubEl.value = String(Math.round(this.t * 1000));
-    this.markCurrentStep();
   };
 
-  Player.prototype.markCurrentStep = function () {
-    if (!this.chipEls) return;
-    // The active chip is the last one whose t is at or before the playhead.
-    var active = 0;
-    for (var i = 0; i < this.steps.length; i++) {
-      if (this.t + 1e-6 >= this.steps[i].t) active = i;
-    }
-    for (var j = 0; j < this.chipEls.length; j++) {
-      this.chipEls[j].setAttribute("aria-current", j === active ? "true" : "false");
-    }
+  Player.prototype.step = function (dir) {
+    this.goTo(this.idx + dir);
   };
 
-  Player.prototype.play = function () {
-    if (this.playing) return;
-    // Replaying from the end starts over rather than sitting on the last frame.
-    var from = this.t >= 0.999 ? 0 : this.t;
-    this.seek(from);
+  Player.prototype.goTo = function (i, instant) {
+    if (this.static) return;
+    i = Math.min(this.steps.length - 1, Math.max(0, i));
+    var from = this.t;
+    var to = this.steps[i].t;
+    this.idx = i;
+    this.render();
 
-    this.playing = true;
-    this.stage.style.setProperty("--t0", from);
-    // Force a style flush so the delay change is picked up as a fresh start
-    // rather than being coalesced with the class toggle below.
-    void this.stage.offsetWidth;
-    this.stage.classList.add("playing");
-    this.row.classList.add("is-playing");
-    this.playBtn.setAttribute("aria-label", "Pause animation");
+    if (this.rafId) { cancelAnimationFrame(this.rafId); this.rafId = 0; }
+    if (instant || reduceMotion || from === to) {
+      this.seek(to);
+      return;
+    }
+    this.tween(from, to);
+  };
 
+  Player.prototype.tween = function (from, to) {
     var self = this;
-    var started = (window.performance && performance.now ? performance.now() : Date.now());
-    var span = (1 - from) * this.durMs;
+    var span = Math.abs(to - from);
+    var ms = Math.max(MIN_MS, Math.min(MAX_MS, span * this.durMs));
+    var started = now();
 
-    (function tick(now) {
-      if (!self.playing) return;
-      var elapsed = (now || (window.performance && performance.now ? performance.now() : Date.now())) - started;
-      if (elapsed >= span) {
-        self.finish();
+    this.figure.classList.add("is-moving");
+
+    (function frame() {
+      var p = (now() - started) / ms;
+      if (p >= 1) {
+        self.seek(to);
+        self.rafId = 0;
+        self.figure.classList.remove("is-moving");
         return;
       }
-      // Mirror the browser's clock into --t so a pause lands exactly here.
-      self.t = from + (elapsed / self.durMs);
-      if (self.scrubEl) self.scrubEl.value = String(Math.round(self.t * 1000));
-      self.markCurrentStep();
-      self.rafId = requestAnimationFrame(tick);
+      // easeInOutQuad — the CSS animations are linear, so the feel is set here.
+      var e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+      self.seek(from + (to - from) * e);
+      self.rafId = requestAnimationFrame(frame);
     })();
   };
 
-  Player.prototype.pause = function () {
-    if (!this.playing) return;
-    this.playing = false;
-    if (this.rafId) cancelAnimationFrame(this.rafId);
-    this.rafId = 0;
-    this.stage.classList.remove("playing");
-    this.row.classList.remove("is-playing");
-    this.playBtn.setAttribute("aria-label", "Play animation");
-    // Re-assert the paused position we were mirroring during playback.
-    this.seek(this.t);
-  };
-
-  Player.prototype.finish = function () {
-    this.playing = false;
-    if (this.rafId) cancelAnimationFrame(this.rafId);
-    this.rafId = 0;
-    this.stage.classList.remove("playing");
-    this.row.classList.remove("is-playing");
-    this.playBtn.setAttribute("aria-label", "Play animation");
-    this.seek(1);
+  Player.prototype.render = function () {
+    var step = this.steps[this.idx];
+    this.nameEl.textContent = step.label;
+    this.countEl.textContent = (this.idx + 1) + " / " + this.steps.length;
+    this.prevBtn.disabled = this.idx === 0;
+    this.nextBtn.disabled = this.idx === this.steps.length - 1;
+    for (var i = 0; i < this.chipEls.length; i++) {
+      this.chipEls[i].setAttribute("aria-current", i === this.idx ? "true" : "false");
+    }
   };
 
   function init() {
     var figures = document.querySelectorAll(".figure");
-    if (!figures.length) return;
-
-    var players = [];
     for (var i = 0; i < figures.length; i++) {
       var p = new Player(figures[i]);
-      if (p.stage) {
-        figures[i].__player = p;
-        players.push(p);
-      }
+      if (p.stage) figures[i].__player = p;
     }
-
-    // Play a figure the first time it is scrolled into view, and pause it when
-    // it leaves so off-screen diagrams aren't burning frames. Never when the
-    // visitor has asked for reduced motion.
-    if (reduceMotion || !("IntersectionObserver" in window)) return;
-
-    var io = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          var player = entry.target.__player;
-          if (!player) return;
-          if (entry.isIntersecting) {
-            if (!player.hasAutoPlayed) {
-              player.hasAutoPlayed = true;
-              player.play();
-            }
-          } else {
-            player.pause();
-          }
-        });
-      },
-      { threshold: 0.45 }
-    );
-
-    players.forEach(function (p) {
-      io.observe(p.figure);
-    });
   }
 
   if (document.readyState === "loading") {

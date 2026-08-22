@@ -10,28 +10,25 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232f6fed' stroke-width='2'><rect x='3' y='3' width='18' height='18' rx='1.5'/><path d='M12 3v18M3 12h18'/></svg>">
   <style>
     /* Fig 1 — score, pry, lift the inside stop */
-    @keyframes knife  { 0%,6%{opacity:0} 12%,26%{opacity:1} 32%,100%{opacity:0} }
-    @keyframes scored { 0%,16%{opacity:0} 24%,100%{opacity:1} }
-    @keyframes putty  { 0%,32%{opacity:0} 40%,54%{opacity:1} 60%,100%{opacity:0} }
-    @keyframes prybar { 0%,58%{opacity:0} 66%,100%{opacity:1} }
-    @keyframes stopOff{
-      0%,60%   { transform: translateX(0) rotate(0deg); }
-      100%     { transform: translateX(52px) rotate(9deg); }
-    }
-    @keyframes nailholes { 0%,80%{opacity:0} 92%,100%{opacity:1} }
+    @keyframes knife { 0% { opacity: 0; } 25% { opacity: 1; } 50%, 100% { opacity: 0; } }
+    @keyframes scored { 0% { opacity: 0; } 25%, 100% { opacity: 1; } }
+    @keyframes putty { 0%, 25% { opacity: 0; } 50% { opacity: 1; } 75%, 100% { opacity: 0; } }
+    @keyframes prybar { 0%, 50% { opacity: 0; } 75%, 100% { opacity: 1; } }
+    @keyframes stopOff { 0%, 75% { transform: translateX(0) rotate(0deg); } 100% { transform: translateX(52px) rotate(9deg); } }
+    @keyframes nailholes { 0%, 75% { opacity: 0; } 100% { opacity: 1; } }
 
     /* Fig 2 — sashes and parting bead out */
-    @keyframes cordCut { 0%,8%{opacity:0} 14%,24%{opacity:1} 30%,100%{opacity:0} }
-    @keyframes lowerOut{ 0%,22%{transform:translateY(0);opacity:1} 40%,100%{transform:translateY(70px);opacity:0} }
-    @keyframes beadOut { 0%,44%{transform:translateY(0);opacity:1} 60%,100%{transform:translateY(-26px);opacity:0} }
-    @keyframes upperOut{ 0%,62%{transform:translateY(0);opacity:1} 80%,100%{transform:translateY(-70px);opacity:0} }
-    @keyframes bareOn  { 0%,82%{opacity:0} 94%,100%{opacity:1} }
+    @keyframes cordCut { 0% { opacity: 0; } 20% { opacity: 1; } 40%, 100% { opacity: 0; } }
+    @keyframes lowerOut { 0%, 20% { transform: translateY(0); opacity: 1; } 40%, 100% { transform: translateY(70px); opacity: 0; } }
+    @keyframes beadOut { 0%, 40% { transform: translateY(0); opacity: 1; } 60%, 100% { transform: translateY(-26px); opacity: 0; } }
+    @keyframes upperOut { 0%, 60% { transform: translateY(0); opacity: 1; } 80%, 100% { transform: translateY(-70px); opacity: 0; } }
+    @keyframes bareOn { 0%, 80% { opacity: 0; } 100% { opacity: 1; } }
 
     /* Fig 3 — weight pocket */
-    @keyframes panelOff { 0%,14%{transform:translateX(0);opacity:1} 28%,100%{transform:translateX(-90px);opacity:0} }
-    @keyframes weightOut{ 0%,32%{transform:translateY(0);opacity:1} 50%,100%{transform:translateY(120px);opacity:0} }
-    @keyframes fillIn   { 0%,54%{opacity:0} 72%,100%{opacity:1} }
-    @keyframes panelBack{ 0%,76%{opacity:0} 92%,100%{opacity:1} }
+    @keyframes panelOff { 0% { transform: translateX(0); opacity: 1; } 25%, 100% { transform: translateX(-90px); opacity: 0; } }
+    @keyframes weightOut { 0%, 25% { transform: translateY(0); opacity: 1; } 50%, 100% { transform: translateY(120px); opacity: 0; } }
+    @keyframes fillIn { 0%, 50% { opacity: 0; } 75%, 100% { opacity: 1; } }
+    @keyframes panelBack { 0%, 75% { opacity: 0; } 100% { opacity: 1; } }
 
     .lbl   { font-size: 15px; fill: var(--text); font-weight: 600; }
     .lbl-s { font-size: 13px; fill: var(--text-muted); }
@@ -87,7 +84,7 @@
           both — and you need that stop back on at the end of the day.</p>
 
         <figure class="figure" data-dur="10s"
-                data-steps="0:In place|0.18:Score both lines|0.38:Putty knife|0.62:Flat bar|0.85:Stop off">
+                data-steps="0:In place|0.25:Score both lines|0.5:Putty knife|0.75:Flat bar|1:Stop off">
           <div class="stage">
             <svg viewBox="-20 0 800 340" role="img" aria-labelledby="s1T s1D">
               <title id="s1T">Removing an inside stop</title>
@@ -177,9 +174,9 @@
           in the way of the parting bead.</p>
 
         <figure class="figure" data-dur="12s"
-                data-steps="0:Both sashes in|0.16:Cut the cords|0.32:Lower sash out|0.5:Parting bead out|0.68:Upper sash out|0.9:Bare pocket">
+                data-steps="0:Both sashes in|0.2:Cut the cords|0.4:Lower sash out|0.6:Parting bead out|0.8:Upper sash out|1:Bare pocket">
           <div class="stage">
-            <svg viewBox="-20 0 800 480" role="img" aria-labelledby="s2T s2D">
+            <svg viewBox="-100 0 930 480" role="img" aria-labelledby="s2T s2D">
               <title id="s2T">Taking the sashes and parting bead out</title>
               <desc id="s2D">The sash cords are cut, the lower sash lifts out, the parting bead is
                 worked out of its groove in each jamb, the upper sash lifts out, and the frame is
@@ -272,9 +269,9 @@
           again.</p>
 
         <figure class="figure" data-dur="10s"
-                data-steps="0:Access panel|0.2:Panel off|0.42:Weight out|0.65:Insulate|0.85:Panel back">
+                data-steps="0:Access panel|0.25:Panel off|0.5:Weight out|0.75:Insulate|1:Panel back">
           <div class="stage">
-            <svg viewBox="-20 0 800 380" role="img" aria-labelledby="s3T s3D">
+            <svg viewBox="-60 0 850 380" role="img" aria-labelledby="s3T s3D">
               <title id="s3T">Emptying and insulating a sash weight pocket</title>
               <desc id="s3D">The access panel in the lower jamb is unscrewed, the iron weight is
                 lifted out on its cord, the cavity is packed with insulation, and the panel is

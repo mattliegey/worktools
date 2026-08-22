@@ -10,32 +10,16 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232f6fed' stroke-width='2'><rect x='3' y='3' width='18' height='18' rx='1.5'/><path d='M12 3v18M3 12h18'/></svg>">
   <style>
     /* ---- Hero: sashes out, insert in ---- */
-    @keyframes heroSashUp {
-      0%, 14%   { transform: translateY(0); opacity: 1; }
-      30%, 100% { transform: translateY(-40px); opacity: 0; }
-    }
-    @keyframes heroSashDown {
-      0%, 18%   { transform: translateY(0); opacity: 1; }
-      34%, 100% { transform: translateY(46px); opacity: 0; }
-    }
-    @keyframes heroPocketGlow {
-      0%, 20%   { opacity: 0; }
-      31%, 47%  { opacity: 1; }
-      56%, 100% { opacity: 0; }
-    }
+    @keyframes heroSashUp { 0% { transform: translateY(0); opacity: 1; } 25%, 100% { transform: translateY(-40px); opacity: 0; } }
+    @keyframes heroSashDown { 0% { transform: translateY(0); opacity: 1; } 25%, 100% { transform: translateY(46px); opacity: 0; } }
+    @keyframes heroPocketGlow { 0%, 25% { opacity: 0; } 50% { opacity: 1; } 75%, 100% { opacity: 0; } }
     /* The insert seats into the opening from the interior side — it settles
        into place rather than dropping in from above, which is what actually
        happens on the wall. */
-    @keyframes heroInsertIn {
-      0%, 50%   { opacity: 0; transform: translateY(-16px) scale(1.06); }
-      70%, 100% { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    @keyframes heroSettle {
-      0%, 72%   { opacity: 0; }
-      85%, 100% { opacity: 1; }
-    }
-    @keyframes heroLabelA { 0%, 26% { opacity: 1; } 36%, 100% { opacity: 0; } }
-    @keyframes heroLabelB { 0%, 74% { opacity: 0; } 86%, 100% { opacity: 1; } }
+    @keyframes heroInsertIn { 0%, 50% { opacity: 0; transform: translateY(-16px) scale(1.06); } 75%, 100% { opacity: 1; transform: translateY(0) scale(1); } }
+    @keyframes heroSettle { 0%, 75% { opacity: 0; } 100% { opacity: 1; } }
+    @keyframes heroLabelA { 0% { opacity: 1; } 25%, 100% { opacity: 0; } }
+    @keyframes heroLabelB { 0%, 75% { opacity: 0; } 100% { opacity: 1; } }
 
     .hero-fig .insert-grp { transform-box: fill-box; transform-origin: center; }
     .hero-fig .stage { padding: 4px 10px 0; }
@@ -54,7 +38,7 @@
 
     <main>
       <figure class="figure hero-fig" data-dur="9s"
-              data-steps="0:Original window|0.3:Sashes out|0.45:Bare pocket|0.7:Insert set|1:Sealed &amp; trimmed">
+              data-steps="0:Original window|0.25:Sashes out|0.5:Bare pocket|0.75:Insert set|1:Sealed &amp; trimmed">
         <div class="stage">
           <svg viewBox="0 0 520 470" role="img" aria-labelledby="heroTitle heroDesc">
             <title id="heroTitle">A double-hung window converted to a vinyl insert</title>
