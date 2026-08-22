@@ -10,18 +10,18 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232f6fed' stroke-width='2'><rect x='3' y='3' width='18' height='18' rx='1.5'/><path d='M12 3v18M3 12h18'/></svg>">
   <style>
     /* Fig 1 — sealant bed and setting the unit */
-    @keyframes beadOn   { 0%,10%{opacity:0} 22%,100%{opacity:1} }
-    @keyframes unitIn   { 0%,26%{opacity:0;transform:translateY(-14px) scale(1.05)} 46%,100%{opacity:1;transform:translateY(0) scale(1)} }
-    @keyframes shimsOn  { 0%,50%{opacity:0} 64%,100%{opacity:1} }
-    @keyframes diagOn   { 0%,68%{opacity:0} 80%,100%{opacity:1} }
-    @keyframes screwOn  { 0%,84%{opacity:0} 95%,100%{opacity:1} }
+    @keyframes beadOn { 0% { opacity: 0; } 20%, 100% { opacity: 1; } }
+    @keyframes unitIn { 0%, 20% { opacity: 0; transform: translateY(-14px) scale(1.05); } 40%, 100% { opacity: 1; transform: translateY(0) scale(1); } }
+    @keyframes shimsOn { 0%, 40% { opacity: 0; } 60%, 100% { opacity: 1; } }
+    @keyframes diagOn { 0%, 60% { opacity: 0; } 80%, 100% { opacity: 1; } }
+    @keyframes screwOn { 0%, 80% { opacity: 0; } 100% { opacity: 1; } }
 
     /* Fig 2 — foam: low expansion vs high expansion */
-    @keyframes lowFoam   { 0%,14%{opacity:0} 30%,100%{opacity:1} }
-    @keyframes lowOK     { 0%,34%{opacity:0} 46%,100%{opacity:1} }
-    @keyframes hiStraight{ 0%,52%{opacity:1} 64%,100%{opacity:0} }
-    @keyframes hiBowed   { 0%,56%{opacity:0} 70%,100%{opacity:1} }
-    @keyframes hiBad     { 0%,74%{opacity:0} 86%,100%{opacity:1} }
+    @keyframes lowFoam { 0% { opacity: 0; } 25%, 100% { opacity: 1; } }
+    @keyframes lowOK { 0%, 25% { opacity: 0; } 50%, 100% { opacity: 1; } }
+    @keyframes hiStraight { 0%, 50% { opacity: 1; } 75%, 100% { opacity: 0; } }
+    @keyframes hiBowed { 0%, 50% { opacity: 0; } 75%, 100% { opacity: 1; } }
+    @keyframes hiBad { 0%, 75% { opacity: 0; } 100% { opacity: 1; } }
 
     .lbl   { font-size: 15px; fill: var(--text); font-weight: 600; }
     .lbl-s { font-size: 13px; fill: var(--text-muted); }
@@ -58,9 +58,9 @@
           and seals.</p>
 
         <figure class="figure" data-dur="12s"
-                data-steps="0:Bare pocket|0.16:Sealant on the sill|0.34:Set the unit|0.56:Shim at the balance points|0.72:Check the diagonals|0.9:Fasten">
+                data-steps="0:Bare pocket|0.2:Sealant on the sill|0.4:Set the unit|0.6:Shim at the balance points|0.8:Check the diagonals|1:Fasten">
           <div class="stage">
-            <svg viewBox="-20 0 800 470" role="img" aria-labelledby="i1T i1D">
+            <svg viewBox="-65 0 895 470" role="img" aria-labelledby="i1T i1D">
               <title id="i1T">Setting and shimming an insert window</title>
               <desc id="i1D">A continuous bead of sealant is laid on the sill, the unit is set into
                 it, shims are placed at the balance points on both jambs, the diagonals are checked
@@ -160,7 +160,7 @@
           direction left is into your jamb.</p>
 
         <figure class="figure" data-dur="11s"
-                data-steps="0:The gap|0.2:Low expansion|0.42:Sash runs free|0.6:High expansion|0.78:Jamb bows|0.9:Sash binds">
+                data-steps="0:The gap|0.25:Low expansion|0.5:Sash runs free|0.75:High expansion bows the jamb|1:Sash binds">
           <div class="stage">
             <svg viewBox="-20 0 800 400" role="img" aria-labelledby="i2T i2D">
               <title id="i2T">Low expansion foam versus high expansion foam in a shim gap</title>

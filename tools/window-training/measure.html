@@ -9,30 +9,20 @@
   <link rel="stylesheet" href="training.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232f6fed' stroke-width='2'><rect x='3' y='3' width='18' height='18' rx='1.5'/><path d='M12 3v18M3 12h18'/></svg>">
   <style>
-    @keyframes mA { 0%,2%{opacity:0} 9%,100%{opacity:1} }
-    @keyframes mB { 0%,26%{opacity:0} 33%,100%{opacity:1} }
-    @keyframes mC { 0%,50%{opacity:0} 57%,100%{opacity:1} }
-    @keyframes mWin { 0%,70%{opacity:0} 78%,100%{opacity:1} }
-    @keyframes mOrder { 0%,86%{opacity:0} 94%,100%{opacity:1} }
+    @keyframes mA { 0%, 100% { opacity: 1; } }
+    @keyframes mB { 0% { opacity: 0; } 25%, 100% { opacity: 1; } }
+    @keyframes mC { 0%, 25% { opacity: 0; } 50%, 100% { opacity: 1; } }
+    @keyframes mWin { 0%, 50% { opacity: 0; } 75%, 100% { opacity: 1; } }
+    @keyframes mOrder { 0%, 75% { opacity: 0; } 100% { opacity: 1; } }
     /* Tape blade riding down to each reading position, then off */
-    @keyframes tapeW {
-      0%,9%    { transform: translateY(0);    opacity: 1; }
-      26%,33%  { transform: translateY(110px); opacity: 1; }
-      50%,57%  { transform: translateY(225px); opacity: 1; }
-      66%,100% { transform: translateY(225px); opacity: 0; }
-    }
-    @keyframes tapeH {
-      0%,9%    { transform: translateX(0);     opacity: 1; }
-      26%,33%  { transform: translateX(130px); opacity: 1; }
-      50%,57%  { transform: translateX(260px); opacity: 1; }
-      66%,100% { transform: translateX(260px); opacity: 0; }
-    }
+    @keyframes tapeW { 0% { transform: translateY(0); opacity: 1; } 25% { transform: translateY(110px); opacity: 1; } 50% { transform: translateY(225px); opacity: 1; } 75%, 100% { transform: translateY(225px); opacity: 0; } }
+    @keyframes tapeH { 0% { transform: translateX(0); opacity: 1; } 25% { transform: translateX(130px); opacity: 1; } 50% { transform: translateX(260px); opacity: 1; } 75%, 100% { transform: translateX(260px); opacity: 0; } }
     /* Squareness: a true opening, then a racked one */
-    @keyframes sqGood { 0%,40%{opacity:1} 48%,100%{opacity:0} }
-    @keyframes sqBad  { 0%,44%{opacity:0} 54%,100%{opacity:1} }
+    @keyframes sqGood { 0% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes sqBad { 0% { opacity: 0; } 100% { opacity: 1; } }
     /* Sill slope reveal */
-    @keyframes slopeHi { 0%,30%{opacity:0} 42%,100%{opacity:1} }
-    @keyframes slopeBad{ 0%,64%{opacity:0} 76%,100%{opacity:1} }
+    @keyframes slopeHi { 0% { opacity: 0; } 50%, 100% { opacity: 1; } }
+    @keyframes slopeBad { 0%, 50% { opacity: 0; } 100% { opacity: 1; } }
 
     .lbl   { font-size: 15px; fill: var(--text); font-weight: 600; }
     .lbl-s { font-size: 13px; fill: var(--text-muted); }
@@ -75,7 +65,7 @@
           and the bottom</strong>. Old jambs bow. They are almost never the same three times.</p>
 
         <figure class="figure" data-dur="11s"
-                data-steps="0:Top|0.28:Middle|0.52:Bottom|0.76:Smallest wins|1:Order width">
+                data-steps="0:Top|0.25:Middle|0.5:Bottom|0.75:Smallest wins|1:Order width">
           <div class="stage">
             <svg viewBox="-20 0 830 470" role="img" aria-labelledby="wT wD">
               <title id="wT">Measuring the width of a window opening in three places</title>
@@ -169,7 +159,7 @@
           <strong>highest</strong> point — the back edge, nearest the room.</p>
 
         <figure class="figure" data-dur="11s"
-                data-steps="0:Left|0.28:Centre|0.52:Right|0.76:Smallest wins|1:Order height">
+                data-steps="0:Left|0.25:Centre|0.5:Right|0.75:Smallest wins|1:Order height">
           <div class="stage">
             <svg viewBox="-20 0 830 470" role="img" aria-labelledby="hT hD">
               <title id="hT">Measuring the height of a window opening in three places</title>
@@ -240,7 +230,7 @@
 
         <h3>Why the high point matters</h3>
         <figure class="figure" data-dur="8s"
-                data-steps="0:The sill slopes|0.4:Measure here|0.8:Not here">
+                data-steps="0:The sill slopes|0.5:Measure here|1:Not here">
           <div class="stage">
             <svg viewBox="-20 0 800 300" role="img" aria-labelledby="slT slD">
               <title id="slT">Section through a window sill showing its slope</title>
@@ -294,7 +284,7 @@
           window will drop in and operate. If they do not, you already know you will be shimming
           and scribing — and if it is bad enough, you order tighter to buy yourself room.</p>
 
-        <figure class="figure" data-dur="9s" data-steps="0:Square opening|0.5:Racked opening">
+        <figure class="figure" data-dur="9s" data-steps="0:Square opening|1:Racked opening">
           <div class="stage">
             <svg viewBox="-20 0 800 360" role="img" aria-labelledby="sqT sqD">
               <title id="sqT">Checking an opening for square by measuring both diagonals</title>
