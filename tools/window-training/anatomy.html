@@ -54,11 +54,13 @@
                 stops and trim labeled in three groups.</desc>
 
               <!-- Base drawing -->
-              <!-- Casing (interior trim) -->
-              <path d="M250 60 H510 V440 H250 Z M272 82 H488 V418 H272 Z"
-                    fill="var(--dg-wood)" fill-rule="evenodd"
+              <!-- Casing: a head piece and two legs, no bottom member. On a
+                   stool-and-apron window the legs die into the top of the
+                   stool - they never run past it. -->
+              <path d="M250 60 H510 V418 H488 V82 H272 V418 H250 Z"
+                    fill="var(--dg-wood)"
                     stroke="var(--dg-wood-edge)" stroke-width="2"/>
-              <!-- Frame: head jamb, side jambs -->
+              <!-- Frame: head jamb, side jambs, and the sill across the bottom -->
               <path d="M272 82 H488 V418 H272 Z M292 102 H468 V398 H292 Z"
                     fill="var(--dg-wood-dark)" fill-rule="evenodd"
                     stroke="var(--dg-wood-edge)" stroke-width="2"/>
@@ -78,10 +80,13 @@
                     stroke="#fff" stroke-width="6" opacity="0.45"/>
               <!-- Sash lock on the meeting rail -->
               <rect x="366" y="243" width="28" height="10" rx="2" fill="var(--dg-metal)"/>
-              <!-- Stool and apron -->
-              <path d="M238 418 H522 V436 H238 Z" fill="var(--dg-wood)"
+              <!-- Stool: the interior shelf. Its horns run past the casing
+                   on both sides, so it is the widest thing on the window. -->
+              <path d="M236 418 H524 V438 H236 Z" fill="var(--dg-wood)"
                     stroke="var(--dg-wood-edge)" stroke-width="2"/>
-              <path d="M266 436 H494 V466 H266 Z" fill="var(--dg-wood)"
+              <!-- Apron: under the stool, running out flush with the outer
+                   edges of the casing legs. -->
+              <path d="M250 438 H510 V470 H250 Z" fill="var(--dg-wood)"
                     stroke="var(--dg-wood-edge)" stroke-width="2"/>
 
               <!-- Group 1: the frame -->
@@ -134,26 +139,25 @@
 
               <!-- Group 3: stops and trim -->
               <g data-anim="" style="animation-name: grp3">
-                <rect class="hl" x="250" y="60" width="260" height="22"/>
-                <rect class="hl" x="250" y="60" width="22" height="380"/>
-                <rect class="hl" x="238" y="418" width="284" height="18"/>
-                <rect class="hl" x="266" y="436" width="228" height="30"/>
+                <path class="hl" d="M250 60 H510 V418 H488 V82 H272 V418 H250 Z"/>
+                <rect class="hl" x="236" y="418" width="288" height="20"/>
+                <rect class="hl" x="250" y="438" width="260" height="32"/>
 
                 <path class="lead" d="M232 70 H300"/><circle class="dot" cx="300" cy="70" r="4"/>
                 <text class="lbl" x="226" y="66" text-anchor="end">Casing</text>
                 <text class="lbl-s" x="226" y="84" text-anchor="end">the trim around the opening</text>
 
-                <path class="lead" d="M528 300 H282"/><circle class="dot" cx="282" cy="300" r="4"/>
+                <path class="lead" d="M528 300 H478"/><circle class="dot" cx="478" cy="300" r="4"/>
                 <text class="lbl" x="534" y="296">Inside stop</text>
                 <text class="lbl-s" x="534" y="314">pry it off first, save it, reuse it</text>
 
-                <path class="lead" d="M232 427 H300"/><circle class="dot" cx="300" cy="427" r="4"/>
-                <text class="lbl" x="226" y="423" text-anchor="end">Stool</text>
-                <text class="lbl-s" x="226" y="441" text-anchor="end">the interior shelf</text>
+                <path class="lead" d="M228 428 H300"/><circle class="dot" cx="300" cy="428" r="4"/>
+                <text class="lbl" x="222" y="424" text-anchor="end">Stool</text>
+                <text class="lbl-s" x="222" y="442" text-anchor="end">the shelf the casing sits on</text>
 
-                <path class="lead" d="M528 451 H480"/><circle class="dot" cx="480" cy="451" r="4"/>
-                <text class="lbl" x="534" y="447">Apron</text>
-                <text class="lbl-s" x="534" y="465">trim under the stool</text>
+                <path class="lead" d="M532 454 H470"/><circle class="dot" cx="470" cy="454" r="4"/>
+                <text class="lbl" x="538" y="450">Apron</text>
+                <text class="lbl-s" x="538" y="468">under the stool, out to the casing</text>
 
                 <text class="lbl c-accent" x="380" y="492" text-anchor="middle">
                   Trim comes off carefully — you are putting it all back.</text>
