@@ -64,11 +64,13 @@
               <path d="M272 82 H488 V418 H272 Z M292 102 H468 V398 H292 Z"
                     fill="var(--dg-wood-dark)" fill-rule="evenodd"
                     stroke="var(--dg-wood-edge)" stroke-width="2"/>
-              <!-- Upper sash -->
-              <path d="M292 102 H468 V250 H292 Z M308 118 H452 V234 H308 Z"
+              <!-- Upper sash. Its bottom rail runs down past the top of the
+                   lower sash, which is drawn after it and laps over the front -
+                   that overlap is what the two sashes lock together on. -->
+              <path d="M292 102 H468 V264 H292 Z M308 118 H452 V242 H308 Z"
                     fill="var(--dg-wood)" fill-rule="evenodd"
                     stroke="var(--dg-wood-edge)" stroke-width="1.8"/>
-              <rect x="308" y="118" width="144" height="116"
+              <rect x="308" y="118" width="144" height="124"
                     fill="var(--dg-glass)" stroke="var(--dg-glass-edge)" stroke-width="1.4"/>
               <!-- Lower sash -->
               <path d="M292 248 H468 V398 H292 Z M308 264 H452 V382 H308 Z"
@@ -76,10 +78,10 @@
                     stroke="var(--dg-wood-edge)" stroke-width="1.8"/>
               <rect x="308" y="264" width="144" height="118"
                     fill="var(--dg-glass)" stroke="var(--dg-glass-edge)" stroke-width="1.4"/>
-              <path d="M322 226 L356 126 M322 374 L356 274"
+              <path d="M322 234 L356 126 M322 374 L356 274"
                     stroke="#fff" stroke-width="6" opacity="0.45"/>
               <!-- Sash lock on the meeting rail -->
-              <rect x="366" y="243" width="28" height="10" rx="2" fill="var(--dg-metal)"/>
+              <rect x="366" y="251" width="28" height="10" rx="2" fill="var(--dg-metal)"/>
               <!-- Stool: the interior shelf. Its horns run past the casing
                    on both sides, so it is the widest thing on the window. -->
               <path d="M236 418 H524 V438 H236 Z" fill="var(--dg-wood)"
@@ -114,7 +116,7 @@
 
               <!-- Group 2: the sashes -->
               <g data-anim="" style="animation-name: grp2">
-                <rect class="hl" x="292" y="102" width="176" height="148"/>
+                <rect class="hl" x="292" y="102" width="176" height="162"/>
                 <rect class="hl" x="292" y="248" width="176" height="150"/>
 
                 <path class="lead" d="M232 150 H302"/><circle class="dot" cx="302" cy="150" r="4"/>
@@ -125,9 +127,9 @@
                 <text class="lbl" x="226" y="326" text-anchor="end">Lower sash</text>
                 <text class="lbl-s" x="226" y="344" text-anchor="end">comes out first</text>
 
-                <path class="lead" d="M528 248 H400"/><circle class="dot" cx="400" cy="248" r="4"/>
-                <text class="lbl" x="534" y="244">Meeting rail</text>
-                <text class="lbl-s" x="534" y="262">where the two sashes lock</text>
+                <path class="lead" d="M528 253 H400"/><circle class="dot" cx="400" cy="253" r="4"/>
+                <text class="lbl" x="534" y="249">Meeting rail</text>
+                <text class="lbl-s" x="534" y="267">the two rails lap and lock here</text>
 
                 <path class="lead" d="M528 150 H458"/><circle class="dot" cx="458" cy="150" r="4"/>
                 <text class="lbl" x="534" y="146">Balance / cord</text>
