@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Path B: Changing Out an Old Insert — Window Training — WorkTools</title>
+  <meta name="description" content="Removing an older vinyl or aluminum replacement window back to the original wood frame, and why you cannot measure until it is out.">
+  <link rel="stylesheet" href="../../assets/style.css">
+  <link rel="stylesheet" href="training.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232f6fed' stroke-width='2'><rect x='3' y='3' width='18' height='18' rx='1.5'/><path d='M12 3v18M3 12h18'/></svg>">
+  <style>
+    /* Fig 1 — the trap: measuring before the old insert is out */
+    @keyframes trapWrong { 0%,34%{opacity:1} 44%,100%{opacity:0} }
+    @keyframes trapRight { 0%,46%{opacity:0} 58%,100%{opacity:1} }
+    @keyframes trapGap   { 0%,72%{opacity:0} 86%,100%{opacity:1} }
+
+    /* Fig 2 — stripping the old unit out */
+    @keyframes coverOff  { 0%,10%{transform:translateX(0);opacity:1} 22%,100%{transform:translateX(-60px);opacity:0} }
+    @keyframes screwsOut { 0%,24%{opacity:1} 40%,100%{opacity:0} }
+    @keyframes caulkCut  { 0%,40%{opacity:0} 50%,62%{opacity:1} 70%,100%{opacity:0} }
+    @keyframes frameOut  { 0%,66%{transform:scale(1);opacity:1} 84%,100%{transform:scale(0.82);opacity:0} }
+    @keyframes woodShow  { 0%,80%{opacity:0} 94%,100%{opacity:1} }
+
+    .lbl   { font-size: 15px; fill: var(--text); font-weight: 600; }
+    .lbl-s { font-size: 13px; fill: var(--text-muted); }
+    .lead  { stroke: var(--text-muted); stroke-width: 1.4; fill: none; }
+    .dot   { fill: var(--accent); }
+    .dim   { stroke: var(--accent); stroke-width: 2.2; fill: none; }
+    .dim-bad { stroke: var(--wt-stop); stroke-width: 2.2; fill: none; }
+    .read  { font-size: 19px; font-weight: 700; fill: var(--accent); }
+    .chip-bg { fill: var(--surface); stroke: var(--accent); stroke-width: 2; }
+    .chip-bg.bad { stroke: var(--wt-stop); }
+    .tool  { fill: var(--dg-metal); stroke: var(--dg-line); stroke-width: 1.4; }
+    .grip  { fill: var(--wt-stop); stroke: var(--dg-line); stroke-width: 1.2; }
+    .frame-grp { transform-box: fill-box; transform-origin: center; }
+  </style>
+</head>
+<body>
+  <div class="wrap lesson">
+    <header class="site-header">
+      <a class="back-link" href="./">&larr; Window Training</a>
+      <p class="eyebrow"><span class="badge path-b">Path B</span></p>
+      <h1 class="site-title">Changing Out an Old Insert</h1>
+      <p class="lede">The original sashes went years ago and somebody put a vinyl or aluminum
+        unit in their place. That unit has to come <em>all</em> the way out before you measure
+        anything.</p>
+    </header>
+
+    <main>
+      <div class="callout stop">
+        <div class="callout-title">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M4.5 7.2h7v1.6h-7z" fill="#fff"/></svg>
+          The mistake this whole page exists to prevent
+        </div>
+        <p>The old insert has a frame of its own, and that frame is <strong>inside</strong> the
+          original wood one. Measure while it is still there and you are measuring the old vinyl,
+          not the opening. The window comes back an inch or more too small, and there is nothing
+          to do with it but eat it.</p>
+      </div>
+
+      <section class="section">
+        <h2>Why the opening gets bigger</h2>
+        <p>Two frames, one opening. Pull the inner one and you get its wall thickness back on
+          every side &#8212; typically <strong>&#190;&#8243; to 1&#188;&#8243; on the width</strong>,
+          and the same again on the height.</p>
+
+        <figure class="figure" data-dur="11s"
+                data-steps="0:Measuring the old vinyl|0.5:Old unit gone|0.8:What you gained">
+          <div class="stage">
+            <svg viewBox="-20 0 800 430" role="img" aria-labelledby="tT tD">
+              <title id="tT">Why measuring before removing the old insert reads short</title>
+              <desc id="tD">With the old insert still fitted, the tape reads the inside of the old
+                vinyl frame. Once it is removed the opening is measured to the original wood jambs,
+                which is roughly an inch wider.</desc>
+
+              <!-- original wood frame, always present -->
+              <rect x="120" y="30" width="520" height="360" rx="3"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <path d="M150 60 H610 V360 H150 Z M190 100 H570 V320 H190 Z"
+                    fill="var(--dg-wood-dark)" fill-rule="evenodd"
+                    stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <rect x="190" y="100" width="380" height="220" fill="var(--surface-2)"/>
+
+              <!-- WRONG: old insert still in, tape reads its inside face -->
+              <g data-anim="" style="animation-name: trapWrong">
+                <path d="M190 100 H570 V320 H190 Z M244 132 H516 V288 H244 Z"
+                      fill="var(--dg-vinyl)" fill-rule="evenodd"
+                      stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
+                <rect x="244" y="132" width="272" height="156"
+                      fill="var(--dg-glass)" stroke="var(--dg-glass-edge)" stroke-width="1.4"/>
+                <text class="lbl-s" x="380" y="122" text-anchor="middle">old vinyl insert &#8212; still fitted</text>
+
+                <path class="dim-bad" d="M244 210 H516"/>
+                <path class="dim-bad" d="M252 202 L244 210 L252 218 M508 202 L516 210 L508 218"/>
+                <rect class="chip-bg bad" x="326" y="186" width="108" height="34" rx="8"/>
+                <text class="read c-stop" x="380" y="210" text-anchor="middle">34 &#189;&#8243;</text>
+                <text class="lbl c-stop" x="380" y="256" text-anchor="middle">WRONG &#8212; this is the old vinyl</text>
+              </g>
+
+              <!-- RIGHT: old unit gone, measure the wood -->
+              <g data-anim="" style="animation-name: trapRight">
+                <path class="dim" d="M190 210 H570"/>
+                <path class="dim" d="M198 202 L190 210 L198 218 M562 202 L570 210 L562 218"/>
+                <rect class="chip-bg" x="326" y="186" width="108" height="34" rx="8"/>
+                <text class="read" x="380" y="210" text-anchor="middle">36 &#188;&#8243;</text>
+                <text class="lbl c-good" x="380" y="256" text-anchor="middle">RIGHT &#8212; wood jamb to wood jamb</text>
+              </g>
+
+              <!-- the difference -->
+              <g data-anim="" style="animation-name: trapGap">
+                <rect x="190" y="100" width="54" height="220" fill="var(--wt-stop)" opacity="0.24"/>
+                <rect x="516" y="100" width="54" height="220" fill="var(--wt-stop)" opacity="0.24"/>
+                <text class="lbl c-stop" x="380" y="412" text-anchor="middle">
+                  1 &#190;&#8243; of opening you would have thrown away</text>
+              </g>
+            </svg>
+          </div>
+          <figcaption><b>Same hole, two very different numbers.</b> Everything on the measuring
+            page assumes bare wood. Get the old unit out first, then measure.</figcaption>
+        </figure>
+      </section>
+
+      <hr class="rule">
+
+      <div class="callout safety">
+        <div class="callout-title">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.2 1 14.3h14zM8 5.6c.5 0 .8.4.75.9l-.3 3.2a.45.45 0 0 1-.9 0l-.3-3.2A.76.76 0 0 1 8 5.6m0 5.3a.85.85 0 1 1 0 1.7.85.85 0 0 1 0-1.7"/></svg>
+          The vinyl is new. The wood behind it is not.
+        </div>
+        <p>A 1990s insert in a 1920s house means 1920s paint on the frame you are about to scrape.
+          If the house predates 1978, this is a lead job the moment you disturb that wood &#8212;
+          the shiny window out front changes nothing. Eye protection and cut gloves throughout;
+          cutting old vinyl throws chips.</p>
+      </div>
+
+      <div class="step" data-step="1">
+        <h3>Work out what you are looking at</h3>
+        <p>Before anything comes off, figure out how the old unit was fitted. Look for:</p>
+        <ul class="checklist">
+          <li>A vinyl or aluminum frame sitting <em>inside</em> the wood one &#8212; a visible second frame all the way round</li>
+          <li>A caulk joint where that frame meets the original wood</li>
+          <li>Screw heads in the side jambs, usually hidden behind the balance covers or under a snap-in trim strip</li>
+          <li>Expander trim at the head, and a sloped adapter at the sill</li>
+          <li>Whether the original inside stops are still there, or whether the old install ripped them off</li>
+        </ul>
+        <div class="callout tip">
+          <div class="callout-title">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a5 5 0 0 0-3 9v2.2c0 .4.3.8.8.8h4.4c.5 0 .8-.4.8-.8V10A5 5 0 0 0 8 1m-2 14h4v.4c0 .3-.3.6-.6.6H6.6a.6.6 0 0 1-.6-.6z"/></svg>
+            Photograph it before you touch it
+          </div>
+          <p>Especially the corners and the sill. When you are trying to remember how the trim
+            went together three hours later, the photo is worth more than your memory.</p>
+        </div>
+      </div>
+
+      <div class="step" data-step="2">
+        <h3>Strip the old unit out</h3>
+        <p>Sashes out first &#8212; they come out the same way they do on any modern insert, by
+          tilting or by releasing the balance clips. A stripped frame is far easier to handle and
+          nothing is going to break and cut you.</p>
+
+        <figure class="figure" data-dur="12s"
+                data-steps="0:Old unit in place|0.16:Covers off|0.3:Back the screws out|0.55:Cut the caulk|0.75:Frame out|0.9:Original wood">
+          <div class="stage">
+            <svg viewBox="-20 0 800 430" role="img" aria-labelledby="s2T s2D">
+              <title id="s2T">Removing an old vinyl insert from the original frame</title>
+              <desc id="s2D">The balance covers come off to expose the mounting screws, the screws
+                are backed out, the perimeter caulk and foam are cut, and the old vinyl frame is
+                lifted out to leave the original wood jambs.</desc>
+
+              <rect x="120" y="30" width="520" height="360" rx="3"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <path d="M150 60 H610 V360 H150 Z M190 100 H570 V320 H190 Z"
+                    fill="var(--dg-wood-dark)" fill-rule="evenodd"
+                    stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <rect x="190" y="100" width="380" height="220" fill="var(--surface-2)"/>
+
+              <!-- original wood exposed at the end -->
+              <g data-anim="" style="animation-name: woodShow">
+                <rect x="190" y="100" width="380" height="220"
+                      fill="var(--accent-soft)" stroke="var(--accent)"
+                      stroke-width="2.5" stroke-dasharray="9 7"/>
+                <text class="lbl c-accent" x="380" y="200" text-anchor="middle"
+                      font-size="20">ORIGINAL WOOD FRAME</text>
+                <text class="lbl-s" x="380" y="226" text-anchor="middle">clean it up, then measure this</text>
+              </g>
+
+              <!-- old vinyl frame -->
+              <g class="frame-grp" data-anim="" style="animation-name: frameOut">
+                <path d="M190 100 H570 V320 H190 Z M244 132 H516 V288 H244 Z"
+                      fill="var(--dg-vinyl)" fill-rule="evenodd"
+                      stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
+                <rect x="244" y="132" width="272" height="156"
+                      fill="var(--dg-glass)" stroke="var(--dg-glass-edge)" stroke-width="1.4"/>
+
+                <!-- mounting screws -->
+                <g data-anim="" style="animation-name: screwsOut">
+                  <circle cx="216" cy="150" r="6" fill="var(--dg-metal)" stroke="var(--dg-line)" stroke-width="1.4"/>
+                  <circle cx="216" cy="210" r="6" fill="var(--dg-metal)" stroke="var(--dg-line)" stroke-width="1.4"/>
+                  <circle cx="216" cy="270" r="6" fill="var(--dg-metal)" stroke="var(--dg-line)" stroke-width="1.4"/>
+                  <circle cx="544" cy="150" r="6" fill="var(--dg-metal)" stroke="var(--dg-line)" stroke-width="1.4"/>
+                  <circle cx="544" cy="210" r="6" fill="var(--dg-metal)" stroke="var(--dg-line)" stroke-width="1.4"/>
+                  <circle cx="544" cy="270" r="6" fill="var(--dg-metal)" stroke="var(--dg-line)" stroke-width="1.4"/>
+                  <path class="lead" d="M660 210 H556"/><circle class="dot" cx="556" cy="210" r="4"/>
+                  <text class="lbl" x="666" y="206">Mounting screws</text>
+                  <text class="lbl-s" x="666" y="226">back them all out &#8212; miss</text>
+                  <text class="lbl-s" x="666" y="244">one and nothing will move</text>
+                </g>
+
+                <!-- balance covers -->
+                <g data-anim="" style="animation-name: coverOff">
+                  <rect x="196" y="110" width="18" height="200" rx="3"
+                        fill="var(--dg-vinyl)" stroke="var(--dg-vinyl-edge)" stroke-width="1.6"/>
+                  <rect x="546" y="110" width="18" height="200" rx="3"
+                        fill="var(--dg-vinyl)" stroke="var(--dg-vinyl-edge)" stroke-width="1.6"/>
+                  <path class="lead" d="M100 210 H190"/>
+                  <text class="lbl" x="94" y="206" text-anchor="end">Balance covers</text>
+                  <text class="lbl-s" x="94" y="226" text-anchor="end">snap off &#8212; the screws</text>
+                  <text class="lbl-s" x="94" y="244" text-anchor="end">are underneath</text>
+                </g>
+              </g>
+
+              <!-- cutting the perimeter caulk -->
+              <g data-anim="" style="animation-name: caulkCut">
+                <path d="M190 100 H570 V320 H190 Z" fill="none"
+                      stroke="var(--wt-stop)" stroke-width="4" stroke-dasharray="10 6"/>
+                <path class="tool" d="M420 66 L336 96 L330 88 L414 58 Z"/>
+                <rect class="grip" x="416" y="52" width="66" height="19" rx="4"
+                      transform="rotate(-20 416 52)"/>
+                <text class="lbl c-stop" x="600" y="72">Cut the caulk and foam</text>
+                <text class="lbl-s" x="600" y="92">all four sides, inside and out,</text>
+                <text class="lbl-s" x="600" y="110">before you pull anything</text>
+              </g>
+            </svg>
+          </div>
+          <figcaption><b>Screws out and caulk cut before you pull.</b> Levering against one screw
+            you missed is how the original jamb gets split &#8212; and that jamb is the thing your
+            new window screws into.</figcaption>
+        </figure>
+
+        <div class="callout warn">
+          <div class="callout-title">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.2 1 14.3h14zM8 5.6c.5 0 .8.4.75.9l-.3 3.2a.45.45 0 0 1-.9 0l-.3-3.2A.76.76 0 0 1 8 5.6m0 5.3a.85.85 0 1 1 0 1.7.85.85 0 0 1 0-1.7"/></svg>
+            If it still will not come out, cut it — carefully
+          </div>
+          <p>Old units were often foamed in solid. Cut through the vinyl frame at the corners with
+            an oscillating tool or a fine-tooth blade and collapse it inward, so the pressure goes
+            away from the wood. <b>Set the blade depth to the vinyl only.</b> A blade into the
+            original jamb turns a routine change-out into a frame repair.</p>
+        </div>
+      </div>
+
+      <div class="step" data-step="3">
+        <h3>Get back to bare, sound wood</h3>
+        <p>What is left is somebody else's install, and you are about to warranty whatever you
+          leave behind it.</p>
+        <ul class="checklist">
+          <li>Cut and pull every bit of old foam out of the perimeter &#8212; it hides both rot and screws</li>
+          <li>Scrape the old caulk off the jamb faces so the new unit sits flat</li>
+          <li>Pull every leftover screw, shim and nail</li>
+          <li>Check whether the old install removed the parting bead and blind stop, or just buried them &#8212; anything left in the pocket changes your depth</li>
+          <li>Probe the sill and jamb bottoms with an awl. Old inserts leak at the sill, and that is exactly where you will find the damage</li>
+          <li>Look for water staining on the interior casing &#8212; it tells you the last one failed and why</li>
+          <li>Fill, sand, and prime bare wood before you measure</li>
+        </ul>
+
+        <div class="callout stop">
+          <div class="callout-title">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M4.5 7.2h7v1.6h-7z" fill="#fff"/></svg>
+            Expect to find rot here more often than on Path A
+          </div>
+          <p>An insert that has been leaking quietly for twenty years has been feeding water
+            straight into the original sill. If the sill is soft, no amount of foam and caulk on
+            the new unit will fix it. Repair the wood or price the opening as a full-frame &#8212;
+            and tell the customer before you order, not after.</p>
+        </div>
+      </div>
+
+      <div class="step" data-step="4">
+        <h3>Now — and only now — measure</h3>
+        <p>Old unit gone, foam out, caulk scraped, wood sound and primed. The opening in front of
+          you is a different size than the one you started the morning with, and this is the one
+          that counts.</p>
+        <div class="link-grid">
+          <a class="link-card" href="measure.html">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 8h20v8H2z"/><path d="M6 8v4M10 8v6M14 8v4M18 8v6"/></svg>
+            <span><strong>How to measure</strong>
+            <span>Three widths, three heights, both diagonals, the depth.</span></span>
+          </a>
+          <a class="link-card" href="worksheet.html">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="2.5" width="16" height="19" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+            <span><strong>Worksheet</strong>
+            <span>Punch the readings in, get the order size.</span></span>
+          </a>
+        </div>
+      </div>
+
+      <nav class="pager">
+        <a class="prev" href="./"><span class="dir">Back to</span><span class="name">&larr; Training home</span></a>
+        <a class="next" href="install.html"><span class="dir">Next</span><span class="name">Setting the new window &rarr;</span></a>
+      </nav>
+    </main>
+  </div>
+
+  <script src="../../assets/feedback-config.js"></script>
+  <script src="../../assets/feedback.js" defer></script>
+  <script src="../../assets/analytics.js" defer></script>
+  <script src="diagrams.js" defer></script>
+</body>
+</html>

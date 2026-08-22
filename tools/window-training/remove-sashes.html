@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Path A: Removing the Original Sashes — Window Training — WorkTools</title>
+  <meta name="description" content="Taking the inside stop, both sashes and the parting bead out of an original wood double-hung, and prepping the pocket.">
+  <link rel="stylesheet" href="../../assets/style.css">
+  <link rel="stylesheet" href="training.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232f6fed' stroke-width='2'><rect x='3' y='3' width='18' height='18' rx='1.5'/><path d='M12 3v18M3 12h18'/></svg>">
+  <style>
+    /* Fig 1 — score, pry, lift the inside stop */
+    @keyframes knife  { 0%,6%{opacity:0} 12%,26%{opacity:1} 32%,100%{opacity:0} }
+    @keyframes scored { 0%,16%{opacity:0} 24%,100%{opacity:1} }
+    @keyframes putty  { 0%,32%{opacity:0} 40%,54%{opacity:1} 60%,100%{opacity:0} }
+    @keyframes prybar { 0%,58%{opacity:0} 66%,100%{opacity:1} }
+    @keyframes stopOff{
+      0%,60%   { transform: translateX(0) rotate(0deg); }
+      100%     { transform: translateX(52px) rotate(9deg); }
+    }
+    @keyframes nailholes { 0%,80%{opacity:0} 92%,100%{opacity:1} }
+
+    /* Fig 2 — sashes and parting bead out */
+    @keyframes cordCut { 0%,8%{opacity:0} 14%,24%{opacity:1} 30%,100%{opacity:0} }
+    @keyframes lowerOut{ 0%,22%{transform:translateY(0);opacity:1} 40%,100%{transform:translateY(70px);opacity:0} }
+    @keyframes beadOut { 0%,44%{transform:translateY(0);opacity:1} 60%,100%{transform:translateY(-26px);opacity:0} }
+    @keyframes upperOut{ 0%,62%{transform:translateY(0);opacity:1} 80%,100%{transform:translateY(-70px);opacity:0} }
+    @keyframes bareOn  { 0%,82%{opacity:0} 94%,100%{opacity:1} }
+
+    /* Fig 3 — weight pocket */
+    @keyframes panelOff { 0%,14%{transform:translateX(0);opacity:1} 28%,100%{transform:translateX(-90px);opacity:0} }
+    @keyframes weightOut{ 0%,32%{transform:translateY(0);opacity:1} 50%,100%{transform:translateY(120px);opacity:0} }
+    @keyframes fillIn   { 0%,54%{opacity:0} 72%,100%{opacity:1} }
+    @keyframes panelBack{ 0%,76%{opacity:0} 92%,100%{opacity:1} }
+
+    .lbl   { font-size: 15px; fill: var(--text); font-weight: 600; }
+    .lbl-s { font-size: 13px; fill: var(--text-muted); }
+    .lead  { stroke: var(--text-muted); stroke-width: 1.4; fill: none; }
+    .dot   { fill: var(--accent); }
+    .tool  { fill: var(--dg-metal); stroke: var(--dg-line); stroke-width: 1.4; }
+    .grip  { fill: var(--wt-stop); stroke: var(--dg-line); stroke-width: 1.2; }
+    .stop-grp { transform-box: fill-box; transform-origin: right center; }
+  </style>
+</head>
+<body>
+  <div class="wrap lesson">
+    <header class="site-header">
+      <a class="back-link" href="./">&larr; Window Training</a>
+      <p class="eyebrow"><span class="badge path-a">Path A</span></p>
+      <h1 class="site-title">Removing the Original Sashes</h1>
+      <p class="lede">The original wood double-hung is still intact. Everything inside the frame
+        comes out — stops, sashes, bead, weights — before a tape ever touches the opening.</p>
+    </header>
+
+    <main>
+      <div class="callout safety">
+        <div class="callout-title">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.2 1 14.3h14zM8 5.6c.5 0 .8.4.75.9l-.3 3.2a.45.45 0 0 1-.9 0l-.3-3.2A.76.76 0 0 1 8 5.6m0 5.3a.85.85 0 1 1 0 1.7.85.85 0 0 1 0-1.7"/></svg>
+          Built before 1978? Then this is a lead job
+        </div>
+        <p>Prying painted stops and sliding painted sashes makes lead dust, and old windows are
+          where most of it comes from. Certified renovator on site, poly down and taped, the room
+          sealed off, no dry scraping or sanding, HEPA vac only, and the paperwork signed. If you
+          are not set up for that today, do not open the window.</p>
+        <p><b>Every job, lead or not:</b> eye protection, cut gloves on any sash with glass in it,
+          and never leave a loose sash standing in the opening.</p>
+      </div>
+
+      <section class="section">
+        <h2>What you need</h2>
+        <ul class="legend">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 20 20 4M14 4h6v6"/></svg>Utility knife, fresh blade</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12h13l5-4v8l-5-4"/></svg>Stiff putty knife</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 19 19 5M15 5h4v4"/></svg>Flat bar / trim pry bar</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Nippers or end cutters</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h18v10H3z"/><path d="M7 8V5h10v3"/></svg>HEPA vacuum</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 8h20v8H2z"/><path d="M6 8v4M10 8v6M14 8v4M18 8v6"/></svg>Tape measure</li>
+        </ul>
+      </section>
+
+      <hr class="rule">
+
+      <div class="step" data-step="1">
+        <h3>Score the inside stop before you touch it with a bar</h3>
+        <p>The stop is painted to the jamb and to the casing. Cut both of those paint lines with a
+          sharp knife first. Skip this and you tear the paint off the casing, split the stop, or
+          both — and you need that stop back on at the end of the day.</p>
+
+        <figure class="figure" data-dur="10s"
+                data-steps="0:In place|0.18:Score both lines|0.38:Putty knife|0.62:Flat bar|0.85:Stop off">
+          <div class="stage">
+            <svg viewBox="-20 0 800 340" role="img" aria-labelledby="s1T s1D">
+              <title id="s1T">Removing an inside stop</title>
+              <desc id="s1D">Looking down at the jamb. The paint lines on both sides of the inside
+                stop are scored with a knife, a putty knife opens the joint, a flat bar behind the
+                putty knife levers the stop off, and the stop comes away leaving its nail holes.</desc>
+
+              <text class="lbl-s" x="40" y="40">EXTERIOR</text>
+              <text class="lbl-s" x="40" y="312">INTERIOR</text>
+
+              <!-- jamb -->
+              <rect x="150" y="50" width="46" height="250"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <text class="lbl-s" x="173" y="176" text-anchor="middle"
+                    transform="rotate(-90 173 176)">side jamb</text>
+              <!-- casing -->
+              <rect x="104" y="250" width="46" height="50"
+                    fill="var(--dg-wood-dark)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <text class="lbl-s" x="127" y="322" text-anchor="middle">casing</text>
+              <!-- lower sash still in place -->
+              <rect x="196" y="150" width="200" height="46"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <text class="lbl-s" x="300" y="178" text-anchor="middle">lower sash</text>
+
+              <!-- nail holes revealed at the end -->
+              <g data-anim="" style="animation-name: nailholes">
+                <circle cx="205" cy="262" r="3.5" fill="var(--dg-wood-edge)"/>
+                <circle cx="205" cy="286" r="3.5" fill="var(--dg-wood-edge)"/>
+                <text class="lbl-s" x="230" y="292">nail holes &#8212; fill them later</text>
+              </g>
+
+              <!-- the inside stop itself -->
+              <g class="stop-grp" data-anim="" style="animation-name: stopOff">
+                <rect x="196" y="250" width="34" height="50"
+                      fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              </g>
+
+              <!-- scored paint lines -->
+              <g data-anim="" style="animation-name: scored">
+                <path d="M196 248 H232" stroke="var(--wt-good)" stroke-width="3"/>
+                <path d="M194 250 V300" stroke="var(--wt-good)" stroke-width="3"/>
+              </g>
+
+              <!-- knife -->
+              <g data-anim="" style="animation-name: knife">
+                <path class="tool" d="M300 214 L214 246 L206 240 L292 206 Z"/>
+                <rect class="grip" x="296" y="200" width="70" height="20" rx="4"
+                      transform="rotate(-21 296 200)"/>
+                <text class="lbl c-good" x="420" y="212">1. Score both paint lines</text>
+              </g>
+
+              <!-- putty knife -->
+              <g data-anim="" style="animation-name: putty">
+                <path class="tool" d="M330 244 L200 258 L200 268 L330 262 Z"/>
+                <rect class="grip" x="330" y="240" width="76" height="24" rx="5"/>
+                <text class="lbl" x="424" y="290">2. Open the joint gently</text>
+              </g>
+
+              <!-- flat bar -->
+              <g data-anim="" style="animation-name: prybar">
+                <path class="tool" d="M360 252 L246 266 L244 280 L358 272 Z"/>
+                <path class="tool" d="M356 246 L420 236 L426 264 L360 276 Z"/>
+                <text class="lbl" x="446" y="256">3. Work along the stop,</text>
+                <text class="lbl-s" x="446" y="276">a little at each nail &#8212; never</text>
+                <text class="lbl-s" x="446" y="294">lever it all from one spot</text>
+              </g>
+            </svg>
+          </div>
+          <figcaption><b>Score, open, then lever &#8212; in that order.</b> Work the bar along the
+            length of the stop a bit at a time. Label the stops as they come off so they go back
+            on the same side they came from.</figcaption>
+        </figure>
+
+        <div class="callout tip">
+          <div class="callout-title">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a5 5 0 0 0-3 9v2.2c0 .4.3.8.8.8h4.4c.5 0 .8-.4.8-.8V10A5 5 0 0 0 8 1m-2 14h4v.4c0 .3-.3.6-.6.6H6.6a.6.6 0 0 1-.6-.6z"/></svg>
+            Pull the nails through the back
+          </div>
+          <p>Do not hammer them back out the face &#8212; that blows the wood out around every
+            hole. Grab the shank from the back with nippers and pull it straight through.</p>
+        </div>
+      </div>
+
+      <div class="step" data-step="2">
+        <h3>Lower sash out, then the parting bead, then the upper</h3>
+        <p>That order is not optional. The parting bead traps the upper sash, and the lower sash is
+          in the way of the parting bead.</p>
+
+        <figure class="figure" data-dur="12s"
+                data-steps="0:Both sashes in|0.16:Cut the cords|0.32:Lower sash out|0.5:Parting bead out|0.68:Upper sash out|0.9:Bare pocket">
+          <div class="stage">
+            <svg viewBox="-20 0 800 480" role="img" aria-labelledby="s2T s2D">
+              <title id="s2T">Taking the sashes and parting bead out</title>
+              <desc id="s2D">The sash cords are cut, the lower sash lifts out, the parting bead is
+                worked out of its groove in each jamb, the upper sash lifts out, and the frame is
+                left as a bare pocket.</desc>
+
+              <rect x="130" y="20" width="500" height="440" rx="3"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <path d="M160 50 H600 V450 H160 Z M200 80 H560 V410 H200 Z"
+                    fill="var(--dg-wood-dark)" fill-rule="evenodd"
+                    stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <rect x="200" y="80" width="360" height="330" fill="var(--surface-2)"/>
+
+              <!-- bare pocket callout -->
+              <g data-anim="" style="animation-name: bareOn">
+                <rect x="200" y="80" width="360" height="330"
+                      fill="var(--accent-soft)" stroke="var(--accent)"
+                      stroke-width="2.5" stroke-dasharray="9 7"/>
+                <text class="lbl c-accent" x="380" y="240" text-anchor="middle"
+                      font-size="20">BARE POCKET</text>
+                <text class="lbl-s" x="380" y="266" text-anchor="middle">now you can measure</text>
+              </g>
+
+              <!-- upper sash -->
+              <g data-anim="" style="animation-name: upperOut">
+                <path d="M200 80 H560 V240 H200 Z M218 98 H542 V222 H218 Z"
+                      fill="var(--dg-wood)" fill-rule="evenodd"
+                      stroke="var(--dg-wood-edge)" stroke-width="2"/>
+                <rect x="218" y="98" width="324" height="124"
+                      fill="var(--dg-glass)" stroke="var(--dg-glass-edge)" stroke-width="1.4"/>
+                <path d="M238 212 L286 108" stroke="#fff" stroke-width="7" opacity="0.45"/>
+                <text class="lbl-s" x="380" y="168" text-anchor="middle">upper sash</text>
+              </g>
+
+              <!-- parting bead: a thin strip in each jamb groove -->
+              <g data-anim="" style="animation-name: beadOut">
+                <rect x="192" y="80" width="10" height="330" fill="var(--wt-caution)"
+                      stroke="var(--dg-wood-edge)" stroke-width="1.4"/>
+                <rect x="558" y="80" width="10" height="330" fill="var(--wt-caution)"
+                      stroke="var(--dg-wood-edge)" stroke-width="1.4"/>
+                <path class="lead" d="M660 300 H574"/><circle class="dot" cx="574" cy="300" r="4"/>
+                <text class="lbl c-warn" x="666" y="296">Parting bead</text>
+                <text class="lbl-s" x="666" y="316">pliers at the top, then</text>
+                <text class="lbl-s" x="666" y="334">work down &#8212; it will</text>
+                <text class="lbl-s" x="666" y="352">probably break, that is fine</text>
+              </g>
+
+              <!-- lower sash -->
+              <g data-anim="" style="animation-name: lowerOut">
+                <path d="M200 250 H560 V410 H200 Z M218 268 H542 V392 H218 Z"
+                      fill="var(--dg-wood)" fill-rule="evenodd"
+                      stroke="var(--dg-wood-edge)" stroke-width="2"/>
+                <rect x="218" y="268" width="324" height="124"
+                      fill="var(--dg-glass)" stroke="var(--dg-glass-edge)" stroke-width="1.4"/>
+                <path d="M238 382 L286 278" stroke="#fff" stroke-width="7" opacity="0.45"/>
+                <text class="lbl-s" x="380" y="338" text-anchor="middle">lower sash</text>
+              </g>
+
+              <!-- cords being cut -->
+              <g data-anim="" style="animation-name: cordCut">
+                <path d="M206 96 V300" stroke="var(--dg-wood-edge)" stroke-width="3"/>
+                <path d="M554 96 V300" stroke="var(--dg-wood-edge)" stroke-width="3"/>
+                <circle cx="206" cy="300" r="10" fill="none" stroke="var(--wt-stop)" stroke-width="3"/>
+                <path d="M198 292 L214 308 M214 292 L198 308" stroke="var(--wt-stop)" stroke-width="3"/>
+                <path class="lead" d="M100 300 H190"/>
+                <text class="lbl c-stop" x="94" y="296" text-anchor="end">Cut the cords</text>
+                <text class="lbl-s" x="94" y="316" text-anchor="end">knot the end so the weight</text>
+                <text class="lbl-s" x="94" y="334" text-anchor="end">does not vanish down the pocket</text>
+              </g>
+            </svg>
+          </div>
+          <figcaption><b>Cords first.</b> Knot or clamp the cut end before you let go &#8212; an
+            untied cord disappears into the weight pocket and you will be fishing for it.</figcaption>
+        </figure>
+
+        <div class="callout warn">
+          <div class="callout-title">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.2 1 14.3h14zM8 5.6c.5 0 .8.4.75.9l-.3 3.2a.45.45 0 0 1-.9 0l-.3-3.2A.76.76 0 0 1 8 5.6m0 5.3a.85.85 0 1 1 0 1.7.85.85 0 0 1 0-1.7"/></svg>
+            Spiral balances are under tension
+          </div>
+          <p>If the window has spiral or block-and-tackle balances instead of cords and weights,
+            they are wound tight. Release them the way the maker intended, or unscrew the top
+            anchor with the sash still supported. Letting one snap back takes fingers.</p>
+        </div>
+      </div>
+
+      <div class="step" data-step="3">
+        <h3>Pull the weights and insulate the pockets</h3>
+        <p>Those cavities run the full height of the window on both sides and they are empty. It is
+          the cheapest insulation you will ever install, and the window is never open like this
+          again.</p>
+
+        <figure class="figure" data-dur="10s"
+                data-steps="0:Access panel|0.2:Panel off|0.42:Weight out|0.65:Insulate|0.85:Panel back">
+          <div class="stage">
+            <svg viewBox="-20 0 800 380" role="img" aria-labelledby="s3T s3D">
+              <title id="s3T">Emptying and insulating a sash weight pocket</title>
+              <desc id="s3D">The access panel in the lower jamb is unscrewed, the iron weight is
+                lifted out on its cord, the cavity is packed with insulation, and the panel is
+                screwed back.</desc>
+
+              <!-- jamb with cavity -->
+              <rect x="180" y="30" width="150" height="330"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <rect x="212" y="46" width="86" height="298"
+                    fill="var(--surface-2)" stroke="var(--dg-wood-edge)" stroke-width="1.5"/>
+              <text class="lbl-s" x="255" y="26" text-anchor="middle">weight pocket cavity</text>
+
+              <!-- insulation packed in -->
+              <g data-anim="" style="animation-name: fillIn">
+                <rect x="212" y="46" width="86" height="298" fill="var(--dg-foam)" opacity="0.85"/>
+                <path d="M220 70 q20 14 40 0 q20 -14 40 0 M220 120 q20 14 40 0 q20 -14 40 0
+                         M220 170 q20 14 40 0 q20 -14 40 0 M220 220 q20 14 40 0 q20 -14 40 0
+                         M220 270 q20 14 40 0 q20 -14 40 0 M220 316 q20 14 40 0 q20 -14 40 0"
+                      fill="none" stroke="var(--dg-wood-edge)" stroke-width="1.6" opacity="0.7"/>
+                <path class="lead" d="M420 150 H306"/><circle class="dot" cx="306" cy="150" r="4"/>
+                <text class="lbl" x="426" y="146">Pack it out</text>
+                <text class="lbl-s" x="426" y="166">unfaced batt or loose fill &#8212;</text>
+                <text class="lbl-s" x="426" y="184">not expanding foam, it will</text>
+                <text class="lbl-s" x="426" y="202">bow the jamb</text>
+              </g>
+
+              <!-- the weight on its cord -->
+              <g data-anim="" style="animation-name: weightOut">
+                <path d="M255 46 V210" stroke="var(--dg-wood-edge)" stroke-width="3"/>
+                <rect x="240" y="210" width="30" height="110" rx="5"
+                      fill="var(--dg-metal)" stroke="var(--dg-line)" stroke-width="1.6"/>
+                <path class="lead" d="M420 264 H278"/><circle class="dot" cx="278" cy="264" r="4"/>
+                <text class="lbl" x="426" y="260">Cast iron weight</text>
+                <text class="lbl-s" x="426" y="280">lift it out &#8212; scrap it</text>
+              </g>
+
+              <!-- access panel -->
+              <g data-anim="" style="animation-name: panelOff">
+                <rect x="180" y="240" width="34" height="104"
+                      fill="var(--dg-wood-dark)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+                <circle cx="197" cy="258" r="4" fill="var(--dg-metal)"/>
+                <circle cx="197" cy="326" r="4" fill="var(--dg-metal)"/>
+                <path class="lead" d="M120 292 H174"/>
+                <text class="lbl" x="114" y="288" text-anchor="end">Access panel</text>
+                <text class="lbl-s" x="114" y="308" text-anchor="end">two screws, low on the jamb</text>
+                <text class="lbl-s" x="114" y="326" text-anchor="end">(sometimes painted over)</text>
+              </g>
+
+              <!-- panel screwed back -->
+              <g data-anim="" style="animation-name: panelBack">
+                <rect x="180" y="240" width="34" height="104"
+                      fill="var(--dg-wood-dark)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+                <circle cx="197" cy="258" r="4" fill="var(--dg-metal)"/>
+                <circle cx="197" cy="326" r="4" fill="var(--dg-metal)"/>
+                <text class="lbl c-good" x="426" y="332">Screw it back</text>
+                <text class="lbl-s" x="426" y="352">the jamb has to be solid to screw into</text>
+              </g>
+            </svg>
+          </div>
+          <figcaption><b>Batt or loose fill, never expanding foam.</b> Foam in a closed cavity has
+            nowhere to go but sideways, and it will bow the jamb you are about to screw a window
+            into.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step" data-step="4">
+        <h3>Prep the pocket, and be honest about what you find</h3>
+        <p>The pocket has to be clean, sound, and square-ish before you measure it. This is also
+          the moment you find out whether the job you quoted is the job you have.</p>
+        <ul class="checklist">
+          <li>Pull every nail, staple, cord pulley and bit of hardware out of the jambs</li>
+          <li>Scrape the jambs and sill flat &#8212; wet-scrape only if there is any chance of lead</li>
+          <li>Vacuum the pocket out with the HEPA, sill corners included</li>
+          <li>Probe the sill and the bottom of both jambs with an awl. Soft wood is rot, and rot is a conversation with the customer, not something you foam over</li>
+          <li>Fill the old nail holes and any gouges deep enough to matter</li>
+          <li>Prime bare wood, especially the sill</li>
+          <li>Check the pocket depth now &#8212; before anyone orders anything</li>
+        </ul>
+
+        <div class="callout stop">
+          <div class="callout-title">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M4.5 7.2h7v1.6h-7z" fill="#fff"/></svg>
+            Rot is a stop-work item
+          </div>
+          <p>An insert screws into the jambs and lands on the sill. If either is punky, there is
+            nothing holding your window in and nothing keeping water out. Repair it properly or
+            price the opening as a full-frame. Do not shim over it and hope.</p>
+        </div>
+      </div>
+
+      <div class="step" data-step="5">
+        <h3>Now measure</h3>
+        <p>Bare wood, stops off, bead out, pocket clean. This is the only state in which the
+          numbers mean anything.</p>
+        <div class="link-grid">
+          <a class="link-card" href="measure.html">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 8h20v8H2z"/><path d="M6 8v4M10 8v6M14 8v4M18 8v6"/></svg>
+            <span><strong>How to measure</strong>
+            <span>Three widths, three heights, both diagonals, the depth.</span></span>
+          </a>
+          <a class="link-card" href="worksheet.html">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="2.5" width="16" height="19" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+            <span><strong>Worksheet</strong>
+            <span>Punch the readings in, get the order size.</span></span>
+          </a>
+        </div>
+      </div>
+
+      <nav class="pager">
+        <a class="prev" href="./"><span class="dir">Back to</span><span class="name">&larr; Training home</span></a>
+        <a class="next" href="install.html"><span class="dir">Next</span><span class="name">Setting the new window &rarr;</span></a>
+      </nav>
+    </main>
+  </div>
+
+  <script src="../../assets/feedback-config.js"></script>
+  <script src="../../assets/feedback.js" defer></script>
+  <script src="../../assets/analytics.js" defer></script>
+  <script src="diagrams.js" defer></script>
+</body>
+</html>
