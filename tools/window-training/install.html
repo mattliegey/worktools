@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Setting the New Window — Window Training — WorkTools</title>
+  <meta name="description" content="Dry fit, sealant bed, shim square, fasten, insulate, seal and trim a vinyl insert window.">
+  <link rel="stylesheet" href="../../assets/style.css">
+  <link rel="stylesheet" href="training.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232f6fed' stroke-width='2'><rect x='3' y='3' width='18' height='18' rx='1.5'/><path d='M12 3v18M3 12h18'/></svg>">
+  <style>
+    /* Fig 1 — sealant bed and setting the unit */
+    @keyframes beadOn   { 0%,10%{opacity:0} 22%,100%{opacity:1} }
+    @keyframes unitIn   { 0%,26%{opacity:0;transform:translateY(-14px) scale(1.05)} 46%,100%{opacity:1;transform:translateY(0) scale(1)} }
+    @keyframes shimsOn  { 0%,50%{opacity:0} 64%,100%{opacity:1} }
+    @keyframes diagOn   { 0%,68%{opacity:0} 80%,100%{opacity:1} }
+    @keyframes screwOn  { 0%,84%{opacity:0} 95%,100%{opacity:1} }
+
+    /* Fig 2 — foam: low expansion vs high expansion */
+    @keyframes lowFoam   { 0%,14%{opacity:0} 30%,100%{opacity:1} }
+    @keyframes lowOK     { 0%,34%{opacity:0} 46%,100%{opacity:1} }
+    @keyframes hiStraight{ 0%,52%{opacity:1} 64%,100%{opacity:0} }
+    @keyframes hiBowed   { 0%,56%{opacity:0} 70%,100%{opacity:1} }
+    @keyframes hiBad     { 0%,74%{opacity:0} 86%,100%{opacity:1} }
+
+    .lbl   { font-size: 15px; fill: var(--text); font-weight: 600; }
+    .lbl-s { font-size: 13px; fill: var(--text-muted); }
+    .lead  { stroke: var(--text-muted); stroke-width: 1.4; fill: none; }
+    .dot   { fill: var(--accent); }
+    .unit-grp { transform-box: fill-box; transform-origin: center; }
+  </style>
+</head>
+<body>
+  <div class="wrap lesson">
+    <header class="site-header">
+      <a class="back-link" href="./">&larr; Window Training</a>
+      <p class="eyebrow"><span class="badge shared">Both paths</span></p>
+      <h1 class="site-title">Setting the New Window</h1>
+      <p class="lede">From here the two paths are the same job. A clean pocket, a square unit, and
+        a seal that will still be there in twenty years.</p>
+    </header>
+
+    <main>
+      <div class="callout tip">
+        <div class="callout-title">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a5 5 0 0 0-3 9v2.2c0 .4.3.8.8.8h4.4c.5 0 .8-.4.8-.8V10A5 5 0 0 0 8 1m-2 14h4v.4c0 .3-.3.6-.6.6H6.6a.6.6 0 0 1-.6-.6z"/></svg>
+          Check the window against the opening before you open a tube of anything
+        </div>
+        <p>Unwrap it, check the label size against your worksheet, look it over for shipping
+          damage, and offer it up to the opening dry. Finding out the unit is wrong is a bad
+          morning. Finding out after it is foamed in is a bad week.</p>
+      </div>
+
+      <div class="step" data-step="1">
+        <h3>Bed the sill, set the unit, shim it square</h3>
+        <p>The sill is where every failed insert leaks. Lay a continuous bead &#8212; two if the
+          sill is worn &#8212; and set the unit into it while it is still wet so it squeezes out
+          and seals.</p>
+
+        <figure class="figure" data-dur="12s"
+                data-steps="0:Bare pocket|0.16:Sealant on the sill|0.34:Set the unit|0.56:Shim at the balance points|0.72:Check the diagonals|0.9:Fasten">
+          <div class="stage">
+            <svg viewBox="-20 0 800 470" role="img" aria-labelledby="i1T i1D">
+              <title id="i1T">Setting and shimming an insert window</title>
+              <desc id="i1D">A continuous bead of sealant is laid on the sill, the unit is set into
+                it, shims are placed at the balance points on both jambs, the diagonals are checked
+                equal, and screws are driven through the jambs.</desc>
+
+              <rect x="130" y="20" width="500" height="440" rx="3"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <path d="M160 50 H600 V450 H160 Z M200 80 H560 V410 H200 Z"
+                    fill="var(--dg-wood-dark)" fill-rule="evenodd"
+                    stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <rect x="200" y="80" width="360" height="330" fill="var(--surface-2)"/>
+
+              <!-- sealant bead on the sill -->
+              <g data-anim="" style="animation-name: beadOn">
+                <path d="M204 402 H556" stroke="var(--wt-good)" stroke-width="9" stroke-linecap="round"/>
+                <path d="M204 390 H556" stroke="var(--wt-good)" stroke-width="9" stroke-linecap="round" opacity="0.55"/>
+                <path class="lead" d="M660 396 H570"/><circle class="dot" cx="570" cy="396" r="4"/>
+                <text class="lbl c-good" x="666" y="392">Continuous bead</text>
+                <text class="lbl-s" x="666" y="412">no gaps, corner to corner</text>
+                <text class="lbl-s" x="666" y="430">set the unit while it is wet</text>
+              </g>
+
+              <!-- the new unit -->
+              <g class="unit-grp" data-anim="" style="animation-name: unitIn">
+                <path d="M208 88 H552 V402 H208 Z M228 108 H532 V382 H228 Z"
+                      fill="var(--dg-vinyl)" fill-rule="evenodd"
+                      stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
+                <rect x="228" y="108" width="304" height="130"
+                      fill="var(--dg-glass)" stroke="var(--dg-glass-edge)" stroke-width="1.4"/>
+                <rect x="228" y="234" width="304" height="14"
+                      fill="var(--dg-vinyl)" stroke="var(--dg-vinyl-edge)" stroke-width="1.4"/>
+                <rect x="228" y="244" width="304" height="138"
+                      fill="var(--dg-glass)" stroke="var(--dg-glass-edge)" stroke-width="1.4"/>
+                <rect x="360" y="236" width="30" height="10" rx="2" fill="var(--dg-metal)"/>
+                <path d="M250 228 L296 118 M250 372 L296 258" stroke="#fff" stroke-width="6" opacity="0.42"/>
+              </g>
+
+              <!-- shims at the balance points -->
+              <g data-anim="" style="animation-name: shimsOn">
+                <path d="M200 150 h10 l-10 7 z M200 330 h10 l-10 7 z" fill="var(--dg-wood-edge)"/>
+                <path d="M560 150 h-10 l10 7 z M560 330 h-10 l10 7 z" fill="var(--dg-wood-edge)"/>
+                <path d="M300 80 v10 l7 -10 z M460 80 v10 l7 -10 z" fill="var(--dg-wood-edge)"/>
+                <path class="lead" d="M100 154 H196"/>
+                <text class="lbl" x="94" y="150" text-anchor="end">Shim in pairs</text>
+                <text class="lbl-s" x="94" y="170" text-anchor="end">opposing wedges at the</text>
+                <text class="lbl-s" x="94" y="188" text-anchor="end">balance points &#8212; roughly</text>
+                <text class="lbl-s" x="94" y="206" text-anchor="end">a quarter down and a</text>
+                <text class="lbl-s" x="94" y="224" text-anchor="end">quarter up from each end</text>
+              </g>
+
+              <!-- diagonal check -->
+              <g data-anim="" style="animation-name: diagOn">
+                <path d="M208 88 L552 402 M552 88 L208 402" stroke="var(--wt-good)"
+                      stroke-width="2.5" stroke-dasharray="8 6"/>
+                <rect x="326" y="228" width="108" height="34" rx="8"
+                      fill="var(--surface)" stroke="var(--wt-good)" stroke-width="2"/>
+                <text x="380" y="252" text-anchor="middle" font-size="17" font-weight="700"
+                      fill="var(--wt-good)">EQUAL</text>
+                <path class="lead" d="M660 250 H566"/>
+                <text class="lbl c-good" x="666" y="246">Diagonals equal</text>
+                <text class="lbl-s" x="666" y="266">before a single screw</text>
+                <text class="lbl-s" x="666" y="284">goes in. Shim, do not</text>
+                <text class="lbl-s" x="666" y="302">force, to get there</text>
+              </g>
+
+              <!-- screws -->
+              <g data-anim="" style="animation-name: screwOn">
+                <circle cx="216" cy="154" r="6" fill="var(--dg-metal)" stroke="var(--dg-line)" stroke-width="1.4"/>
+                <circle cx="216" cy="334" r="6" fill="var(--dg-metal)" stroke="var(--dg-line)" stroke-width="1.4"/>
+                <circle cx="544" cy="154" r="6" fill="var(--dg-metal)" stroke="var(--dg-line)" stroke-width="1.4"/>
+                <circle cx="544" cy="334" r="6" fill="var(--dg-metal)" stroke="var(--dg-line)" stroke-width="1.4"/>
+                <text class="lbl c-accent" x="380" y="446" text-anchor="middle">
+                  Screws through the shims &#8212; snug, not cranked down</text>
+              </g>
+            </svg>
+          </div>
+          <figcaption><b>Shims carry the load, screws just hold it there.</b> Drive through a
+            shimmed point so the jamb has something solid behind it. Overtighten into an unshimmed
+            spot and you pull the frame out of square.</figcaption>
+        </figure>
+
+        <div class="callout warn">
+          <div class="callout-title">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.2 1 14.3h14zM8 5.6c.5 0 .8.4.75.9l-.3 3.2a.45.45 0 0 1-.9 0l-.3-3.2A.76.76 0 0 1 8 5.6m0 5.3a.85.85 0 1 1 0 1.7.85.85 0 0 1 0-1.7"/></svg>
+            Operate the sashes before you finish fastening
+          </div>
+          <p>Run both sashes all the way up and down, and throw the lock. If a sash drags or the
+            lock will not line up, the frame is racked &#8212; back the screws off and re-shim
+            <em>now</em>. Once it is foamed and trimmed, your only fix is taking it apart again.</p>
+        </div>
+      </div>
+
+      <div class="step" data-step="2">
+        <h3>Insulate — low expansion, and only low expansion</h3>
+        <p>The shim gap gets insulated, not stuffed. Use foam labelled for windows and doors. The
+          regular high-expansion stuff will keep growing in a gap it cannot escape, and the only
+          direction left is into your jamb.</p>
+
+        <figure class="figure" data-dur="11s"
+                data-steps="0:The gap|0.2:Low expansion|0.42:Sash runs free|0.6:High expansion|0.78:Jamb bows|0.9:Sash binds">
+          <div class="stage">
+            <svg viewBox="-20 0 800 400" role="img" aria-labelledby="i2T i2D">
+              <title id="i2T">Low expansion foam versus high expansion foam in a shim gap</title>
+              <desc id="i2D">Low expansion foam fills the gap and the jamb stays straight, so the
+                sash runs freely. High expansion foam has nowhere to go, bows the jamb inward and
+                binds the sash.</desc>
+
+              <text class="lbl c-good" x="176" y="34" text-anchor="middle">LOW EXPANSION</text>
+              <text class="lbl-s" x="176" y="54" text-anchor="middle">&#8220;windows &amp; doors&#8221; on the can</text>
+              <text class="lbl c-stop" x="566" y="34" text-anchor="middle">HIGH EXPANSION</text>
+              <text class="lbl-s" x="566" y="54" text-anchor="middle">general purpose gap filler</text>
+
+              <!-- LEFT: correct -->
+              <rect x="60" y="76" width="46" height="280"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <g data-anim="" style="animation-name: lowFoam">
+                <rect x="106" y="76" width="26" height="280" fill="var(--dg-foam)"
+                      stroke="var(--dg-wood-edge)" stroke-width="1.2"/>
+              </g>
+              <rect x="132" y="76" width="30" height="280"
+                    fill="var(--dg-vinyl)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
+              <rect x="162" y="96" width="130" height="240"
+                    fill="var(--dg-glass)" stroke="var(--dg-glass-edge)" stroke-width="1.4"/>
+              <text class="lbl-s" x="227" y="222" text-anchor="middle">sash</text>
+
+              <g data-anim="" style="animation-name: lowOK">
+                <path d="M227 356 V378" stroke="var(--wt-good)" stroke-width="3"/>
+                <path d="M219 370 L227 378 L235 370" stroke="var(--wt-good)" stroke-width="3" fill="none"/>
+                <text class="lbl c-good" x="176" y="396" text-anchor="middle">Jamb straight &#8212; sash runs free</text>
+              </g>
+
+              <!-- RIGHT: wrong -->
+              <g data-anim="" style="animation-name: hiStraight">
+                <rect x="450" y="76" width="46" height="280"
+                      fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+                <rect x="496" y="76" width="26" height="280" fill="var(--surface-2)"
+                      stroke="var(--dg-wood-edge)" stroke-width="1.2"/>
+              </g>
+              <g data-anim="" style="animation-name: hiBowed">
+                <!-- jamb pushed inward at mid height -->
+                <path d="M450 76 H496 Q532 216 496 356 H450 Z"
+                      fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+                <path d="M496 76 Q532 216 496 356 L522 356 Q558 216 522 76 Z"
+                      fill="var(--dg-foam)" stroke="var(--dg-wood-edge)" stroke-width="1.2"/>
+              </g>
+              <rect x="522" y="76" width="30" height="280"
+                    fill="var(--dg-vinyl)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
+              <rect x="552" y="96" width="130" height="240"
+                    fill="var(--dg-glass)" stroke="var(--dg-glass-edge)" stroke-width="1.4"/>
+              <text class="lbl-s" x="617" y="222" text-anchor="middle">sash</text>
+
+              <g data-anim="" style="animation-name: hiBad">
+                <circle cx="538" cy="216" r="17" fill="none" stroke="var(--wt-stop)" stroke-width="3.5"/>
+                <path d="M527 205 L549 227" stroke="var(--wt-stop)" stroke-width="3.5"/>
+                <text class="lbl c-stop" x="566" y="396" text-anchor="middle">Jamb bowed &#8212; sash binds</text>
+                <text class="lbl-s" x="566" y="376" text-anchor="middle">and the lock will not meet</text>
+              </g>
+            </svg>
+          </div>
+          <figcaption><b>Fill the gap, do not pack it.</b> A light continuous bead is plenty.
+            Trim the cured squeeze-out flush before the stops go back on.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step" data-step="3">
+        <h3>Seal it, outside and in</h3>
+        <p>Two different jobs. Outside keeps weather out. Inside stops air moving through the
+          assembly. Both matter, and neither one covers for the other.</p>
+        <div class="table-scroll">
+          <table class="spec-table">
+            <thead><tr><th>Where</th><th>What</th><th>Watch for</th></tr></thead>
+            <tbody>
+              <tr><td><b>Exterior perimeter</b></td><td>Exterior-grade sealant between the new frame and the blind stop or exterior trim, all four sides.</td><td>Tool it into the joint. A bead sitting proud of the surface peels within a couple of seasons.</td></tr>
+              <tr><td><b>Head</b></td><td>Set the expander down to the head jamb and seal behind it.</td><td>This is the joint that gets skipped, and it is directly in the path of anything running down the wall.</td></tr>
+              <tr><td><b>Sill</b></td><td>The bed you already laid, plus a tooled exterior joint.</td><td>Never seal the drainage weeps shut. Water that gets in has to get back out.</td></tr>
+              <tr><td><b>Interior perimeter</b></td><td>Paintable sealant between frame and jamb, behind where the stop lands.</td><td>Do it before the stops go on, not after.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="step" data-step="4">
+        <h3>Stops back on, and test it like the customer will</h3>
+        <ul class="checklist">
+          <li>Trim any cured foam flush with a knife</li>
+          <li>Put the original stops back on the side they came from, and nail beside the old holes, not into them</li>
+          <li>Fill the nail holes, caulk the trim joints, touch up the paint</li>
+          <li>Run both sashes fully open and fully shut, several times</li>
+          <li>Throw the lock &#8212; it should meet without you pushing the sash sideways</li>
+          <li>Tilt both sashes in and back if it is a tilt unit, and check they latch</li>
+          <li>Check the screens fit and clip in</li>
+          <li>Peel every label and clean the glass</li>
+          <li>HEPA vac the room, and bag the debris if this was a lead job</li>
+          <li>Walk the customer through operating and cleaning it before you leave</li>
+        </ul>
+
+        <div class="callout tip">
+          <div class="callout-title">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a5 5 0 0 0-3 9v2.2c0 .4.3.8.8.8h4.4c.5 0 .8-.4.8-.8V10A5 5 0 0 0 8 1m-2 14h4v.4c0 .3-.3.6-.6.6H6.6a.6.6 0 0 1-.6-.6z"/></svg>
+            The lock is the tell
+          </div>
+          <p>A lock that needs a shove is the window telling you it is not square. It will not
+            settle in on its own, and it is the number one thing you get called back for.</p>
+        </div>
+      </div>
+
+      <nav class="pager">
+        <a class="prev" href="./"><span class="dir">Back to</span><span class="name">&larr; Training home</span></a>
+        <a class="next" href="worksheet.html"><span class="dir">Next opening</span><span class="name">Measuring worksheet &rarr;</span></a>
+      </nav>
+    </main>
+  </div>
+
+  <script src="../../assets/feedback-config.js"></script>
+  <script src="../../assets/feedback.js" defer></script>
+  <script src="../../assets/analytics.js" defer></script>
+  <script src="diagrams.js" defer></script>
+</body>
+</html>

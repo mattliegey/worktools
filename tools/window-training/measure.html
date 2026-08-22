@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Measure — Window Training — WorkTools</title>
+  <meta name="description" content="Three widths, three heights, both diagonals, and the pocket depth — how to measure an opening for a vinyl insert window.">
+  <link rel="stylesheet" href="../../assets/style.css">
+  <link rel="stylesheet" href="training.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232f6fed' stroke-width='2'><rect x='3' y='3' width='18' height='18' rx='1.5'/><path d='M12 3v18M3 12h18'/></svg>">
+  <style>
+    @keyframes mA { 0%,2%{opacity:0} 9%,100%{opacity:1} }
+    @keyframes mB { 0%,26%{opacity:0} 33%,100%{opacity:1} }
+    @keyframes mC { 0%,50%{opacity:0} 57%,100%{opacity:1} }
+    @keyframes mWin { 0%,70%{opacity:0} 78%,100%{opacity:1} }
+    @keyframes mOrder { 0%,86%{opacity:0} 94%,100%{opacity:1} }
+    /* Tape blade riding down to each reading position, then off */
+    @keyframes tapeW {
+      0%,9%    { transform: translateY(0);    opacity: 1; }
+      26%,33%  { transform: translateY(110px); opacity: 1; }
+      50%,57%  { transform: translateY(225px); opacity: 1; }
+      66%,100% { transform: translateY(225px); opacity: 0; }
+    }
+    @keyframes tapeH {
+      0%,9%    { transform: translateX(0);     opacity: 1; }
+      26%,33%  { transform: translateX(130px); opacity: 1; }
+      50%,57%  { transform: translateX(260px); opacity: 1; }
+      66%,100% { transform: translateX(260px); opacity: 0; }
+    }
+    /* Squareness: a true opening, then a racked one */
+    @keyframes sqGood { 0%,40%{opacity:1} 48%,100%{opacity:0} }
+    @keyframes sqBad  { 0%,44%{opacity:0} 54%,100%{opacity:1} }
+    /* Sill slope reveal */
+    @keyframes slopeHi { 0%,30%{opacity:0} 42%,100%{opacity:1} }
+    @keyframes slopeBad{ 0%,64%{opacity:0} 76%,100%{opacity:1} }
+
+    .lbl   { font-size: 15px; fill: var(--text); font-weight: 600; }
+    .lbl-s { font-size: 13px; fill: var(--text-muted); }
+    .lead  { stroke: var(--text-muted); stroke-width: 1.4; fill: none; }
+    .dim   { stroke: var(--accent); stroke-width: 2.2; fill: none; }
+    .read  { font-size: 19px; font-weight: 700; fill: var(--accent); }
+    .chip-bg { fill: var(--surface); stroke: var(--accent); stroke-width: 2; }
+    .chip-bg.good { stroke: var(--wt-good); }
+    .chip-bg.warn { stroke: var(--wt-caution); }
+    .win   { font-size: 13px; font-weight: 700; fill: var(--wt-good); }
+    .tape  { fill: #f2b705; stroke: #9a7500; stroke-width: 1.5; }
+    .tape-t{ font-size: 12px; font-weight: 700; fill: #3a2c00; }
+  </style>
+</head>
+<body>
+  <div class="wrap lesson">
+    <header class="site-header">
+      <a class="back-link" href="./">&larr; Window Training</a>
+      <p class="eyebrow">Start here</p>
+      <h1 class="site-title">How to Measure</h1>
+      <p class="lede">Three widths, three heights, both diagonals, and the depth. Smallest number
+        wins, then take off a half inch. That is the whole method.</p>
+    </header>
+
+    <main>
+      <div class="callout stop">
+        <div class="callout-title">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M4.5 7.2h7v1.6h-7z" fill="#fff"/></svg>
+          Do not measure a window you have not opened up yet
+        </div>
+        <p>Every number on this page is taken off <strong>bare wood</strong>, with the sashes out,
+          the parting bead out, the inside stops off, and the pocket scraped clean. Measuring
+          around a sash, a bead, or an old insert is the single most expensive mistake on this job
+          — the window shows up too small and it is nobody's fault but the tape's.</p>
+      </div>
+
+      <section class="section">
+        <h2>1. Width — three readings, jamb to jamb</h2>
+        <p>Measure the clear opening between the two side jambs at the <strong>top, the middle,
+          and the bottom</strong>. Old jambs bow. They are almost never the same three times.</p>
+
+        <figure class="figure" data-dur="11s"
+                data-steps="0:Top|0.28:Middle|0.52:Bottom|0.76:Smallest wins|1:Order width">
+          <div class="stage">
+            <svg viewBox="-20 0 830 470" role="img" aria-labelledby="wT wD">
+              <title id="wT">Measuring the width of a window opening in three places</title>
+              <desc id="wD">The clear width between the side jambs is measured at the top, middle
+                and bottom. The readings are 36 and a half, 36 and a quarter, and 36 and three
+                eighths inches. The smallest, 36 and a quarter, is used, and half an inch is
+                deducted to give an order width of 35 and three quarter inches.</desc>
+
+              <rect x="130" y="20" width="500" height="430" rx="3"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <path d="M160 50 H600 V440 H160 Z M200 80 H560 V400 H200 Z"
+                    fill="var(--dg-wood-dark)" fill-rule="evenodd"
+                    stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <rect x="200" y="80" width="360" height="320" fill="var(--surface-2)"/>
+              <text class="lbl-s" x="180" y="245" text-anchor="middle"
+                    transform="rotate(-90 180 245)">side jamb</text>
+              <text class="lbl-s" x="580" y="245" text-anchor="middle"
+                    transform="rotate(-90 580 245)">side jamb</text>
+
+              <!-- Tape blade riding between the three positions -->
+              <g data-anim="" style="animation-name: tapeW">
+                <rect class="tape" x="196" y="118" width="368" height="16" rx="3"/>
+                <path class="tape" d="M196 112 h8 v28 h-8 z"/>
+                <text class="tape-t" x="380" y="130" text-anchor="middle">0        6        12        18        24        30        36</text>
+              </g>
+
+              <!-- Top reading -->
+              <g data-anim="" style="animation-name: mA">
+                <path class="dim" d="M200 160 H560"/>
+                <path class="dim" d="M208 152 L200 160 L208 168 M552 152 L560 160 L552 168"/>
+                <rect class="chip-bg" x="326" y="124" width="108" height="34" rx="8"/>
+                <text class="read" x="380" y="148" text-anchor="middle">36 &#189;&#8243;</text>
+                <text class="lbl-s" x="380" y="182" text-anchor="middle">top</text>
+              </g>
+
+              <!-- Middle reading -->
+              <g data-anim="" style="animation-name: mB">
+                <path class="dim" d="M200 270 H560"/>
+                <path class="dim" d="M208 262 L200 270 L208 278 M552 262 L560 270 L552 278"/>
+                <rect class="chip-bg" x="326" y="234" width="108" height="34" rx="8"/>
+                <text class="read" x="380" y="258" text-anchor="middle">36 &#188;&#8243;</text>
+                <text class="lbl-s" x="380" y="292" text-anchor="middle">middle</text>
+              </g>
+
+              <!-- Bottom reading -->
+              <g data-anim="" style="animation-name: mC">
+                <path class="dim" d="M200 375 H560"/>
+                <path class="dim" d="M208 367 L200 375 L208 383 M552 367 L560 375 L552 383"/>
+                <rect class="chip-bg" x="326" y="339" width="108" height="34" rx="8"/>
+                <text class="read" x="380" y="363" text-anchor="middle">36 &#8540;&#8243;</text>
+                <text class="lbl-s" x="380" y="397" text-anchor="middle">bottom</text>
+              </g>
+
+              <!-- Winner -->
+              <g data-anim="" style="animation-name: mWin">
+                <rect x="318" y="226" width="124" height="50" rx="10"
+                      fill="none" stroke="var(--wt-good)" stroke-width="3"/>
+                <text class="win" x="380" y="216" text-anchor="middle">SMALLEST &#8212; THIS IS YOUR WIDTH</text>
+              </g>
+
+              <!-- Order size -->
+              <g data-anim="" style="animation-name: mOrder">
+                <rect x="620" y="196" width="168" height="96" rx="10"
+                      fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+                <text class="lbl-s" x="704" y="220" text-anchor="middle">36 &#188;&#8243; &#8722; &#189;&#8243;</text>
+                <text class="lbl-s" x="704" y="240" text-anchor="middle" font-weight="700">ORDER WIDTH</text>
+                <text class="read" x="704" y="272" text-anchor="middle" font-size="26">35 &#190;&#8243;</text>
+              </g>
+            </svg>
+          </div>
+          <figcaption><b>Three readings, smallest wins.</b> Here the middle is tight at 36&#160;&#188;&#8243;,
+            so that is the number that goes on the order — minus the half inch.</figcaption>
+        </figure>
+
+        <div class="callout tip">
+          <div class="callout-title">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a5 5 0 0 0-3 9v2.2c0 .4.3.8.8.8h4.4c.5 0 .8-.4.8-.8V10A5 5 0 0 0 8 1m-2 14h4v.4c0 .3-.3.6-.6.6H6.6a.6.6 0 0 1-.6-.6z"/></svg>
+            Hook the tape on the jamb, not the stop
+          </div>
+          <p>You are measuring the wood the window will actually screw into. If your tape is
+            catching on a stop, a bead, or a chunk of old caulk, you are measuring the wrong thing.</p>
+        </div>
+      </section>
+
+      <hr class="rule">
+
+      <section class="section">
+        <h2>2. Height — three readings, from the high point of the sill</h2>
+        <p>Measure at the <strong>left, the centre, and the right</strong>, from the underside of
+          the head jamb down to the sill. Because the sill slopes, always come down to its
+          <strong>highest</strong> point — the back edge, nearest the room.</p>
+
+        <figure class="figure" data-dur="11s"
+                data-steps="0:Left|0.28:Centre|0.52:Right|0.76:Smallest wins|1:Order height">
+          <div class="stage">
+            <svg viewBox="-20 0 830 470" role="img" aria-labelledby="hT hD">
+              <title id="hT">Measuring the height of a window opening in three places</title>
+              <desc id="hD">The clear height is measured at the left, centre and right, from the
+                head jamb down to the high point of the sill. The readings are 60, 59 and seven
+                eighths, and 60 and one eighth inches. The smallest, 59 and seven eighths, is used,
+                and half an inch is deducted to give an order height of 59 and three eighths inches.</desc>
+
+              <rect x="130" y="20" width="500" height="430" rx="3"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <path d="M160 50 H600 V440 H160 Z M200 80 H560 V400 H200 Z"
+                    fill="var(--dg-wood-dark)" fill-rule="evenodd"
+                    stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <rect x="200" y="80" width="360" height="320" fill="var(--surface-2)"/>
+              <path class="lead" d="M640 66 H560 V78"/>
+              <text class="lbl-s" x="646" y="70">head jamb</text>
+              <path class="lead" d="M640 406 H560 V398"/>
+              <text class="lbl-s" x="646" y="402">sill &#8212; high point</text>
+              <text class="lbl-s" x="646" y="420">is at the back edge</text>
+
+              <g data-anim="" style="animation-name: tapeH">
+                <rect class="tape" x="232" y="76" width="16" height="328" rx="3"/>
+                <path class="tape" d="M226 76 h28 v8 h-28 z"/>
+              </g>
+
+              <g data-anim="" style="animation-name: mA">
+                <path class="dim" d="M258 80 V400"/>
+                <path class="dim" d="M250 88 L258 80 L266 88 M250 392 L258 400 L266 392"/>
+                <rect class="chip-bg" x="214" y="164" width="88" height="34" rx="8"/>
+                <text class="read" x="258" y="188" text-anchor="middle">60&#8243;</text>
+                <text class="lbl-s" x="258" y="214" text-anchor="middle">left</text>
+              </g>
+
+              <g data-anim="" style="animation-name: mB">
+                <path class="dim" d="M388 80 V400"/>
+                <path class="dim" d="M380 88 L388 80 L396 88 M380 392 L388 400 L396 392"/>
+                <rect class="chip-bg" x="336" y="224" width="104" height="34" rx="8"/>
+                <text class="read" x="388" y="248" text-anchor="middle">59 &#8542;&#8243;</text>
+                <text class="lbl-s" x="388" y="274" text-anchor="middle">centre</text>
+              </g>
+
+              <g data-anim="" style="animation-name: mC">
+                <path class="dim" d="M518 80 V400"/>
+                <path class="dim" d="M510 88 L518 80 L526 88 M510 392 L518 400 L526 392"/>
+                <rect class="chip-bg" x="466" y="292" width="104" height="34" rx="8"/>
+                <text class="read" x="518" y="316" text-anchor="middle">60 &#8539;&#8243;</text>
+                <text class="lbl-s" x="518" y="342" text-anchor="middle">right</text>
+              </g>
+
+              <g data-anim="" style="animation-name: mWin">
+                <rect x="330" y="218" width="116" height="46" rx="10"
+                      fill="none" stroke="var(--wt-good)" stroke-width="3"/>
+                <text class="win" x="388" y="208" text-anchor="middle">SMALLEST</text>
+              </g>
+
+              <g data-anim="" style="animation-name: mOrder">
+                <rect x="620" y="196" width="168" height="96" rx="10"
+                      fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+                <text class="lbl-s" x="704" y="220" text-anchor="middle">59 &#8542;&#8243; &#8722; &#189;&#8243;</text>
+                <text class="lbl-s" x="704" y="240" text-anchor="middle" font-weight="700">ORDER HEIGHT</text>
+                <text class="read" x="704" y="272" text-anchor="middle" font-size="26">59 &#8540;&#8243;</text>
+              </g>
+            </svg>
+          </div>
+          <figcaption><b>Same rule as the width.</b> Three readings, take the smallest, then take
+            off the half inch.</figcaption>
+        </figure>
+
+        <h3>Why the high point matters</h3>
+        <figure class="figure" data-dur="8s"
+                data-steps="0:The sill slopes|0.4:Measure here|0.8:Not here">
+          <div class="stage">
+            <svg viewBox="-20 0 800 300" role="img" aria-labelledby="slT slD">
+              <title id="slT">Section through a window sill showing its slope</title>
+              <desc id="slD">The sill slopes down toward the exterior. The high point is at the
+                interior edge. Measuring to the low outer edge gives a height that is too big and
+                the window will not fit.</desc>
+
+              <text class="lbl-s" x="60" y="40">INTERIOR</text>
+              <text class="lbl-s" x="620" y="40">EXTERIOR</text>
+
+              <!-- Head jamb reference -->
+              <rect x="120" y="56" width="480" height="22"
+                    fill="var(--dg-wood-dark)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <text class="lbl-s" x="360" y="50" text-anchor="middle">head jamb</text>
+
+              <!-- Sloped sill -->
+              <path d="M120 200 L600 246 L600 276 L120 236 Z"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <text class="lbl-s" x="360" y="292" text-anchor="middle">the sill slopes to shed water</text>
+
+              <!-- High point marker -->
+              <g data-anim="" style="animation-name: slopeHi">
+                <circle cx="132" cy="201" r="8" fill="var(--wt-good)"/>
+                <path class="dim" d="M132 78 V196" stroke="var(--wt-good)"/>
+                <path class="dim" d="M124 86 L132 78 L140 86" stroke="var(--wt-good)"/>
+                <text class="lbl c-good" x="150" y="140">HIGH POINT</text>
+                <text class="lbl-s" x="150" y="160">measure to here &#8212; the back edge,</text>
+                <text class="lbl-s" x="150" y="178">nearest the room</text>
+              </g>
+
+              <!-- The wrong place -->
+              <g data-anim="" style="animation-name: slopeBad">
+                <circle cx="588" cy="245" r="8" fill="var(--wt-stop)"/>
+                <path class="dim" d="M588 78 V240" stroke="var(--wt-stop)" stroke-dasharray="7 5"/>
+                <text class="lbl c-stop" x="580" y="140" text-anchor="end">NOT HERE</text>
+                <text class="lbl-s" x="580" y="160" text-anchor="end">the outer edge reads tall &#8212; order</text>
+                <text class="lbl-s" x="580" y="178" text-anchor="end">off this and it will not go in</text>
+              </g>
+            </svg>
+          </div>
+          <figcaption><b>The sill is not level, and it is not supposed to be.</b> Its high point is
+            the interior edge. That is where your tape lands.</figcaption>
+        </figure>
+      </section>
+
+      <hr class="rule">
+
+      <section class="section">
+        <h2>3. Square — measure both diagonals</h2>
+        <p>Corner to corner, both ways. If the two numbers match, the opening is square and the
+          window will drop in and operate. If they do not, you already know you will be shimming
+          and scribing — and if it is bad enough, you order tighter to buy yourself room.</p>
+
+        <figure class="figure" data-dur="9s" data-steps="0:Square opening|0.5:Racked opening">
+          <div class="stage">
+            <svg viewBox="-20 0 800 360" role="img" aria-labelledby="sqT sqD">
+              <title id="sqT">Checking an opening for square by measuring both diagonals</title>
+              <desc id="sqD">In a square opening the two diagonals are equal. In a racked opening
+                they differ; a difference over half an inch means the opening needs scribing and a
+                tighter order size.</desc>
+
+              <!-- Square case -->
+              <g data-anim="" style="animation-name: sqGood">
+                <rect x="80" y="60" width="300" height="230"
+                      fill="var(--surface-2)" stroke="var(--dg-wood-edge)" stroke-width="3"/>
+                <path d="M80 60 L380 290 M380 60 L80 290" stroke="var(--wt-good)"
+                      stroke-width="2.5" stroke-dasharray="8 6"/>
+                <text class="lbl c-good" x="230" y="42" text-anchor="middle">SQUARE</text>
+                <rect class="chip-bg good" x="176" y="126" width="108" height="34" rx="8"/>
+                <text class="read c-good" x="230" y="150" text-anchor="middle">72 &#8539;&#8243;</text>
+                <rect class="chip-bg good" x="176" y="206" width="108" height="34" rx="8"/>
+                <text class="read c-good" x="230" y="230" text-anchor="middle">72 &#8539;&#8243;</text>
+                <text class="lbl-s" x="430" y="140">Both diagonals match.</text>
+                <text class="lbl-s" x="430" y="162">Set it, shim it, done.</text>
+                <text class="lbl c-good" x="430" y="200">Under &#188;&#8243; apart = fine</text>
+              </g>
+
+              <!-- Racked case -->
+              <g data-anim="" style="animation-name: sqBad">
+                <path d="M80 60 L380 76 L372 290 L88 278 Z"
+                      fill="var(--surface-2)" stroke="var(--dg-wood-edge)" stroke-width="3"/>
+                <path d="M80 60 L372 290 M380 76 L88 278" stroke="var(--wt-caution)"
+                      stroke-width="2.5" stroke-dasharray="8 6"/>
+                <text class="lbl c-warn" x="230" y="42" text-anchor="middle">RACKED</text>
+                <rect class="chip-bg warn" x="168" y="126" width="108" height="34" rx="8"/>
+                <text class="read c-warn" x="222" y="150" text-anchor="middle">72 &#8539;&#8243;</text>
+                <rect class="chip-bg warn" x="168" y="210" width="108" height="34" rx="8"/>
+                <text class="read c-warn" x="222" y="234" text-anchor="middle">72 &#8541;&#8243;</text>
+                <text class="lbl-s" x="430" y="130">Half an inch out of square.</text>
+                <text class="lbl-s" x="430" y="152">The unit will not sit true</text>
+                <text class="lbl-s" x="430" y="174">without packing one side.</text>
+                <text class="lbl c-warn" x="430" y="212">Over &#189;&#8243; apart = order tighter</text>
+                <text class="lbl-s" x="430" y="234">and plan to scribe the trim.</text>
+              </g>
+            </svg>
+          </div>
+          <figcaption><b>Two numbers, one answer.</b> Equal diagonals mean square. The bigger the
+            gap between them, the more work the opening is going to give you.</figcaption>
+        </figure>
+
+        <div class="table-scroll">
+          <table class="spec-table">
+            <thead><tr><th>Diagonal difference</th><th>What it means</th><th>What you do</th></tr></thead>
+            <tbody>
+              <tr><td><b>Under &#188;&#8243;</b></td><td>Square enough.</td><td>Order normally. Standard shimming.</td></tr>
+              <tr><td><b>&#188;&#8243; to &#189;&#8243;</b></td><td>Noticeably out.</td><td>Order normally but expect to shim hard on one side and scribe the stops.</td></tr>
+              <tr><td><b>Over &#189;&#8243;</b></td><td>Badly racked.</td><td>Flag it. Consider ordering an extra &#188;&#8243; down, and warn the customer the trim will need scribing.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <hr class="rule">
+
+      <section class="section">
+        <h2>4. Depth — will an insert even fit?</h2>
+        <p>With the parting bead out, measure from the face of the blind stop to the face of the
+          inside stop. A standard insert wants about <strong>3&#188;&#8243;</strong>. Check the
+          spec sheet for the unit you actually sell — some run as little as 2&#190;&#8243;.</p>
+        <p>If the pocket will not make depth, stop. That is a full-frame replacement, and it needs
+          to be priced as one <em>before</em> anyone talks to the customer about money. There is a
+          drawn-out section on this in <a href="anatomy.html">Anatomy &amp; Terms</a>.</p>
+      </section>
+
+      <hr class="rule">
+
+      <section class="section">
+        <h2>5. The deduction — half an inch, every time</h2>
+        <p>Take <strong>&#189;&#8243; off the width and &#189;&#8243; off the height</strong>, off
+          the smallest reading in each direction. That gap is what lets you shim the unit square in
+          an opening that is not, and it is what you pack with insulation afterwards. It is not
+          slop — it is the working room the install depends on.</p>
+
+        <figure class="figure" data-dur="1s" data-steps="0:The shim gap">
+          <div class="stage">
+            <svg viewBox="-20 0 800 300" role="img" aria-labelledby="dedT dedD">
+              <title id="dedT">Where the half inch deduction goes</title>
+              <desc id="dedD">The new window is half an inch narrower and half an inch shorter
+                than the tight opening, leaving roughly a quarter inch gap on each side to shim
+                and insulate.</desc>
+
+              <rect x="150" y="40" width="380" height="220"
+                    fill="none" stroke="var(--dg-wood-edge)" stroke-width="3"/>
+              <text class="lbl-s" x="340" y="28" text-anchor="middle">tight opening &#8212; smallest reading</text>
+
+              <rect x="163" y="53" width="354" height="194"
+                    fill="var(--dg-vinyl)" stroke="var(--dg-vinyl-edge)" stroke-width="2.5"/>
+              <text class="lbl" x="340" y="156" text-anchor="middle">new window</text>
+
+              <rect x="150" y="40" width="13" height="220" fill="var(--dg-foam)"/>
+              <rect x="517" y="40" width="13" height="220" fill="var(--dg-foam)"/>
+              <rect x="150" y="40" width="380" height="13" fill="var(--dg-foam)"/>
+              <rect x="150" y="247" width="380" height="13" fill="var(--dg-foam)"/>
+
+              <path class="dim" d="M150 288 H530"/>
+              <path class="dim" d="M158 280 L150 288 L158 296 M522 280 L530 288 L522 296"/>
+              <text class="lbl-s" x="340" y="282" text-anchor="middle">tight width</text>
+
+              <path class="lead" d="M110 96 H156"/><circle cx="156" cy="96" r="4" fill="var(--accent)"/>
+              <text class="lbl" x="104" y="92" text-anchor="end">&#8776; &#188;&#8243;</text>
+              <text class="lbl-s" x="104" y="110" text-anchor="end">each side</text>
+
+              <text class="lbl" x="574" y="120">&#189;&#8243; total off the width</text>
+              <text class="lbl" x="574" y="146">&#189;&#8243; total off the height</text>
+              <text class="lbl-s" x="574" y="172">shim it square in here,</text>
+              <text class="lbl-s" x="574" y="190">then foam the gap</text>
+            </svg>
+          </div>
+          <figcaption><b>Half an inch off each dimension</b> leaves roughly a quarter inch a side —
+            enough to shim a crooked opening true, and enough to insulate properly.</figcaption>
+        </figure>
+
+        <div class="callout warn">
+          <div class="callout-title">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.2 1 14.3h14zM8 5.6c.5 0 .8.4.75.9l-.3 3.2a.45.45 0 0 1-.9 0l-.3-3.2A.76.76 0 0 1 8 5.6m0 5.3a.85.85 0 1 1 0 1.7.85.85 0 0 1 0-1.7"/></svg>
+            Round down, never up
+          </div>
+          <p>If your arithmetic lands between eighths, go to the <em>smaller</em> eighth. A window
+            a sixteenth too small gets shimmed. A window a sixteenth too big goes back on the
+            truck.</p>
+        </div>
+      </section>
+
+      <hr class="rule">
+
+      <section class="section">
+        <h2>6. Write it down before you leave the room</h2>
+        <p>Six readings, two diagonals, one depth, per opening — and every opening in the house is
+          its own set. Nobody remembers that walking down a ladder.</p>
+        <ul class="checklist">
+          <li>Width at top, middle, bottom</li>
+          <li>Height at left, centre, right</li>
+          <li>Both diagonals</li>
+          <li>Pocket depth</li>
+          <li>A name for the opening you will still understand next week &#8212; &#8220;kitchen, over the sink&#8221;, not &#8220;window 4&#8221;</li>
+          <li>Anything odd: rot, a bowed jamb, a sill that is shot, paint you suspect is lead</li>
+        </ul>
+        <div class="link-grid">
+          <a class="link-card" href="worksheet.html">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="2.5" width="16" height="19" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+            <span><strong>Open the measuring worksheet</strong>
+            <span>Type the readings in fractions, get the order size, save each opening.</span></span>
+          </a>
+        </div>
+      </section>
+
+      <nav class="pager">
+        <a class="prev" href="anatomy.html"><span class="dir">Back to</span><span class="name">&larr; Anatomy &amp; terms</span></a>
+        <a class="next" href="worksheet.html"><span class="dir">Next</span><span class="name">Measuring worksheet &rarr;</span></a>
+      </nav>
+    </main>
+  </div>
+
+  <script src="../../assets/feedback-config.js"></script>
+  <script src="../../assets/feedback.js" defer></script>
+  <script src="../../assets/analytics.js" defer></script>
+  <script src="diagrams.js" defer></script>
+</body>
+</html>

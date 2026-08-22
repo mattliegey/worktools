@@ -1,0 +1,561 @@
+/*
+ * Window Training — layout and diagram styles.
+ *
+ * Builds on the WorkTools tokens in assets/style.css (--accent, --surface,
+ * --border, --text-muted, --radius, --shadow). No colors are hardcoded here
+ * except the fixed semantic hues below, which need to read the same in both
+ * light and dark: "good", "caution", "stop", and the warm tone used for wood
+ * in the diagrams.
+ */
+
+:root {
+  --wt-good: #1f9254;
+  --wt-good-soft: #e4f5ec;
+  --wt-caution: #b5730b;
+  --wt-caution-soft: #fdf1dc;
+  --wt-stop: #c0392b;
+  --wt-stop-soft: #fbe9e7;
+
+  /* Diagram materials */
+  --dg-wood: #c89b6a;
+  --dg-wood-dark: #a3763f;
+  --dg-wood-edge: #7d5729;
+  --dg-vinyl: #f2f5fa;
+  --dg-vinyl-edge: #9fb0c8;
+  --dg-glass: #cfe3f7;
+  --dg-glass-edge: #8fb6dd;
+  --dg-metal: #b9c2ce;
+  --dg-foam: #f3d9a4;
+  --dg-line: #1a2230;
+  --dg-ghost: #b8c2d0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --wt-good: #4ecb87;
+    --wt-good-soft: #14301f;
+    --wt-caution: #e0a63f;
+    --wt-caution-soft: #33270f;
+    --wt-stop: #f0776a;
+    --wt-stop-soft: #351816;
+
+    --dg-wood: #9c7648;
+    --dg-wood-dark: #7a5a34;
+    --dg-wood-edge: #d9b285;
+    --dg-vinyl: #2b3543;
+    --dg-vinyl-edge: #6d7f96;
+    --dg-glass: #24405c;
+    --dg-glass-edge: #5b87b3;
+    --dg-metal: #55606f;
+    --dg-foam: #6d5626;
+    --dg-line: #e8ecf2;
+    --dg-ghost: #4a5666;
+  }
+}
+
+/* ---------------------------------------------------------------- Layout - */
+
+.wrap.lesson {
+  max-width: 860px;
+}
+
+.site-header .eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0;
+}
+
+.lede {
+  font-size: 1.02rem;
+  color: var(--text-muted);
+  max-width: 62ch;
+  margin: 0 auto 8px;
+  text-align: center;
+}
+
+.section {
+  margin: 0 0 20px;
+}
+
+.section > h2 {
+  font-size: 1.18rem;
+  letter-spacing: -0.01em;
+  margin: 32px 0 12px;
+}
+
+.section > h3 {
+  font-size: 1rem;
+  margin: 22px 0 8px;
+}
+
+.section p,
+.section li {
+  font-size: 0.95rem;
+}
+
+.section p {
+  max-width: 68ch;
+}
+
+.panel + .panel {
+  margin-top: 16px;
+}
+
+hr.rule {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 28px 0;
+}
+
+/* ------------------------------------------------------------ Path badges - */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid transparent;
+}
+
+.badge.path-a { background: var(--accent-soft); color: var(--accent); }
+.badge.path-b { background: var(--wt-caution-soft); color: var(--wt-caution); }
+.badge.shared { background: var(--surface-2); color: var(--text-muted); }
+
+/* -------------------------------------------------------------- Hub cards - */
+
+.path-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.path-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.12s ease, border-color 0.12s ease;
+}
+
+.path-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+
+/* The card is a column flex container, so a badge would stretch edge to edge. */
+.path-card .badge { align-self: flex-start; }
+
+.path-card .thumb {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 12px 0 14px;
+}
+
+.path-card h2 {
+  margin: 10px 0 6px;
+  font-size: 1.08rem;
+}
+
+.path-card p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.path-card .go {
+  margin-top: 14px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* Smaller link cards for the shared modules */
+.link-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.link-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.12s ease;
+}
+
+.link-card:hover { border-color: var(--accent); }
+
+.link-card svg {
+  flex: none;
+  color: var(--accent);
+  margin-top: 2px;
+}
+
+.link-card strong { display: block; font-size: 0.94rem; }
+.link-card span { display: block; font-size: 0.83rem; color: var(--text-muted); }
+
+/* ----------------------------------------------------------------- Steps - */
+
+.step {
+  position: relative;
+  padding: 0 0 8px 52px;
+  margin: 0 0 28px;
+}
+
+.step::before {
+  content: attr(data-step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-text);
+  font-size: 0.95rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Connector line down the rail */
+.step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 17px;
+  top: 40px;
+  bottom: -22px;
+  width: 2px;
+  background: var(--border);
+}
+
+.step > h3 {
+  margin: 5px 0 8px;
+  font-size: 1.05rem;
+}
+
+.step > p:first-of-type { margin-top: 0; }
+
+@media (max-width: 560px) {
+  .step { padding-left: 42px; }
+  .step::before { width: 28px; height: 28px; font-size: 0.85rem; }
+  .step:not(:last-child)::after { left: 14px; top: 34px; }
+}
+
+/* ---------------------------------------------------------------- Callout - */
+
+.callout {
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  background: var(--surface-2);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 16px 0;
+}
+
+.callout > :first-child { margin-top: 0; }
+.callout > :last-child { margin-bottom: 0; }
+.callout p, .callout li { font-size: 0.92rem; }
+
+.callout .callout-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: 700;
+  font-size: 0.87rem;
+  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+}
+
+.callout.tip { border-left-color: var(--accent); }
+.callout.tip .callout-title { color: var(--accent); }
+
+.callout.warn { border-left-color: var(--wt-caution); background: var(--wt-caution-soft); }
+.callout.warn .callout-title { color: var(--wt-caution); }
+
+.callout.stop { border-left-color: var(--wt-stop); background: var(--wt-stop-soft); }
+.callout.stop .callout-title { color: var(--wt-stop); }
+
+.callout.safety { border-left-color: var(--wt-stop); background: var(--wt-stop-soft); }
+.callout.safety .callout-title { color: var(--wt-stop); }
+
+/* ------------------------------------------------------------- Key figure - */
+
+.figure {
+  margin: 18px 0 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.figure .stage {
+  background: var(--surface);
+  padding: 10px;
+}
+
+.figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.figure figcaption {
+  border-top: 1px solid var(--border);
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  background: var(--surface-2);
+}
+
+.figure figcaption b { color: var(--text); font-weight: 600; }
+
+/* ------------------------------------------------- Diagram player controls - */
+
+.player {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  flex-wrap: wrap;
+}
+
+.player .play {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--accent-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.player .play svg { width: 15px; height: 15px; display: block; }
+.player .play .ico-pause { display: none; }
+.player.is-playing .play .ico-play { display: none; }
+.player.is-playing .play .ico-pause { display: block; }
+
+.player .scrub {
+  flex: 1;
+  min-width: 120px;
+  accent-color: var(--accent);
+  height: 22px;
+  cursor: pointer;
+}
+
+.player .chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  width: 100%;
+  padding-top: 2px;
+}
+
+.player .chip {
+  font: inherit;
+  font-size: 0.76rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.player .chip:hover { border-color: var(--accent); color: var(--text); }
+
+.player .chip[aria-current="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+  font-weight: 600;
+}
+
+/*
+ * The animation engine.
+ *
+ * Every animated part sets `animation-name` and inherits timing from here.
+ * Playback is driven entirely by --t (0..1): the animation is permanently
+ * paused, and a negative delay of --t * --dur seeks it to that fraction.
+ * One variable therefore scrubs every part of a figure in perfect lockstep,
+ * with no timeline library and no per-part JS.
+ */
+.figure .stage {
+  --t: 0;
+  --dur: 6s;
+}
+
+.figure [data-anim] {
+  animation-duration: var(--dur);
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+  animation-play-state: paused;
+  animation-delay: calc(var(--t) * var(--dur) * -1);
+}
+
+/* Playing: hand the animation back to the browser's own clock. */
+.figure .stage.playing [data-anim] {
+  animation-play-state: running;
+  animation-delay: calc(var(--t0) * var(--dur) * -1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .path-card { transition: none; }
+  .path-card:hover { transform: none; }
+}
+
+/* ----------------------------------------------------------- Tool legend - */
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 4px;
+  padding: 0;
+  list-style: none;
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.84rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 5px 12px 5px 8px;
+}
+
+.legend svg { color: var(--accent); flex: none; }
+
+/* ------------------------------------------------------------- Next / prev - */
+
+.pager {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: stretch;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+
+.pager a {
+  flex: 1 1 220px;
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 14px 16px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.12s ease;
+}
+
+.pager a:hover { border-color: var(--accent); }
+.pager .dir { display: block; font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-muted); }
+.pager .name { display: block; font-weight: 600; font-size: 0.96rem; margin-top: 3px; color: var(--accent); }
+.pager a.next { text-align: right; }
+
+/* ---------------------------------------------------------------- Tables - */
+
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin: 14px 0;
+}
+
+.spec-table th,
+.spec-table td {
+  text-align: left;
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.spec-table th {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.spec-table tbody tr:last-child td { border-bottom: 0; }
+.spec-table td b { color: var(--accent); }
+
+.table-scroll { overflow-x: auto; }
+
+/* ------------------------------------------------------------- Checklist - */
+
+.checklist {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0;
+}
+
+.checklist li {
+  position: relative;
+  padding: 7px 0 7px 30px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.93rem;
+}
+
+.checklist li:last-child { border-bottom: 0; }
+
+.checklist li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 12px;
+  width: 15px;
+  height: 15px;
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+}
+
+/* ------------------------------------------------- Diagram semantic fills -
+ *
+ * Scoped as `svg .c-*` so they outrank the single-class text defaults each
+ * page defines (.lbl, .read, …). Setting a fill="" attribute alongside one of
+ * those classes does NOT work — the class wins — so colour diagram text with
+ * these instead.
+ */
+svg .c-good   { fill: var(--wt-good); }
+svg .c-warn   { fill: var(--wt-caution); }
+svg .c-stop   { fill: var(--wt-stop); }
+svg .c-accent { fill: var(--accent); }
+svg .c-muted  { fill: var(--text-muted); }
+svg .c-text   { fill: var(--text); }

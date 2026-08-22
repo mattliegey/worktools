@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anatomy &amp; Terms — Window Training — WorkTools</title>
+  <meta name="description" content="The parts of a double-hung window, and the pocket a vinyl insert has to fit into.">
+  <link rel="stylesheet" href="../../assets/style.css">
+  <link rel="stylesheet" href="training.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232f6fed' stroke-width='2'><rect x='3' y='3' width='18' height='18' rx='1.5'/><path d='M12 3v18M3 12h18'/></svg>">
+  <style>
+    /* Fig 1 — reveal the parts a group at a time */
+    @keyframes grp1 { 0%,29%{opacity:1} 33%,100%{opacity:0} }
+    @keyframes grp2 { 0%,29%{opacity:0} 33%,62%{opacity:1} 66%,100%{opacity:0} }
+    @keyframes grp3 { 0%,62%{opacity:0} 66%,100%{opacity:1} }
+
+    /* Fig 2 — strip the window back to a bare pocket, then dimension it */
+    @keyframes secSash  { 0%,22%{opacity:1} 40%,100%{opacity:0} }
+    @keyframes secBead  { 0%,34%{opacity:1} 50%,100%{opacity:0} }
+    @keyframes secVoid  { 0%,46%{opacity:0} 60%,100%{opacity:1} }
+    @keyframes secDim   { 0%,64%{opacity:0} 78%,100%{opacity:1} }
+
+    .lbl  { font-size: 15px; fill: var(--text); font-weight: 600; }
+    .lbl-s{ font-size: 13px; fill: var(--text-muted); }
+    .lead { stroke: var(--text-muted); stroke-width: 1.4; fill: none; }
+    .dot  { fill: var(--accent); }
+    .hl   { fill: var(--accent); opacity: 0.26; }
+    .dim  { stroke: var(--accent); stroke-width: 2; fill: none; }
+    .dim-t{ font-size: 15px; fill: var(--accent); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="wrap lesson">
+    <header class="site-header">
+      <a class="back-link" href="./">&larr; Window Training</a>
+      <p class="eyebrow">Start here</p>
+      <h1 class="site-title">Anatomy &amp; Terms</h1>
+      <p class="lede">Every instruction on this site uses these words. Ten minutes here saves
+        an hour of confusion on the wall.</p>
+    </header>
+
+    <main>
+      <section class="section">
+        <h2>The window, part by part</h2>
+        <p>Step through the groups below. The frame is what stays in the wall; the sashes and
+          beads are what come out; the trim is what you take off and put back.</p>
+
+        <figure class="figure" data-dur="10s"
+                data-steps="0:The frame|0.33:The sashes|0.66:Stops &amp; trim">
+          <div class="stage">
+            <svg viewBox="-20 0 800 510" role="img" aria-labelledby="anatT anatD">
+              <title id="anatT">Labeled elevation of a wood double-hung window</title>
+              <desc id="anatD">A double-hung window seen from inside, with its frame, sashes,
+                stops and trim labeled in three groups.</desc>
+
+              <!-- Base drawing -->
+              <!-- Casing (interior trim) -->
+              <path d="M250 60 H510 V440 H250 Z M272 82 H488 V418 H272 Z"
+                    fill="var(--dg-wood)" fill-rule="evenodd"
+                    stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <!-- Frame: head jamb, side jambs -->
+              <path d="M272 82 H488 V418 H272 Z M292 102 H468 V398 H292 Z"
+                    fill="var(--dg-wood-dark)" fill-rule="evenodd"
+                    stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <!-- Upper sash -->
+              <path d="M292 102 H468 V250 H292 Z M308 118 H452 V234 H308 Z"
+                    fill="var(--dg-wood)" fill-rule="evenodd"
+                    stroke="var(--dg-wood-edge)" stroke-width="1.8"/>
+              <rect x="308" y="118" width="144" height="116"
+                    fill="var(--dg-glass)" stroke="var(--dg-glass-edge)" stroke-width="1.4"/>
+              <!-- Lower sash -->
+              <path d="M292 248 H468 V398 H292 Z M308 264 H452 V382 H308 Z"
+                    fill="var(--dg-wood)" fill-rule="evenodd"
+                    stroke="var(--dg-wood-edge)" stroke-width="1.8"/>
+              <rect x="308" y="264" width="144" height="118"
+                    fill="var(--dg-glass)" stroke="var(--dg-glass-edge)" stroke-width="1.4"/>
+              <path d="M322 226 L356 126 M322 374 L356 274"
+                    stroke="#fff" stroke-width="6" opacity="0.45"/>
+              <!-- Sash lock on the meeting rail -->
+              <rect x="366" y="243" width="28" height="10" rx="2" fill="var(--dg-metal)"/>
+              <!-- Stool and apron -->
+              <path d="M238 418 H522 V436 H238 Z" fill="var(--dg-wood)"
+                    stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <path d="M266 436 H494 V466 H266 Z" fill="var(--dg-wood)"
+                    stroke="var(--dg-wood-edge)" stroke-width="2"/>
+
+              <!-- Group 1: the frame -->
+              <g data-anim="" style="animation-name: grp1">
+                <rect class="hl" x="272" y="82" width="216" height="20"/>
+                <rect class="hl" x="272" y="102" width="20" height="296"/>
+                <rect class="hl" x="468" y="102" width="20" height="296"/>
+                <rect class="hl" x="272" y="398" width="216" height="20"/>
+
+                <path class="lead" d="M232 92 H366"/><circle class="dot" cx="366" cy="92" r="4"/>
+                <text class="lbl" x="226" y="88" text-anchor="end">Head jamb</text>
+                <text class="lbl-s" x="226" y="106" text-anchor="end">top of the frame</text>
+
+                <path class="lead" d="M232 250 H282"/><circle class="dot" cx="282" cy="250" r="4"/>
+                <text class="lbl" x="226" y="246" text-anchor="end">Side jamb</text>
+                <text class="lbl-s" x="226" y="264" text-anchor="end">measure width jamb to jamb</text>
+
+                <path class="lead" d="M528 408 H478"/><circle class="dot" cx="478" cy="408" r="4"/>
+                <text class="lbl" x="534" y="404">Sill</text>
+                <text class="lbl-s" x="534" y="422">sloped — measure from its high point</text>
+
+                <text class="lbl c-accent" x="380" y="492" text-anchor="middle">
+                  The frame stays in the wall. Everything else comes out.</text>
+              </g>
+
+              <!-- Group 2: the sashes -->
+              <g data-anim="" style="animation-name: grp2">
+                <rect class="hl" x="292" y="102" width="176" height="148"/>
+                <rect class="hl" x="292" y="248" width="176" height="150"/>
+
+                <path class="lead" d="M232 150 H302"/><circle class="dot" cx="302" cy="150" r="4"/>
+                <text class="lbl" x="226" y="146" text-anchor="end">Upper sash</text>
+                <text class="lbl-s" x="226" y="164" text-anchor="end">sits behind the parting bead</text>
+
+                <path class="lead" d="M232 330 H302"/><circle class="dot" cx="302" cy="330" r="4"/>
+                <text class="lbl" x="226" y="326" text-anchor="end">Lower sash</text>
+                <text class="lbl-s" x="226" y="344" text-anchor="end">comes out first</text>
+
+                <path class="lead" d="M528 248 H400"/><circle class="dot" cx="400" cy="248" r="4"/>
+                <text class="lbl" x="534" y="244">Meeting rail</text>
+                <text class="lbl-s" x="534" y="262">where the two sashes lock</text>
+
+                <path class="lead" d="M528 150 H458"/><circle class="dot" cx="458" cy="150" r="4"/>
+                <text class="lbl" x="534" y="146">Balance / cord</text>
+                <text class="lbl-s" x="534" y="164">hidden in the jamb pocket</text>
+
+                <text class="lbl c-accent" x="380" y="492" text-anchor="middle">
+                  Both sashes and their balances are removed and discarded.</text>
+              </g>
+
+              <!-- Group 3: stops and trim -->
+              <g data-anim="" style="animation-name: grp3">
+                <rect class="hl" x="250" y="60" width="260" height="22"/>
+                <rect class="hl" x="250" y="60" width="22" height="380"/>
+                <rect class="hl" x="238" y="418" width="284" height="18"/>
+                <rect class="hl" x="266" y="436" width="228" height="30"/>
+
+                <path class="lead" d="M232 70 H300"/><circle class="dot" cx="300" cy="70" r="4"/>
+                <text class="lbl" x="226" y="66" text-anchor="end">Casing</text>
+                <text class="lbl-s" x="226" y="84" text-anchor="end">the trim around the opening</text>
+
+                <path class="lead" d="M528 300 H282"/><circle class="dot" cx="282" cy="300" r="4"/>
+                <text class="lbl" x="534" y="296">Inside stop</text>
+                <text class="lbl-s" x="534" y="314">pry it off first, save it, reuse it</text>
+
+                <path class="lead" d="M232 427 H300"/><circle class="dot" cx="300" cy="427" r="4"/>
+                <text class="lbl" x="226" y="423" text-anchor="end">Stool</text>
+                <text class="lbl-s" x="226" y="441" text-anchor="end">the interior shelf</text>
+
+                <path class="lead" d="M528 451 H480"/><circle class="dot" cx="480" cy="451" r="4"/>
+                <text class="lbl" x="534" y="447">Apron</text>
+                <text class="lbl-s" x="534" y="465">trim under the stool</text>
+
+                <text class="lbl c-accent" x="380" y="492" text-anchor="middle">
+                  Trim comes off carefully — you are putting it all back.</text>
+              </g>
+            </svg>
+          </div>
+          <figcaption><b>A wood double-hung, seen from inside.</b> Use the chips to step through
+            the frame, the sashes, and the trim.</figcaption>
+        </figure>
+      </section>
+
+      <hr class="rule">
+
+      <section class="section">
+        <h2>The pocket — the part that decides everything</h2>
+        <p>Cut horizontally through the window and look down at one side jamb. This is the view
+          that matters, because the space between the inside stop and the blind stop is the
+          <strong>pocket</strong> — the slot your new insert has to live in. If it is too
+          shallow, an insert will not work here at all.</p>
+
+        <figure class="figure" data-dur="10s"
+                data-steps="0:As it stands|0.3:Sashes out|0.5:Parting bead out|0.75:The pocket|1:Depth measured">
+          <div class="stage">
+            <svg viewBox="0 0 760 400" role="img" aria-labelledby="secT secD">
+              <title id="secT">Horizontal section through a window jamb</title>
+              <desc id="secD">Looking down at the left jamb. The blind stop sits at the exterior,
+                then the upper sash channel, the parting bead, the lower sash channel, and the
+                inside stop at the interior. Removing the sashes and parting bead leaves the
+                pocket, whose depth is measured between the blind stop and the inside stop.</desc>
+
+              <!-- Orientation labels -->
+              <text class="lbl-s" x="30" y="46">EXTERIOR</text>
+              <text class="lbl-s" x="30" y="366">INTERIOR</text>
+              <path class="lead" d="M30 54 V330" stroke-dasharray="4 5"/>
+
+              <!-- Wall framing behind the jamb -->
+              <rect x="108" y="30" width="52" height="320"
+                    fill="var(--dg-wood-dark)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <text class="lbl-s" x="134" y="196" text-anchor="middle"
+                    transform="rotate(-90 134 196)">stud</text>
+
+              <!-- The jamb board -->
+              <rect x="160" y="60" width="44" height="266"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <text class="lbl-s" x="182" y="196" text-anchor="middle"
+                    transform="rotate(-90 182 196)">side jamb</text>
+
+              <!-- Exterior blind stop -->
+              <rect x="204" y="60" width="26" height="34"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <path class="lead" d="M300 48 H222 V62"/><circle class="dot" cx="222" cy="66" r="4"/>
+              <text class="lbl" x="306" y="52">Blind stop</text>
+              <text class="lbl-s" x="306" y="70">fixed — the exterior limit of the pocket</text>
+
+              <!-- Upper sash (in its channel) -->
+              <g data-anim="" style="animation-name: secSash">
+                <rect x="204" y="96" width="230" height="48"
+                      fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+                <text class="lbl-s" x="330" y="125" text-anchor="middle">upper sash</text>
+              </g>
+
+              <!-- Parting bead -->
+              <g data-anim="" style="animation-name: secBead">
+                <rect x="204" y="148" width="24" height="30"
+                      fill="var(--wt-caution)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+                <path class="lead" d="M300 166 H234"/><circle class="dot" cx="234" cy="166" r="4"/>
+                <text class="lbl" x="306" y="162">Parting bead</text>
+                <text class="lbl-s" x="306" y="180">the thin strip between the sashes — this comes out</text>
+              </g>
+
+              <!-- Lower sash -->
+              <g data-anim="" style="animation-name: secSash">
+                <rect x="204" y="182" width="230" height="48"
+                      fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+                <text class="lbl-s" x="330" y="211" text-anchor="middle">lower sash</text>
+              </g>
+
+              <!-- Inside stop -->
+              <rect x="204" y="286" width="30" height="40"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <path class="lead" d="M300 330 H224 V322"/><circle class="dot" cx="224" cy="318" r="4"/>
+              <text class="lbl" x="306" y="334">Inside stop</text>
+              <text class="lbl-s" x="306" y="352">removable — the interior limit of the pocket</text>
+
+              <!-- The bare pocket, once everything is out -->
+              <g data-anim="" style="animation-name: secVoid">
+                <rect x="204" y="94" width="200" height="192"
+                      fill="var(--accent-soft)" stroke="var(--accent)"
+                      stroke-width="2.5" stroke-dasharray="9 7"/>
+                <text class="lbl c-accent" x="304" y="196" text-anchor="middle"
+                      font-size="19">THE POCKET</text>
+              </g>
+
+              <!-- Pocket depth dimension -->
+              <g data-anim="" style="animation-name: secDim">
+                <path class="dim" d="M470 94 V286"/>
+                <path class="dim" d="M462 100 L470 94 L478 100"/>
+                <path class="dim" d="M462 280 L470 286 L478 280"/>
+                <path class="dim" d="M404 94 H478 M404 286 H478" stroke-width="1.2"
+                      stroke-dasharray="4 4"/>
+                <text class="dim-t" x="490" y="184">Pocket depth</text>
+                <text class="lbl-s" x="490" y="204">needs about 3&#188;&#8243; for a</text>
+                <text class="lbl-s" x="490" y="222">standard insert — check</text>
+                <text class="lbl-s" x="490" y="240">your unit&#39;s spec</text>
+              </g>
+            </svg>
+          </div>
+          <figcaption><b>Pocket depth is measured with the parting bead already out</b>, from the
+            face of the blind stop to the face of the inside stop. Too shallow and the insert
+            will not sit behind the stops — that is a full-frame job, not an insert job.</figcaption>
+        </figure>
+
+        <div class="callout stop">
+          <div class="callout-title">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M4.5 7.2h7v1.6h-7z" fill="#fff"/></svg>
+            Check the pocket before you quote the job
+          </div>
+          <p>A shallow pocket is the one thing that stops an insert dead. Measure it on the
+            first visit, before anyone promises the customer a price. If it will not make depth,
+            the honest answer is a full-frame replacement.</p>
+        </div>
+      </section>
+
+      <hr class="rule">
+
+      <section class="section">
+        <h2>What the new unit brings with it</h2>
+        <p>An insert is a complete window in its own frame. It has no nailing fin — it is built to
+          be screwed through its jambs into your old frame and covered by the stops.</p>
+
+        <figure class="figure" data-dur="1s" data-steps="0:Insert profile">
+          <div class="stage">
+            <svg viewBox="-60 0 880 340" role="img" aria-labelledby="insT insD">
+              <title id="insT">Parts of a vinyl insert window</title>
+              <desc id="insD">The insert has an integral vinyl frame, a head expander at the top
+                that closes the gap to the head jamb, and a sloped sill angle adapter at the
+                bottom that matches the old sill's slope.</desc>
+
+              <!-- Old frame ghost -->
+              <path d="M250 30 H560 V300 H250 Z M282 62 H528 V268 H282 Z"
+                    fill="none" stroke="var(--dg-ghost)" stroke-width="2" stroke-dasharray="7 6"/>
+              <text class="lbl-s" x="256" y="22">old wood frame (shown ghosted)</text>
+
+              <!-- Head expander -->
+              <rect x="290" y="62" width="230" height="20"
+                    fill="var(--dg-metal)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
+              <path class="lead" d="M180 72 H286"/><circle class="dot" cx="286" cy="72" r="4"/>
+              <text class="lbl" x="174" y="68" text-anchor="end">Head expander</text>
+              <text class="lbl-s" x="174" y="86" text-anchor="end">takes up the gap at the head jamb</text>
+
+              <!-- Insert frame -->
+              <path d="M290 82 H520 V246 H290 Z M310 102 H500 V226 H310 Z"
+                    fill="var(--dg-vinyl)" fill-rule="evenodd"
+                    stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
+              <rect x="310" y="102" width="190" height="58"
+                    fill="var(--dg-glass)" stroke="var(--dg-glass-edge)" stroke-width="1.4"/>
+              <rect x="310" y="158" width="190" height="12"
+                    fill="var(--dg-vinyl)" stroke="var(--dg-vinyl-edge)" stroke-width="1.4"/>
+              <rect x="310" y="168" width="190" height="58"
+                    fill="var(--dg-glass)" stroke="var(--dg-glass-edge)" stroke-width="1.4"/>
+
+              <path class="lead" d="M600 120 H514"/><circle class="dot" cx="514" cy="120" r="4"/>
+              <text class="lbl" x="606" y="116">Integral frame</text>
+              <text class="lbl-s" x="606" y="134">no nailing fin — screws go</text>
+              <text class="lbl-s" x="606" y="152">through the jambs</text>
+
+              <path class="lead" d="M600 200 H504"/><circle class="dot" cx="504" cy="200" r="4"/>
+              <text class="lbl" x="606" y="196">Screw holes</text>
+              <text class="lbl-s" x="606" y="214">pre-drilled, hidden by the stop</text>
+
+              <!-- Sill angle adapter -->
+              <path d="M290 246 H520 L520 268 H290 Z"
+                    fill="var(--dg-vinyl)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
+              <path d="M290 268 H520 L520 282 L290 258 Z"
+                    fill="var(--dg-metal)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
+              <path class="lead" d="M180 276 H286"/><circle class="dot" cx="286" cy="272" r="4"/>
+              <text class="lbl" x="174" y="272" text-anchor="end">Sill angle adapter</text>
+              <text class="lbl-s" x="174" y="290" text-anchor="end">sloped to sit flat on the old sill</text>
+            </svg>
+          </div>
+          <figcaption><b>An insert is sized to the pocket, not to the rough opening.</b> The
+            expander and sill adapter absorb the small differences — they are not there to make
+            up for a bad measurement.</figcaption>
+        </figure>
+      </section>
+
+      <hr class="rule">
+
+      <section class="section">
+        <h2>Terms, in one place</h2>
+        <div class="table-scroll">
+          <table class="spec-table">
+            <thead>
+              <tr><th>Term</th><th>What it is</th><th>Why you care</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><b>Side jamb</b></td><td>The vertical board on each side of the frame.</td><td>Width is measured jamb to jamb. This is the surface your screws land in.</td></tr>
+              <tr><td><b>Head jamb</b></td><td>The horizontal board at the top.</td><td>Height is measured up to this. The head expander closes the gap here.</td></tr>
+              <tr><td><b>Sill</b></td><td>The sloped board at the bottom, outside the stool.</td><td>It slopes, so heights get measured from its <em>high</em> point.</td></tr>
+              <tr><td><b>Inside stop</b></td><td>Removable strip holding the lower sash in from the room side.</td><td>First thing off, last thing back on. Save it — new stock rarely matches.</td></tr>
+              <tr><td><b>Parting bead</b></td><td>Thin strip in a groove separating the two sashes.</td><td>Must come out before you measure. Leaving it in makes the opening read narrow.</td></tr>
+              <tr><td><b>Blind stop</b></td><td>Fixed strip at the exterior edge of the jamb.</td><td>The outer limit of the pocket, and what the new unit pushes up against.</td></tr>
+              <tr><td><b>Pocket</b></td><td>The clear space between blind stop and inside stop.</td><td>If it is under about 3&#188;&#8243;, an insert will not fit.</td></tr>
+              <tr><td><b>Stool</b></td><td>The interior shelf — what most people call the sill.</td><td>Stays put. Your unit lands behind it, not on it.</td></tr>
+              <tr><td><b>Apron</b></td><td>Trim under the stool.</td><td>Only comes off if you are replacing the stool.</td></tr>
+              <tr><td><b>Insert / pocket window</b></td><td>A complete window built to drop into an existing frame.</td><td>What this whole site is about. No nailing fin, no siding work.</td></tr>
+              <tr><td><b>Full frame</b></td><td>Tearing the old frame out back to the rough opening.</td><td>The fallback when the pocket is too shallow or the frame is rotten.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <nav class="pager">
+        <a class="prev" href="./"><span class="dir">Back to</span><span class="name">&larr; Training home</span></a>
+        <a class="next" href="measure.html"><span class="dir">Next</span><span class="name">How to measure &rarr;</span></a>
+      </nav>
+    </main>
+  </div>
+
+  <script src="../../assets/feedback-config.js"></script>
+  <script src="../../assets/feedback.js" defer></script>
+  <script src="../../assets/analytics.js" defer></script>
+  <script src="diagrams.js" defer></script>
+</body>
+</html>

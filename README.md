@@ -7,6 +7,7 @@ A personal collection of small tools used throughout the workday. Plain static H
 ## Tools
 
 - **Margin & Markup Calculator** (`tools/margin-markup/`) — cost, markup %, margin %, sell price, and sales tax. Lock any one of the four linked values and the others recalculate around it. Tax rates can be saved as named presets (stored in the browser via localStorage).
+- **Vinyl Window Training** (`tools/window-training/`) — a field training site for measuring, prepping and installing a vinyl replacement window inside an original window frame. Covers both starting points (original sashes still in, or an older insert being changed out), with animated SVG diagrams and a measuring worksheet that takes fractions and returns the order size.
 
 ## Feedback & visit counts
 

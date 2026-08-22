@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Measuring Worksheet — Window Training — WorkTools</title>
+  <meta name="description" content="Type your window readings in fractions and get the order size, squareness check, and pocket depth check.">
+  <link rel="stylesheet" href="../../assets/style.css">
+  <link rel="stylesheet" href="training.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232f6fed' stroke-width='2'><rect x='4' y='2.5' width='16' height='19' rx='2'/><path d='M8 8h8M8 12h8M8 16h5'/></svg>">
+  <style>
+    .ws-panel { max-width: 640px; margin: 0 auto; }
+
+    .fieldset { border: 0; padding: 0; margin: 0 0 22px; }
+    .fieldset > legend {
+      padding: 0;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .readings {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .readings.two { grid-template-columns: repeat(2, 1fr); }
+
+    .reading label {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .reading input,
+    .text-input {
+      width: 100%;
+      font: inherit;
+      font-size: 1.02rem;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface-2);
+      color: var(--text);
+      outline: none;
+    }
+
+    .reading input:focus,
+    .text-input:focus { border-color: var(--accent); }
+    .reading input.bad { border-color: var(--wt-stop); background: var(--wt-stop-soft); }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .result-row:last-of-type { border-bottom: 0; }
+    .result-row .label { font-size: 0.88rem; color: var(--text-muted); }
+    .result-row .value { font-size: 1.06rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .result-row .value.big { font-size: 1.3rem; color: var(--accent); }
+    .result-row .value.good { color: var(--wt-good); }
+    .result-row .value.warn { color: var(--wt-caution); }
+    .result-row .value.bad  { color: var(--wt-stop); }
+
+    .note { font-size: 0.84rem; color: var(--text-muted); margin: 6px 0 0; }
+    .note.good { color: var(--wt-good); }
+    .note.warn { color: var(--wt-caution); }
+    .note.bad  { color: var(--wt-stop); }
+    .note code {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-size: 0.92em;
+    }
+
+    .order-box {
+      background: var(--accent-soft);
+      border: 2px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 18px;
+      text-align: center;
+      margin: 4px 0 18px;
+    }
+    .order-box .cap {
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .order-size {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+      margin-top: 4px;
+    }
+    .order-size.ready { color: var(--accent); font-size: 2rem; }
+    .order-box .sub { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
+
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+    .actions .btn { flex: 1 1 auto; }
+    .actions .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .saved-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    .saved-table th, .saved-table td {
+      text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .saved-table th {
+      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted);
+    }
+    .saved-table td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .saved-table .row-actions { white-space: nowrap; }
+    .saved-table .row-actions .btn { padding: 4px 9px; font-size: 0.8rem; margin-right: 5px; }
+
+    @media (max-width: 520px) {
+      .readings { grid-template-columns: 1fr 1fr; }
+      .readings .reading:nth-child(3) { grid-column: span 2; }
+    }
+
+    @media print {
+      .site-header .back-link, .actions, .player, .pager,
+      #wtFeedbackBtn, .no-print { display: none !important; }
+      .panel { box-shadow: none; border: 1px solid #999; }
+      body { background: #fff; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap lesson">
+    <header class="site-header">
+      <a class="back-link" href="./">&larr; Window Training</a>
+      <p class="eyebrow">Start here</p>
+      <h1 class="site-title">Measuring Worksheet</h1>
+      <p class="lede">Type the readings the way you'd write them on a scrap of wood —
+        <code>36 1/2</code>, <code>36-1/2</code>, <code>36.5</code> all work.</p>
+    </header>
+
+    <main>
+      <div class="panel ws-panel">
+        <fieldset class="fieldset">
+          <legend>The opening</legend>
+          <input class="text-input" type="text" id="openingName" autocomplete="off"
+                 placeholder="Kitchen, over the sink">
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend>Width — jamb to jamb</legend>
+          <div class="readings">
+            <div class="reading">
+              <label for="wTop">Top</label>
+              <input type="text" id="wTop" inputmode="text" autocomplete="off" placeholder="36 1/2">
+            </div>
+            <div class="reading">
+              <label for="wMid">Middle</label>
+              <input type="text" id="wMid" inputmode="text" autocomplete="off" placeholder="36 1/4">
+            </div>
+            <div class="reading">
+              <label for="wBot">Bottom</label>
+              <input type="text" id="wBot" inputmode="text" autocomplete="off" placeholder="36 3/8">
+            </div>
+          </div>
+          <div class="result-row">
+            <span class="label">Smallest reading</span>
+            <span class="value" id="tightW">—</span>
+          </div>
+          <div class="result-row">
+            <span class="label">Order width <em>(less &#189;&#8243;)</em></span>
+            <span class="value" id="orderW">—</span>
+          </div>
+          <p class="note" id="wNote"></p>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend>Height — head jamb to the sill's high point</legend>
+          <div class="readings">
+            <div class="reading">
+              <label for="hLeft">Left</label>
+              <input type="text" id="hLeft" inputmode="text" autocomplete="off" placeholder="60">
+            </div>
+            <div class="reading">
+              <label for="hCtr">Centre</label>
+              <input type="text" id="hCtr" inputmode="text" autocomplete="off" placeholder="59 7/8">
+            </div>
+            <div class="reading">
+              <label for="hRight">Right</label>
+              <input type="text" id="hRight" inputmode="text" autocomplete="off" placeholder="60 1/8">
+            </div>
+          </div>
+          <div class="result-row">
+            <span class="label">Smallest reading</span>
+            <span class="value" id="tightH">—</span>
+          </div>
+          <div class="result-row">
+            <span class="label">Order height <em>(less &#189;&#8243;)</em></span>
+            <span class="value" id="orderH">—</span>
+          </div>
+          <p class="note" id="hNote"></p>
+        </fieldset>
+
+        <div class="order-box">
+          <div class="cap">Order this size</div>
+          <div class="order-size" id="orderLine">—</div>
+          <div class="sub">width &times; height, rounded down to the nearest eighth</div>
+        </div>
+
+        <fieldset class="fieldset">
+          <legend>Square — corner to corner</legend>
+          <div class="readings two">
+            <div class="reading">
+              <label for="diag1">Diagonal 1</label>
+              <input type="text" id="diag1" inputmode="text" autocomplete="off" placeholder="72 1/8">
+            </div>
+            <div class="reading">
+              <label for="diag2">Diagonal 2</label>
+              <input type="text" id="diag2" inputmode="text" autocomplete="off" placeholder="72 5/8">
+            </div>
+          </div>
+          <div class="result-row">
+            <span class="label">Out of square by</span>
+            <span class="value" id="sqDelta">—</span>
+          </div>
+          <p class="note" id="sqNote"></p>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend>Pocket depth — blind stop to inside stop</legend>
+          <div class="readings two">
+            <div class="reading">
+              <label for="depth">Measured depth</label>
+              <input type="text" id="depth" inputmode="text" autocomplete="off" placeholder="3 1/4">
+            </div>
+            <div class="reading">
+              <label for="depthNeed">Your unit needs</label>
+              <input type="text" id="depthNeed" inputmode="text" autocomplete="off" placeholder="3 1/4">
+            </div>
+          </div>
+          <div class="result-row">
+            <span class="label">Pocket depth</span>
+            <span class="value" id="depthOut">—</span>
+          </div>
+          <p class="note" id="depthNote"></p>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend>Notes</legend>
+          <input class="text-input" type="text" id="openingNotes" autocomplete="off"
+                 placeholder="Sill soft at the left corner — check before ordering">
+        </fieldset>
+
+        <div class="actions">
+          <button class="btn btn-primary" type="button" id="saveBtn">Save this opening</button>
+          <button class="btn" type="button" id="clearBtn">Clear</button>
+          <button class="btn" type="button" id="printBtn">Print</button>
+        </div>
+        <p class="note" id="saveNote"></p>
+      </div>
+
+      <div class="panel" id="savedWrap" hidden style="margin-top:16px">
+        <h2 style="margin:0 0 4px;font-size:1.05rem">Saved openings</h2>
+        <p class="note" style="margin-bottom:10px">Stored in this browser only, on this device.
+          Print the list before you order.</p>
+        <div class="table-scroll">
+          <table class="saved-table">
+            <thead>
+              <tr><th>Opening</th><th>Order size</th><th>Out of square</th><th>Depth</th><th>Notes</th><th class="no-print"></th></tr>
+            </thead>
+            <tbody id="savedBody"></tbody>
+          </table>
+        </div>
+        <div class="actions no-print" style="margin-top:12px">
+          <button class="btn btn-danger" type="button" id="clearAllBtn">Delete all saved openings</button>
+        </div>
+      </div>
+
+      <div class="callout tip" style="max-width:640px;margin-left:auto;margin-right:auto">
+        <div class="callout-title">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a5 5 0 0 0-3 9v2.2c0 .4.3.8.8.8h4.4c.5 0 .8-.4.8-.8V10A5 5 0 0 0 8 1m-2 14h4v.4c0 .3-.3.6-.6.6H6.6a.6.6 0 0 1-.6-.6z"/></svg>
+          Not sure where these numbers come from?
+        </div>
+        <p><a href="measure.html">How to measure</a> walks through all six readings, the diagonals,
+          and the depth, with the tape drawn on the wall.</p>
+      </div>
+
+      <nav class="pager">
+        <a class="prev" href="measure.html"><span class="dir">Back to</span><span class="name">&larr; How to measure</span></a>
+        <a class="next" href="./"><span class="dir">Next</span><span class="name">Pick your path &rarr;</span></a>
+      </nav>
+    </main>
+  </div>
+
+  <script src="../../assets/feedback-config.js"></script>
+  <script src="../../assets/feedback.js" defer></script>
+  <script src="../../assets/analytics.js" defer></script>
+  <script src="worksheet.js" defer></script>
+</body>
+</html>
