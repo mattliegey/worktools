@@ -345,14 +345,16 @@
               <text class="lbl" x="606" y="196">Screw holes</text>
               <text class="lbl-s" x="606" y="214">pre-drilled, hidden by the stop</text>
 
-              <!-- Sill angle adapter -->
-              <path d="M290 246 H520 L520 268 H290 Z"
-                    fill="var(--dg-vinyl)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
-              <path d="M290 268 H520 L520 282 L290 258 Z"
+              <!-- Sill angle adapter. Drawn as a plain band because this is a
+                   face-on elevation: the adapter's slope runs front to back, so
+                   it is not visible from here. Mirrors the head expander, which
+                   does the same job at the top of the opening. -->
+              <rect x="290" y="246" width="230" height="22"
                     fill="var(--dg-metal)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
-              <path class="lead" d="M180 276 H286"/><circle class="dot" cx="286" cy="272" r="4"/>
-              <text class="lbl" x="174" y="272" text-anchor="end">Sill angle adapter</text>
-              <text class="lbl-s" x="174" y="290" text-anchor="end">sloped to sit flat on the old sill</text>
+              <path class="lead" d="M180 257 H286"/><circle class="dot" cx="286" cy="257" r="4"/>
+              <text class="lbl" x="174" y="253" text-anchor="end">Sill angle adapter</text>
+              <text class="lbl-s" x="174" y="271" text-anchor="end">sloped on its underside to</text>
+              <text class="lbl-s" x="174" y="289" text-anchor="end">sit flat on the old sill</text>
             </svg>
           </div>
           <figcaption><b>An insert is sized to the pocket, not to the rough opening.</b> The
