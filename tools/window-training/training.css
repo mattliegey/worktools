@@ -574,6 +574,10 @@ hr.rule {
  * those classes does NOT work — the class wins — so colour diagram text with
  * these instead.
  */
+/* Parts that STAY on the wall, so a diagram can separate "you touch this"
+   (.hl, accent) from "leave it alone" at a glance. */
+.hl-stay { fill: var(--text-muted); opacity: 0.22; }
+
 svg .c-good   { fill: var(--wt-good); }
 svg .c-warn   { fill: var(--wt-caution); }
 svg .c-stop   { fill: var(--wt-stop); }

@@ -42,8 +42,9 @@
     <main>
       <section class="section">
         <h2>The window, part by part</h2>
-        <p>Step through the groups below. The frame is what stays in the wall; the sashes and
-          beads are what come out; the trim is what you take off and put back.</p>
+        <p>Step through the groups below. The frame stays in the wall, the sashes and beads
+          come out, and of the trim only the inside stops come off — the casing, stool
+          and apron never leave the wall on an insert job.</p>
 
         <figure class="figure" data-dur="10s"
                 data-steps="0:The frame|0.5:The sashes|1:Stops &amp; trim">
@@ -82,6 +83,11 @@
                     stroke="#fff" stroke-width="6" opacity="0.45"/>
               <!-- Sash lock on the meeting rail -->
               <rect x="366" y="251" width="28" height="10" rx="2" fill="var(--dg-metal)"/>
+              <!-- Inside stop: head and two legs sitting on the inner face of
+                   the jamb, dying into the stool. The only trim that comes off
+                   for an insert, so it is drawn as its own piece. -->
+              <path d="M282 92 H478 V398 H468 V102 H292 V398 H282 Z"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="1.8"/>
               <!-- Stool: the interior shelf. Its horns run past the casing
                    on both sides, so it is the widest thing on the window. -->
               <path d="M236 418 H524 V438 H236 Z" fill="var(--dg-wood)"
@@ -102,7 +108,7 @@
                 <text class="lbl" x="226" y="88" text-anchor="end">Head jamb</text>
                 <text class="lbl-s" x="226" y="106" text-anchor="end">top of the frame</text>
 
-                <path class="lead" d="M232 250 H282"/><circle class="dot" cx="282" cy="250" r="4"/>
+                <path class="lead" d="M232 250 H277"/><circle class="dot" cx="277" cy="250" r="4"/>
                 <text class="lbl" x="226" y="246" text-anchor="end">Side jamb</text>
                 <text class="lbl-s" x="226" y="264" text-anchor="end">measure width jamb to jamb</text>
 
@@ -141,28 +147,35 @@
 
               <!-- Group 3: stops and trim -->
               <g data-anim="" style="animation-name: grp3">
-                <path class="hl" d="M250 60 H510 V418 H488 V82 H272 V418 H250 Z"/>
-                <rect class="hl" x="236" y="418" width="288" height="20"/>
-                <rect class="hl" x="250" y="438" width="260" height="32"/>
+                <!-- Stays on the wall: muted. -->
+                <path class="hl-stay" d="M250 60 H510 V418 H488 V82 H272 V418 H250 Z"/>
+                <rect class="hl-stay" x="236" y="418" width="288" height="20"/>
+                <rect class="hl-stay" x="250" y="438" width="260" height="32"/>
+                <!-- Comes off: accent fill plus an outline, because a strip this
+                     thin does not read on a tint alone. -->
+                <path class="hl" d="M282 92 H478 V398 H468 V102 H292 V398 H282 Z"/>
+                <path d="M282 92 H478 V398 H468 V102 H292 V398 H282 Z"
+                      fill="none" stroke="var(--accent)" stroke-width="3"/>
 
                 <path class="lead" d="M232 70 H300"/><circle class="dot" cx="300" cy="70" r="4"/>
                 <text class="lbl" x="226" y="66" text-anchor="end">Casing</text>
-                <text class="lbl-s" x="226" y="84" text-anchor="end">the trim around the opening</text>
+                <text class="lbl-s" x="226" y="84" text-anchor="end">stays on the wall</text>
 
-                <path class="lead" d="M528 300 H478"/><circle class="dot" cx="478" cy="300" r="4"/>
-                <text class="lbl" x="534" y="296">Inside stop</text>
-                <text class="lbl-s" x="534" y="314">pry it off first, save it, reuse it</text>
+                <path class="lead" d="M528 300 H473"/><circle class="dot" cx="473" cy="300" r="4"/>
+                <text class="lbl c-accent" x="534" y="296">Inside stop</text>
+                <text class="lbl-s" x="534" y="314">the only trim that comes off —</text>
+                <text class="lbl-s" x="534" y="332">save it, it goes back on</text>
 
                 <path class="lead" d="M228 428 H300"/><circle class="dot" cx="300" cy="428" r="4"/>
                 <text class="lbl" x="222" y="424" text-anchor="end">Stool</text>
-                <text class="lbl-s" x="222" y="442" text-anchor="end">the shelf the casing sits on</text>
+                <text class="lbl-s" x="222" y="442" text-anchor="end">stays put</text>
 
                 <path class="lead" d="M532 454 H470"/><circle class="dot" cx="470" cy="454" r="4"/>
                 <text class="lbl" x="538" y="450">Apron</text>
-                <text class="lbl-s" x="538" y="468">under the stool, out to the casing</text>
+                <text class="lbl-s" x="538" y="468">stays put</text>
 
                 <text class="lbl c-accent" x="380" y="492" text-anchor="middle">
-                  Trim comes off carefully — you are putting it all back.</text>
+                  Only the inside stops come off. Casing, stool and apron stay.</text>
               </g>
             </svg>
           </div>
@@ -359,6 +372,7 @@
               <tr><td><b>Side jamb</b></td><td>The vertical board on each side of the frame.</td><td>Width is measured jamb to jamb. This is the surface your screws land in.</td></tr>
               <tr><td><b>Head jamb</b></td><td>The horizontal board at the top.</td><td>Height is measured up to this. The head expander closes the gap here.</td></tr>
               <tr><td><b>Sill</b></td><td>The sloped board at the bottom, outside the stool.</td><td>It slopes, so heights get measured from its <em>high</em> point.</td></tr>
+              <tr><td><b>Casing</b></td><td>The trim around the opening — head and both sides.</td><td>Stays on the wall. Score the paint where the stop meets it so you do not tear it.</td></tr>
               <tr><td><b>Inside stop</b></td><td>Removable strip holding the lower sash in from the room side.</td><td>First thing off, last thing back on. Save it — new stock rarely matches.</td></tr>
               <tr><td><b>Parting bead</b></td><td>Thin strip in a groove separating the two sashes.</td><td>Must come out before you measure. Leaving it in makes the opening read narrow.</td></tr>
               <tr><td><b>Blind stop</b></td><td>Fixed strip at the exterior edge of the jamb.</td><td>The outer limit of the pocket, and what the new unit pushes up against.</td></tr>
