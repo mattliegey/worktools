@@ -25,6 +25,13 @@
     @keyframes secStopGone { 0%, 66.7% { opacity: 0; } 83.3% { opacity: 1; } 100% { opacity: 0; } }
     @keyframes secNewIn { 0%, 83.3% { opacity: 0; } 100% { opacity: 1; } }
 
+    /* Fig 4 — vertical section: what the adapter and the expander actually do */
+    @keyframes vsBare  { 0% { opacity: 1; } 33.3%, 100% { opacity: 0; } }
+    @keyframes vsAdapt { 0% { transform: translateX(-110px); opacity: 0; } 12% { opacity: 1; } 33.3%, 100% { transform: translateX(0); opacity: 1; } }
+    @keyframes vsUnit  { 0%, 33.3% { transform: translateY(-30px); opacity: 0; } 46% { opacity: 1; } 66.7%, 100% { transform: translateY(0); opacity: 1; } }
+    @keyframes vsGap   { 0%, 33.3% { opacity: 0; } 66.7% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes vsExp   { 0%, 66.7% { transform: translateY(44px); opacity: 0; } 80% { opacity: 1; } 100% { transform: translateY(0); opacity: 1; } }
+
     .lbl  { font-size: 15px; fill: var(--text); font-weight: 600; }
     .lbl-s{ font-size: 13px; fill: var(--text-muted); }
     .lead { stroke: var(--text-muted); stroke-width: 1.4; fill: none; }
@@ -416,7 +423,7 @@
                     fill="var(--dg-metal)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
               <path class="lead" d="M180 72 H286"/><circle class="dot" cx="286" cy="72" r="4"/>
               <text class="lbl" x="174" y="68" text-anchor="end">Head expander</text>
-              <text class="lbl-s" x="174" y="86" text-anchor="end">takes up the gap at the head jamb</text>
+              <text class="lbl-s" x="174" y="86" text-anchor="end">what it does only shows in section</text>
 
               <!-- Insert frame -->
               <path d="M290 82 H520 V246 H290 Z M310 102 H500 V226 H310 Z"
@@ -446,13 +453,109 @@
                     fill="var(--dg-metal)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
               <path class="lead" d="M180 257 H286"/><circle class="dot" cx="286" cy="257" r="4"/>
               <text class="lbl" x="174" y="253" text-anchor="end">Sill angle adapter</text>
-              <text class="lbl-s" x="174" y="271" text-anchor="end">sloped on its underside to</text>
-              <text class="lbl-s" x="174" y="289" text-anchor="end">sit flat on the old sill</text>
+              <text class="lbl-s" x="174" y="271" text-anchor="end">also a section job — its slope</text>
+              <text class="lbl-s" x="174" y="289" text-anchor="end">runs front to back</text>
             </svg>
           </div>
           <figcaption><b>An insert is sized to the pocket, not to the rough opening.</b> The
             expander and sill adapter absorb the small differences — they are not there to make
-            up for a bad measurement.</figcaption>
+            up for a bad measurement. Face-on, both of them are just bands: the next drawing cuts
+            through the window to show what they are for.</figcaption>
+        </figure>
+
+        <h3>Why the expander and the adapter exist</h3>
+        <p>Neither part makes sense head-on. The old sill <strong>slopes front to back</strong> and
+          the new unit has a flat bottom, so something has to sit between them. And the unit is
+          made shorter than the opening, so there is <strong>a gap left at the head</strong> that
+          has to be closed. Cut the window down the middle and both problems are obvious.</p>
+
+        <figure class="figure" data-dur="9s"
+                data-steps="0:The old opening|0.333:Sill adapter in|0.667:Unit set on it|1:Head expander up">
+          <div class="stage">
+            <svg viewBox="-20 0 900 570" role="img" aria-labelledby="vsT vsD">
+              <title id="vsT">Vertical section through an insert in the old frame</title>
+              <desc id="vsD">A section cut down through the window, interior on the left and
+                exterior on the right. The old sill slopes down toward the exterior, so nothing
+                flat can sit on it. A sill angle adapter, sloped on its underside and level on
+                top, goes on first and gives the new unit a flat bed. The unit sits on that,
+                leaving a gap between its head and the old head jamb. The head expander then
+                slides up out of the unit's head to close that gap. Clearances are drawn much
+                larger than they are in life.</desc>
+
+              <text class="lbl-s" x="200" y="28">&#8592; INTERIOR</text>
+              <text class="lbl-s" x="690" y="28" text-anchor="end">EXTERIOR &#8594;</text>
+
+              <rect x="200" y="52" width="490" height="44"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <path class="lead" d="M194 74 H236"/><circle class="dot" cx="236" cy="74" r="4"/>
+              <text class="lbl-s" x="188" y="70" text-anchor="end">old head jamb</text>
+
+              <rect x="650" y="96" width="40" height="34"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <path class="lead" d="M670 113 H700 V82"/><circle class="dot" cx="670" cy="113" r="4"/>
+              <text class="lbl-s" x="706" y="78">blind stop at the head</text>
+
+              <path d="M200 460 L690 502 L690 536 L200 494 Z"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <path class="lead" d="M194 486 H240"/><circle class="dot" cx="240" cy="486" r="4"/>
+              <text class="lbl-s" x="188" y="482" text-anchor="end">old sill</text>
+              <text class="lbl-s" x="188" y="500" text-anchor="end">sloped to shed water</text>
+
+              <text class="lbl-s" x="445" y="556" text-anchor="middle">clearances drawn much larger than they are in life</text>
+
+              <g data-anim="" style="animation-name: vsBare">
+                <path class="hl" d="M240 440 H650 V499 L240 463 Z"/>
+                <path d="M240 440 H650" stroke="var(--accent)" stroke-width="2"
+                      stroke-dasharray="8 6" fill="none"/>
+                <text class="lbl c-accent" x="445" y="426" text-anchor="middle">nothing with a flat bottom sits on this</text>
+              </g>
+
+              <g data-anim="" style="animation-name: vsAdapt">
+                <path d="M240 440 H650 V499 L240 463 Z"
+                      fill="var(--dg-metal)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
+                <path class="lead" d="M194 450 H286"/><circle class="dot" cx="286" cy="450" r="4"/>
+                <text class="lbl" x="188" y="428" text-anchor="end">Sill angle adapter</text>
+                <text class="lbl-s" x="188" y="446" text-anchor="end">level on top, sloped underneath</text>
+              </g>
+
+              <g data-anim="" style="animation-name: vsUnit">
+                <rect x="240" y="140" width="410" height="75"
+                      fill="var(--dg-vinyl)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
+                <rect x="376" y="140" width="38" height="75"
+                      fill="var(--surface-2)" stroke="var(--dg-vinyl-edge)" stroke-width="1.2"/>
+                <rect x="240" y="215" width="410" height="185"
+                      fill="var(--dg-vinyl)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
+                <rect x="256" y="231" width="378" height="153"
+                      fill="var(--dg-glass)" stroke="var(--dg-glass-edge)" stroke-width="1.4"/>
+                <rect x="240" y="400" width="410" height="40"
+                      fill="var(--dg-vinyl)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
+                <path class="lead" d="M700 420 H656"/><circle class="dot" cx="656" cy="420" r="4"/>
+                <text class="lbl-s" x="706" y="416">the unit sits flat</text>
+                <text class="lbl-s" x="706" y="434">on the adapter</text>
+              </g>
+
+              <g data-anim="" style="animation-name: vsGap">
+                <rect class="hl" x="240" y="96" width="410" height="44"/>
+                <text class="lbl c-accent" x="445" y="124" text-anchor="middle">and now there is a gap up here</text>
+              </g>
+
+              <g data-anim="" style="animation-name: vsExp">
+                <path d="M240 96 H650 V140 H414 V162 H376 V140 H240 Z"
+                      fill="var(--dg-metal)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
+                <path class="lead" d="M194 109 H300"/><circle class="dot" cx="300" cy="109" r="4"/>
+                <text class="lbl" x="188" y="105" text-anchor="end">Head expander</text>
+                <text class="lbl-s" x="188" y="123" text-anchor="end">slides up out of the unit&#39;s head</text>
+                <text class="lbl-s" x="188" y="141" text-anchor="end">until it meets the head jamb</text>
+                <path class="lead" d="M700 150 H420"/><circle class="dot" cx="420" cy="150" r="4"/>
+                <text class="lbl-s" x="706" y="146">its leg stays in the</text>
+                <text class="lbl-s" x="706" y="164">head, so it telescopes</text>
+              </g>
+            </svg>
+          </div>
+          <figcaption><b>Adapter first, unit second, expander last.</b> The adapter turns a sloped
+            sill into a level bed; the expander closes the gap the unit was deliberately made
+            short of. Both absorb <em>clearance</em>, not error — a window ordered too small
+            still ends up with a gap neither of them can reach.</figcaption>
         </figure>
       </section>
 
