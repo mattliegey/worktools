@@ -14,11 +14,15 @@
     @keyframes grp2 { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
     @keyframes grp3 { 0%, 50% { opacity: 0; } 100% { opacity: 1; } }
 
-    /* Fig 2 — strip the window back to a bare pocket, then dimension it */
-    @keyframes secSash { 0% { opacity: 1; } 25%, 100% { opacity: 0; } }
-    @keyframes secBead { 0%, 25% { opacity: 1; } 50%, 100% { opacity: 0; } }
-    @keyframes secVoid { 0%, 50% { opacity: 0; } 75%, 100% { opacity: 1; } }
-    @keyframes secDim { 0%, 75% { opacity: 0; } 100% { opacity: 1; } }
+    /* Fig 2 — strip the window back to a bare pocket, dimension it, then take
+       the inside stop off so the new unit has a way in */
+    @keyframes secSash { 0% { opacity: 1; } 20%, 100% { opacity: 0; } }
+    @keyframes secBead { 0%, 20% { opacity: 1; } 40%, 100% { opacity: 0; } }
+    @keyframes secVoid { 0%, 40% { opacity: 0; } 60%, 100% { opacity: 1; } }
+    @keyframes secDim { 0%, 60% { opacity: 0; } 80%, 100% { opacity: 1; } }
+    @keyframes secStopOff { 0%, 80% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(58px); opacity: 0; } }
+    @keyframes secStopOn { 0%, 80% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes secStopGone { 0%, 80% { opacity: 0; } 100% { opacity: 1; } }
 
     .lbl  { font-size: 15px; fill: var(--text); font-weight: 600; }
     .lbl-s{ font-size: 13px; fill: var(--text-muted); }
@@ -192,15 +196,17 @@
           <strong>pocket</strong> — the slot your new insert has to live in. If it is too
           shallow, an insert will not work here at all.</p>
 
-        <figure class="figure" data-dur="10s"
-                data-steps="0:As it stands|0.25:Sashes out|0.5:Parting bead out|0.75:The pocket|1:Pocket depth">
+        <figure class="figure" data-dur="12s"
+                data-steps="0:As it stands|0.2:Sashes out|0.4:Parting bead out|0.6:The pocket|0.8:Pocket depth|1:Inside stop off">
           <div class="stage">
             <svg viewBox="0 0 760 400" role="img" aria-labelledby="secT secD">
               <title id="secT">Horizontal section through a window jamb</title>
               <desc id="secD">Looking down at the left jamb. The blind stop sits at the exterior,
                 then the upper sash channel, the parting bead, the lower sash channel, and the
                 inside stop at the interior. Removing the sashes and parting bead leaves the
-                pocket, whose depth is measured between the blind stop and the inside stop.</desc>
+                pocket, whose depth is measured between the blind stop and the inside stop.
+                Finally the inside stop comes off, opening the pocket to the room so the new
+                insert can go in; the stop is refitted over it afterwards.</desc>
 
               <!-- Orientation labels -->
               <text class="lbl-s" x="30" y="46">EXTERIOR</text>
@@ -250,12 +256,24 @@
                 <text class="lbl-s" x="330" y="251" text-anchor="middle">lower sash</text>
               </g>
 
-              <!-- Inside stop -->
-              <rect x="204" y="286" width="30" height="40"
-                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
-              <path class="lead" d="M300 330 H224 V322"/><circle class="dot" cx="224" cy="318" r="4"/>
-              <text class="lbl" x="306" y="334">Inside stop</text>
-              <text class="lbl-s" x="306" y="352">removable — the interior limit of the pocket</text>
+              <!-- Inside stop, and the moment it comes off -->
+              <g data-anim="" style="animation-name: secStopOff">
+                <rect x="204" y="286" width="30" height="40"
+                      fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              </g>
+              <g data-anim="" style="animation-name: secStopOn">
+                <path class="lead" d="M300 330 H224 V322"/><circle class="dot" cx="224" cy="318" r="4"/>
+                <text class="lbl" x="306" y="334">Inside stop</text>
+                <text class="lbl-s" x="306" y="352">removable — the interior limit of the pocket</text>
+              </g>
+              <g data-anim="" style="animation-name: secStopGone">
+                <rect x="204" y="286" width="30" height="40" fill="none"
+                      stroke="var(--dg-wood-edge)" stroke-width="2" stroke-dasharray="6 5"/>
+                <path class="lead" d="M300 330 H224 V322"/><circle class="dot" cx="224" cy="318" r="4"/>
+                <text class="lbl c-accent" x="306" y="334">Inside stop off</text>
+                <text class="lbl-s" x="306" y="352">the insert goes in through here,</text>
+                <text class="lbl-s" x="306" y="370">then the stop goes back on over it</text>
+              </g>
 
               <!-- The bare pocket, once everything is out -->
               <g data-anim="" style="animation-name: secVoid">
@@ -284,7 +302,12 @@
             inside stop.</b> Stripped back like this you can see it plainly — but you do not have
             to strip anything to read it. The tape hook rides straight over the bead, which is
             covered on <a href="measure.html">How to measure</a>. Too shallow and the insert will
-            not sit behind the stops — that is a full-frame job, not an insert job.</figcaption>
+            not sit behind the stops — that is a full-frame job, not an insert job.
+            <br><br>The last stage is the one that gets forgotten: <b>the inside stop has to come
+            off before the new unit can go in</b>, and back on over it once the window is set. On
+            the wall it is actually the <em>first</em> thing off, because nothing else moves until
+            it does — it is shown last here only because it is the last thing standing
+            between the pocket and the room.</figcaption>
         </figure>
 
         <div class="callout stop">
