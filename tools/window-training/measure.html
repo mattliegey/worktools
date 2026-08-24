@@ -4,22 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>How to Measure — Window Training — WorkTools</title>
-  <meta name="description" content="Three widths, three heights, both diagonals, and the pocket depth — how to measure an opening for a vinyl insert window.">
+  <meta name="description" content="Three widths, three heights, the add-back behind the stops, both diagonals and the pocket depth — measured on an undisturbed window, weeks before install day.">
   <link rel="stylesheet" href="../../assets/style.css">
   <link rel="stylesheet" href="training.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232f6fed' stroke-width='2'><rect x='3' y='3' width='18' height='18' rx='1.5'/><path d='M12 3v18M3 12h18'/></svg>">
   <style>
-    @keyframes mA { 0%, 100% { opacity: 1; } }
-    @keyframes mB { 0% { opacity: 0; } 25%, 100% { opacity: 1; } }
-    @keyframes mC { 0%, 25% { opacity: 0; } 50%, 100% { opacity: 1; } }
-    @keyframes mWin { 0%, 50% { opacity: 0; } 75%, 100% { opacity: 1; } }
-    @keyframes mOrder { 0%, 75% { opacity: 0; } 100% { opacity: 1; } }
-    /* Tape blade riding down to each reading position, then off */
-    @keyframes tapeW { 0% { transform: translateY(0); opacity: 1; } 25% { transform: translateY(110px); opacity: 1; } 50% { transform: translateY(225px); opacity: 1; } 75%, 100% { transform: translateY(225px); opacity: 0; } }
-    @keyframes tapeH { 0% { transform: translateX(0); opacity: 1; } 25% { transform: translateX(130px); opacity: 1; } 50% { transform: translateX(260px); opacity: 1; } 75%, 100% { transform: translateX(260px); opacity: 0; } }
+    /* Six-stage grid: 0, .2, .4, .6, .8, 1 */
+    @keyframes k6a { 0%, 100% { opacity: 1; } }
+    @keyframes k6b { 0% { opacity: 0; } 20%, 100% { opacity: 1; } }
+    @keyframes k6c { 0%, 20% { opacity: 0; } 40%, 100% { opacity: 1; } }
+    @keyframes k6d { 0%, 40% { opacity: 0; } 60%, 100% { opacity: 1; } }
+    @keyframes k6e { 0%, 60% { opacity: 0; } 80%, 100% { opacity: 1; } }
+    @keyframes k6f { 0%, 80% { opacity: 0; } 100% { opacity: 1; } }
+
+    /* Tape riding between the three reading positions, then clearing out */
+    @keyframes tapeW { 0% { transform: translateY(0); opacity: 1; } 20% { transform: translateY(94px); opacity: 1; } 40% { transform: translateY(178px); opacity: 1; } 60%, 100% { transform: translateY(178px); opacity: 0; } }
+    @keyframes tapeH { 0% { transform: translateX(0); opacity: 1; } 20% { transform: translateX(96px); opacity: 1; } 40% { transform: translateX(192px); opacity: 1; } 60%, 100% { transform: translateX(192px); opacity: 0; } }
+
+    /* Three-stage grid: 0, .5, 1 */
+    @keyframes bladeIn { 0% { transform: translateY(96px); opacity: 0; } 14% { opacity: 1; } 50%, 100% { transform: translateY(0); opacity: 1; } }
+    @keyframes tapeIn  { 0% { transform: translateX(190px); opacity: 0; } 14% { opacity: 1; } 50%, 100% { transform: translateX(0); opacity: 1; } }
+    @keyframes lateDim { 0%, 50% { opacity: 0; } 100% { opacity: 1; } }
+
     /* Squareness: a true opening, then a racked one */
     @keyframes sqGood { 0% { opacity: 1; } 100% { opacity: 0; } }
     @keyframes sqBad { 0% { opacity: 0; } 100% { opacity: 1; } }
+
     /* Sill slope reveal */
     @keyframes slopeHi { 0% { opacity: 0; } 50%, 100% { opacity: 1; } }
     @keyframes slopeBad { 0%, 50% { opacity: 0; } 100% { opacity: 1; } }
@@ -27,7 +37,9 @@
     .lbl   { font-size: 15px; fill: var(--text); font-weight: 600; }
     .lbl-s { font-size: 13px; fill: var(--text-muted); }
     .lead  { stroke: var(--text-muted); stroke-width: 1.4; fill: none; }
+    .dot   { fill: var(--text-muted); }
     .dim   { stroke: var(--accent); stroke-width: 2.2; fill: none; }
+    .ext   { stroke: var(--accent); stroke-width: 1.2; fill: none; stroke-dasharray: 4 4; }
     .read  { font-size: 19px; font-weight: 700; fill: var(--accent); }
     .chip-bg { fill: var(--surface); stroke: var(--accent); stroke-width: 2; }
     .chip-bg.good { stroke: var(--wt-good); }
@@ -35,6 +47,9 @@
     .win   { font-size: 13px; font-weight: 700; fill: var(--wt-good); }
     .tape  { fill: #f2b705; stroke: #9a7500; stroke-width: 1.5; }
     .tape-t{ font-size: 12px; font-weight: 700; fill: #3a2c00; }
+    .blade { fill: var(--dg-metal); stroke: var(--dg-line); stroke-width: 1.6; }
+    .ghost { fill: none; stroke: var(--dg-ghost); stroke-width: 1.6; stroke-dasharray: 6 5; }
+    .hl-strip { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2; }
   </style>
 </head>
 <body>
@@ -43,189 +58,341 @@
       <a class="back-link" href="./">&larr; Window Training</a>
       <p class="eyebrow">Start here</p>
       <h1 class="site-title">How to Measure</h1>
-      <p class="lede">Three widths, three heights, both diagonals, and the depth. Smallest number
-        wins, then take off a half inch. That is the whole method.</p>
+      <p class="lede">You measure weeks before you install, on a window that still works. Three
+        widths, three heights, what is hidden behind the stops, both diagonals and the depth.
+        Smallest number wins, then take off a half inch.</p>
     </header>
 
     <main>
-      <div class="callout stop">
+      <div class="callout tip">
         <div class="callout-title">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M4.5 7.2h7v1.6h-7z" fill="#fff"/></svg>
-          Do not measure a window you have not opened up yet
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a5 5 0 0 0-3 9v2.2c0 .4.3.8.8.8h4.4c.5 0 .8-.4.8-.8V10A5 5 0 0 0 8 1m-2 14h4v.4c0 .3-.3.6-.6.6H6.6a.6.6 0 0 1-.6-.6z"/></svg>
+          Measure the window exactly as you find it
         </div>
-        <p>Every number on this page is taken off <strong>bare wood</strong>, with the sashes out,
-          the parting bead out, the inside stops off, and the pocket scraped clean. Measuring
-          around a sash, a bead, or an old insert is the single most expensive mistake on this job
-          — the window shows up too small and it is nobody's fault but the tape's.</p>
+        <p>Nothing comes off. No stops, no bead, no sashes. You take these numbers on an intact,
+          working window, the order goes in, and the window shows up. <strong>Install day is the
+          only day anything comes apart</strong> — and by then the replacement is already sitting
+          in the van.</p>
+        <p>Every reading here is taken <strong>between the inside stops</strong>, where the sashes
+          run. That is not the whole opening — the stops are covering the last bit of it on each
+          side. Section&nbsp;2 is how you get that bit back.</p>
       </div>
 
       <section class="section">
-        <h2>1. Width — three readings, jamb to jamb</h2>
-        <p>Measure the clear opening between the two side jambs at the <strong>top, the middle,
-          and the bottom</strong>. Old jambs bow. They are almost never the same three times.</p>
+        <h2>1. Width — three readings between the inside stops</h2>
+        <p>Lay the tape across the window and read the clear distance between the two inside stops
+          at the <strong>top, the middle, and the bottom</strong>. Old jambs bow. They are almost
+          never the same three times.</p>
 
-        <figure class="figure" data-dur="11s"
-                data-steps="0:Top|0.25:Middle|0.5:Bottom|0.75:Smallest wins|1:Order width">
+        <figure class="figure" data-dur="13s"
+                data-steps="0:Top|0.2:Middle|0.4:Bottom|0.6:Smallest wins|0.8:Add back the stops|1:Order width">
           <div class="stage">
-            <svg viewBox="-20 0 830 470" role="img" aria-labelledby="wT wD">
-              <title id="wT">Measuring the width of a window opening in three places</title>
-              <desc id="wD">The clear width between the side jambs is measured at the top, middle
-                and bottom. The readings are 36 and a half, 36 and a quarter, and 36 and three
-                eighths inches. The smallest, 36 and a quarter, is used, and half an inch is
-                deducted to give an order width of 35 and three quarter inches.</desc>
+            <svg viewBox="-20 0 900 520" role="img" aria-labelledby="wT wD">
+              <title id="wT">Measuring the width of an intact window between the inside stops</title>
+              <desc id="wD">The clear width between the two inside stops is measured at the top,
+                middle and bottom of an undisturbed double-hung window. The readings are 34 and a
+                half, 34 and a quarter, and 34 and three eighths inches. The smallest, 34 and a
+                quarter, is taken, then three quarters of an inch is added back for each stop,
+                giving a tight opening of 35 and three quarter inches. Half an inch is deducted
+                for an order width of 35 and a quarter inches.</desc>
 
-              <rect x="130" y="20" width="500" height="430" rx="3"
+              <rect x="90" y="20" width="520" height="440" rx="3"
                     fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
-              <path d="M160 50 H600 V440 H160 Z M200 80 H560 V400 H200 Z"
+              <path d="M130 50 H570 V440 H130 Z M170 80 H530 V400 H170 Z"
                     fill="var(--dg-wood-dark)" fill-rule="evenodd"
                     stroke="var(--dg-wood-edge)" stroke-width="2"/>
-              <rect x="200" y="80" width="360" height="320" fill="var(--surface-2)"/>
-              <text class="lbl-s" x="180" y="245" text-anchor="middle"
-                    transform="rotate(-90 180 245)">side jamb</text>
-              <text class="lbl-s" x="580" y="245" text-anchor="middle"
-                    transform="rotate(-90 580 245)">side jamb</text>
+              <rect x="170" y="80" width="360" height="320" fill="var(--surface-2)"/>
 
-              <!-- Tape blade riding between the three positions -->
+              <rect x="206" y="116" width="288" height="136"
+                    fill="var(--dg-wood-dark)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <rect x="222" y="132" width="256" height="104"
+                    fill="var(--dg-glass)" stroke="var(--dg-glass-edge)" stroke-width="1.5"/>
+              <rect x="206" y="238" width="288" height="162"
+                    fill="var(--dg-wood-dark)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <rect x="222" y="256" width="256" height="128"
+                    fill="var(--dg-glass)" stroke="var(--dg-glass-edge)" stroke-width="1.5"/>
+              <rect x="336" y="241" width="28" height="10" rx="2"
+                    fill="var(--dg-metal)" stroke="var(--dg-wood-edge)" stroke-width="1"/>
+
+              <rect x="170" y="80" width="360" height="36"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <rect x="170" y="80" width="36" height="320"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <rect x="494" y="80" width="36" height="320"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+
+              <path class="lead" d="M84 300 H188"/><circle class="dot" cx="188" cy="300" r="3.5"/>
+              <text class="lbl-s" x="80" y="296" text-anchor="end">inside stop</text>
+              <path class="lead" d="M84 100 H150"/><circle class="dot" cx="150" cy="100" r="3.5"/>
+              <text class="lbl-s" x="80" y="96" text-anchor="end">jamb</text>
+              <text class="lbl-s" x="350" y="482" text-anchor="middle">the sashes stay in and the window still works &#8212; nothing comes apart to take these</text>
+
               <g data-anim="" style="animation-name: tapeW">
-                <rect class="tape" x="196" y="118" width="368" height="16" rx="3"/>
-                <path class="tape" d="M196 112 h8 v28 h-8 z"/>
-                <text class="tape-t" x="380" y="130" text-anchor="middle">0        6        12        18        24        30        36</text>
+                <rect class="tape" x="202" y="146" width="296" height="16" rx="3"/>
+                <path class="tape" d="M202 140 h8 v28 h-8 z"/>
+                <text class="tape-t" x="350" y="158" text-anchor="middle">0      6      12      18      24      30      34</text>
               </g>
 
-              <!-- Top reading -->
-              <g data-anim="" style="animation-name: mA">
-                <path class="dim" d="M200 160 H560"/>
-                <path class="dim" d="M208 152 L200 160 L208 168 M552 152 L560 160 L552 168"/>
-                <rect class="chip-bg" x="326" y="124" width="108" height="34" rx="8"/>
-                <text class="read" x="380" y="148" text-anchor="middle">36 &#189;&#8243;</text>
-                <text class="lbl-s" x="380" y="182" text-anchor="middle">top</text>
+              <g data-anim="" style="animation-name: k6a">
+                <path class="dim" d="M206 188 H494"/>
+                <path class="dim" d="M214 180 L206 188 L214 196 M486 180 L494 188 L486 196"/>
+                <rect class="chip-bg" x="296" y="152" width="108" height="34" rx="8"/>
+                <text class="read" x="350" y="176" text-anchor="middle">34 &#189;&#8243;</text>
+                <text class="lbl-s" x="288" y="176" text-anchor="end">top</text>
               </g>
 
-              <!-- Middle reading -->
-              <g data-anim="" style="animation-name: mB">
-                <path class="dim" d="M200 270 H560"/>
-                <path class="dim" d="M208 262 L200 270 L208 278 M552 262 L560 270 L552 278"/>
-                <rect class="chip-bg" x="326" y="234" width="108" height="34" rx="8"/>
-                <text class="read" x="380" y="258" text-anchor="middle">36 &#188;&#8243;</text>
-                <text class="lbl-s" x="380" y="292" text-anchor="middle">middle</text>
+              <g data-anim="" style="animation-name: k6b">
+                <path class="dim" d="M206 282 H494"/>
+                <path class="dim" d="M214 274 L206 282 L214 290 M486 274 L494 282 L486 290"/>
+                <rect class="chip-bg" x="296" y="246" width="108" height="34" rx="8"/>
+                <text class="read" x="350" y="270" text-anchor="middle">34 &#188;&#8243;</text>
+                <text class="lbl-s" x="288" y="270" text-anchor="end">middle</text>
               </g>
 
-              <!-- Bottom reading -->
-              <g data-anim="" style="animation-name: mC">
-                <path class="dim" d="M200 375 H560"/>
-                <path class="dim" d="M208 367 L200 375 L208 383 M552 367 L560 375 L552 383"/>
-                <rect class="chip-bg" x="326" y="339" width="108" height="34" rx="8"/>
-                <text class="read" x="380" y="363" text-anchor="middle">36 &#8540;&#8243;</text>
-                <text class="lbl-s" x="380" y="397" text-anchor="middle">bottom</text>
+              <g data-anim="" style="animation-name: k6c">
+                <path class="dim" d="M206 366 H494"/>
+                <path class="dim" d="M214 358 L206 366 L214 374 M486 358 L494 366 L486 374"/>
+                <rect class="chip-bg" x="296" y="330" width="108" height="34" rx="8"/>
+                <text class="read" x="350" y="354" text-anchor="middle">34 &#8540;&#8243;</text>
+                <text class="lbl-s" x="288" y="354" text-anchor="end">bottom</text>
               </g>
 
-              <!-- Winner -->
-              <g data-anim="" style="animation-name: mWin">
-                <rect x="318" y="226" width="124" height="50" rx="10"
+              <g data-anim="" style="animation-name: k6d">
+                <rect x="288" y="238" width="124" height="50" rx="10"
                       fill="none" stroke="var(--wt-good)" stroke-width="3"/>
-                <text class="win" x="380" y="216" text-anchor="middle">SMALLEST &#8212; THIS IS YOUR WIDTH</text>
+                <text class="win" x="350" y="228" text-anchor="middle">SMALLEST BETWEEN THE STOPS</text>
               </g>
 
-              <!-- Order size -->
-              <g data-anim="" style="animation-name: mOrder">
-                <rect x="620" y="196" width="168" height="96" rx="10"
+              <g data-anim="" style="animation-name: k6e">
+                <rect class="hl-strip" x="171" y="81" width="34" height="318"/>
+                <rect class="hl-strip" x="495" y="81" width="34" height="318"/>
+                <text class="read" font-size="17" x="188" y="250" text-anchor="middle"
+                      transform="rotate(-90 188 250)">+ &#190;&#8243;</text>
+                <text class="read" font-size="17" x="512" y="250" text-anchor="middle"
+                      transform="rotate(-90 512 250)">+ &#190;&#8243;</text>
+                <text class="lbl-s" x="350" y="504" text-anchor="middle">the blue strips are the opening hidden behind each stop</text>
+                <rect x="646" y="140" width="214" height="118" rx="10"
                       fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
-                <text class="lbl-s" x="704" y="220" text-anchor="middle">36 &#188;&#8243; &#8722; &#189;&#8243;</text>
-                <text class="lbl-s" x="704" y="240" text-anchor="middle" font-weight="700">ORDER WIDTH</text>
-                <text class="read" x="704" y="272" text-anchor="middle" font-size="26">35 &#190;&#8243;</text>
+                <text class="lbl-s" x="753" y="170" text-anchor="middle">34 &#188;&#8243; + &#190;&#8243; + &#190;&#8243;</text>
+                <text class="lbl-s" x="753" y="192" text-anchor="middle" font-weight="700">TIGHT OPENING</text>
+                <text class="read" x="753" y="230" text-anchor="middle" font-size="26">35 &#190;&#8243;</text>
+              </g>
+
+              <g data-anim="" style="animation-name: k6f">
+                <rect x="646" y="284" width="214" height="118" rx="10"
+                      fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+                <text class="lbl-s" x="753" y="314" text-anchor="middle">35 &#190;&#8243; &#8722; &#189;&#8243;</text>
+                <text class="lbl-s" x="753" y="336" text-anchor="middle" font-weight="700">ORDER WIDTH</text>
+                <text class="read" x="753" y="374" text-anchor="middle" font-size="26">35 &#188;&#8243;</text>
               </g>
             </svg>
           </div>
-          <figcaption><b>Three readings, smallest wins.</b> Here the middle is tight at 36&#160;&#188;&#8243;,
-            so that is the number that goes on the order — minus the half inch.</figcaption>
+          <figcaption><b>Three readings, smallest wins &#8212; then add the stops back on.</b> The
+            middle is tight at 34&#160;&#188;&#8243;, and each stop is hiding another
+            &#190;&#8243;. The real opening is 35&#160;&#190;&#8243;, and that is the number the
+            half inch comes off.</figcaption>
+        </figure>
+      </section>
+
+      <hr class="rule">
+
+      <section class="section">
+        <h2>2. The add-back — what the stops are hiding</h2>
+        <p>The inside stop sits against the jamb and covers the last bit of the opening on each
+          side. Your tape stops at the face of the stop; the jamb carries on behind it. To find
+          out how much, slide something blade-thin in beside the stop until it stops dead on the
+          jamb.</p>
+
+        <figure class="figure" data-dur="8s"
+                data-steps="0:Through the stop|0.5:Blade it to the jamb|1:That is the add-back">
+          <div class="stage">
+            <svg viewBox="-20 0 760 380" role="img" aria-labelledby="abT abD">
+              <title id="abT">A blade-thin rule finding the opening hidden behind the inside stop</title>
+              <desc id="abD">A plan section through the side jamb shows the blind stop, upper
+                sash, parting bead, lower sash and inside stop. A blade-thin rule is slid in
+                beside the inside stop until it touches the jamb, measuring the three quarters of
+                an inch of opening the stop was covering.</desc>
+
+              <text class="lbl-s" x="125" y="28" text-anchor="middle">blind stop</text>
+              <path class="lead" d="M125 34 V126"/>
+              <text class="lbl-s" x="238" y="28" text-anchor="middle">parting bead</text>
+              <path class="lead" d="M238 34 V126"/>
+              <text class="lbl-s" x="351" y="28" text-anchor="middle">inside stop</text>
+              <path class="lead" d="M351 34 V126"/>
+
+              <rect x="60" y="40" width="440" height="70"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2.5"/>
+
+              <rect x="155" y="110" width="72" height="150"
+                    fill="var(--dg-wood-dark)" stroke="var(--dg-wood-edge)" stroke-width="2.5"/>
+              <rect x="249" y="110" width="72" height="150"
+                    fill="var(--dg-wood-dark)" stroke="var(--dg-wood-edge)" stroke-width="2.5"/>
+              <rect x="95" y="110" width="60" height="54"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2.5"/>
+              <rect x="227" y="110" width="22" height="54"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2.5"/>
+              <rect x="321" y="110" width="60" height="54"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2.5"/>
+
+              <text class="lbl-s" x="191" y="286" text-anchor="middle">upper sash</text>
+              <text class="lbl-s" x="285" y="286" text-anchor="middle">lower sash</text>
+
+              <path class="lead" d="M500 110 H560"/>
+              <text class="lbl-s" x="566" y="102">jamb face &#8212;</text>
+              <text class="lbl-s" x="566" y="120">the real edge</text>
+              <text class="lbl-s" x="566" y="138">of the opening</text>
+
+              <text class="lbl-s" x="64" y="372">&#8592; EXTERIOR</text>
+              <text class="lbl-s" x="496" y="372" text-anchor="end">INTERIOR &#8594;</text>
+
+              <g data-anim="" style="animation-name: bladeIn">
+                <rect class="blade" x="315" y="110" width="9" height="140" rx="1"/>
+                <text class="lbl-s" x="370" y="316" text-anchor="middle">a rule thin enough to slide in beside the stop, pushed until it stops on the jamb</text>
+              </g>
+
+              <g data-anim="" style="animation-name: lateDim">
+                <rect class="hl-strip" x="321" y="110" width="60" height="54"/>
+                <path class="ext" d="M381 110 H444 M381 164 H444"/>
+                <path class="dim" d="M424 110 V164"/>
+                <path class="dim" d="M416 118 L424 110 L432 118 M416 156 L424 164 L432 156"/>
+                <rect class="chip-bg" x="452" y="118" width="96" height="38" rx="8"/>
+                <text class="read" x="500" y="144" text-anchor="middle">&#190;&#8243;</text>
+                <text class="lbl-s" x="370" y="344" text-anchor="middle">this is what you add back &#8212; do it on both sides</text>
+              </g>
+            </svg>
+          </div>
+          <figcaption><b>Smallest between-stops reading, plus left, plus right.</b> That total is
+            the tight opening &#8212; the same number you would get if you tore the stops off, and
+            you got it without touching them.</figcaption>
         </figure>
 
         <div class="callout tip">
           <div class="callout-title">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a5 5 0 0 0-3 9v2.2c0 .4.3.8.8.8h4.4c.5 0 .8-.4.8-.8V10A5 5 0 0 0 8 1m-2 14h4v.4c0 .3-.3.6-.6.6H6.6a.6.6 0 0 1-.6-.6z"/></svg>
-            Hook the tape on the jamb, not the stop
+            What to use for a blade
           </div>
-          <p>You are measuring the wood the window will actually screw into. If your tape is
-            catching on a stop, a bead, or a chunk of old caulk, you are measuring the wrong thing.</p>
+          <p>Paint stores sell a rule for reading paint depth in a cup &#8212; about the thickness
+            of a feeler gauge, marked in sixteenths, and it is the right tool for this. A machinist&#39;s
+            rule or a wet-film gauge does the same job. What matters is that it is thin enough to
+            go in without forcing anything and stiff enough to feel the jamb when it lands.</p>
+          <p><b>On Path B</b> &#8212; where an old insert is already in the frame &#8212; that
+            joint is nearly always caulked. Push the blade straight through the caulk. You are
+            looking for the original wood jamb behind it, and on those openings the hidden amount
+            is bigger, because the old unit&#39;s frame is in there too.</p>
         </div>
       </section>
 
       <hr class="rule">
 
       <section class="section">
-        <h2>2. Height — three readings, from the high point of the sill</h2>
-        <p>Measure at the <strong>left, the centre, and the right</strong>, from the underside of
-          the head jamb down to the sill. Because the sill slopes, always come down to its
-          <strong>highest</strong> point — the back edge, nearest the room.</p>
+        <h2>3. Height — three readings, the same way</h2>
+        <p>Drop the tape from under the head stop to the sill at the <strong>left, the centre, and
+          the right</strong>. Because the sill slopes, always come down to its
+          <strong>highest</strong> point &#8212; the back edge, nearest the room. Then add back at
+          the head and at the sill, exactly as you did on the width.</p>
 
-        <figure class="figure" data-dur="11s"
-                data-steps="0:Left|0.25:Centre|0.5:Right|0.75:Smallest wins|1:Order height">
+        <figure class="figure" data-dur="13s"
+                data-steps="0:Left|0.2:Centre|0.4:Right|0.6:Smallest wins|0.8:Add back head and sill|1:Order height">
           <div class="stage">
-            <svg viewBox="-20 0 830 470" role="img" aria-labelledby="hT hD">
-              <title id="hT">Measuring the height of a window opening in three places</title>
-              <desc id="hD">The clear height is measured at the left, centre and right, from the
-                head jamb down to the high point of the sill. The readings are 60, 59 and seven
-                eighths, and 60 and one eighth inches. The smallest, 59 and seven eighths, is used,
-                and half an inch is deducted to give an order height of 59 and three eighths inches.</desc>
+            <svg viewBox="-20 0 900 520" role="img" aria-labelledby="hT hD">
+              <title id="hT">Measuring the height of an intact window in three places</title>
+              <desc id="hD">The clear height between the head stop and the sill is measured at the
+                left, centre and right. The readings are 58, 57 and seven eighths, and 58 and one
+                eighth inches. The smallest, 57 and seven eighths, is taken, then three quarters of
+                an inch is added back at the head and again at the sill, giving a tight opening of
+                59 and three eighths inches. Half an inch is deducted for an order height of 58 and
+                seven eighths inches.</desc>
 
-              <rect x="130" y="20" width="500" height="430" rx="3"
+              <rect x="90" y="20" width="520" height="440" rx="3"
                     fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
-              <path d="M160 50 H600 V440 H160 Z M200 80 H560 V400 H200 Z"
+              <path d="M130 50 H570 V440 H130 Z M170 80 H530 V400 H170 Z"
                     fill="var(--dg-wood-dark)" fill-rule="evenodd"
                     stroke="var(--dg-wood-edge)" stroke-width="2"/>
-              <rect x="200" y="80" width="360" height="320" fill="var(--surface-2)"/>
-              <path class="lead" d="M640 66 H560 V78"/>
-              <text class="lbl-s" x="646" y="70">head jamb</text>
-              <path class="lead" d="M640 406 H560 V398"/>
-              <text class="lbl-s" x="646" y="402">sill &#8212; high point</text>
-              <text class="lbl-s" x="646" y="420">is at the back edge</text>
+              <rect x="170" y="80" width="360" height="320" fill="var(--surface-2)"/>
+
+              <rect x="206" y="116" width="288" height="136"
+                    fill="var(--dg-wood-dark)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <rect x="222" y="132" width="256" height="104"
+                    fill="var(--dg-glass)" stroke="var(--dg-glass-edge)" stroke-width="1.5"/>
+              <rect x="206" y="238" width="288" height="162"
+                    fill="var(--dg-wood-dark)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <rect x="222" y="256" width="256" height="128"
+                    fill="var(--dg-glass)" stroke="var(--dg-glass-edge)" stroke-width="1.5"/>
+              <rect x="336" y="241" width="28" height="10" rx="2"
+                    fill="var(--dg-metal)" stroke="var(--dg-wood-edge)" stroke-width="1"/>
+
+              <rect x="170" y="80" width="360" height="36"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <rect x="170" y="80" width="36" height="320"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+              <rect x="494" y="80" width="36" height="320"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+
+              <path class="lead" d="M84 98 H188"/><circle class="dot" cx="188" cy="98" r="3.5"/>
+              <text class="lbl-s" x="80" y="94" text-anchor="end">head stop</text>
+              <path class="lead" d="M84 404 H176"/><circle class="dot" cx="176" cy="404" r="3.5"/>
+              <text class="lbl-s" x="80" y="400" text-anchor="end">sill</text>
+              <text class="lbl-s" x="350" y="482" text-anchor="middle">under the head stop, down to the high point of the sill</text>
 
               <g data-anim="" style="animation-name: tapeH">
-                <rect class="tape" x="232" y="76" width="16" height="328" rx="3"/>
-                <path class="tape" d="M226 76 h28 v8 h-28 z"/>
+                <rect class="tape" x="214" y="116" width="16" height="250" rx="3"/>
+                <path class="tape" d="M208 116 h28 v8 h-28 z"/>
               </g>
 
-              <g data-anim="" style="animation-name: mA">
-                <path class="dim" d="M258 80 V400"/>
-                <path class="dim" d="M250 88 L258 80 L266 88 M250 392 L258 400 L266 392"/>
-                <rect class="chip-bg" x="214" y="164" width="88" height="34" rx="8"/>
-                <text class="read" x="258" y="188" text-anchor="middle">60&#8243;</text>
-                <text class="lbl-s" x="258" y="214" text-anchor="middle">left</text>
+              <g data-anim="" style="animation-name: k6a">
+                <path class="dim" d="M254 116 V365"/>
+                <path class="dim" d="M246 124 L254 116 L262 124 M246 357 L254 365 L262 357"/>
+                <rect class="chip-bg" x="202" y="160" width="104" height="34" rx="8"/>
+                <text class="read" x="254" y="184" text-anchor="middle">58&#8243;</text>
+                <text class="lbl-s" x="254" y="212" text-anchor="middle">left</text>
               </g>
 
-              <g data-anim="" style="animation-name: mB">
-                <path class="dim" d="M388 80 V400"/>
-                <path class="dim" d="M380 88 L388 80 L396 88 M380 392 L388 400 L396 392"/>
-                <rect class="chip-bg" x="336" y="224" width="104" height="34" rx="8"/>
-                <text class="read" x="388" y="248" text-anchor="middle">59 &#8542;&#8243;</text>
-                <text class="lbl-s" x="388" y="274" text-anchor="middle">centre</text>
+              <g data-anim="" style="animation-name: k6b">
+                <path class="dim" d="M350 116 V365"/>
+                <path class="dim" d="M342 124 L350 116 L358 124 M342 357 L350 365 L358 357"/>
+                <rect class="chip-bg" x="298" y="290" width="104" height="34" rx="8"/>
+                <text class="read" x="350" y="314" text-anchor="middle">57 &#8542;&#8243;</text>
+                <text class="lbl-s" x="350" y="342" text-anchor="middle">centre</text>
               </g>
 
-              <g data-anim="" style="animation-name: mC">
-                <path class="dim" d="M518 80 V400"/>
-                <path class="dim" d="M510 88 L518 80 L526 88 M510 392 L518 400 L526 392"/>
-                <rect class="chip-bg" x="466" y="292" width="104" height="34" rx="8"/>
-                <text class="read" x="518" y="316" text-anchor="middle">60 &#8539;&#8243;</text>
-                <text class="lbl-s" x="518" y="342" text-anchor="middle">right</text>
+              <g data-anim="" style="animation-name: k6c">
+                <path class="dim" d="M446 116 V365"/>
+                <path class="dim" d="M438 124 L446 116 L454 124 M438 357 L446 365 L454 357"/>
+                <rect class="chip-bg" x="394" y="160" width="104" height="34" rx="8"/>
+                <text class="read" x="446" y="184" text-anchor="middle">58 &#8539;&#8243;</text>
+                <text class="lbl-s" x="446" y="212" text-anchor="middle">right</text>
               </g>
 
-              <g data-anim="" style="animation-name: mWin">
-                <rect x="330" y="218" width="116" height="46" rx="10"
+              <g data-anim="" style="animation-name: k6d">
+                <rect x="292" y="284" width="116" height="46" rx="10"
                       fill="none" stroke="var(--wt-good)" stroke-width="3"/>
-                <text class="win" x="388" y="208" text-anchor="middle">SMALLEST</text>
+                <text class="win" x="350" y="274" text-anchor="middle">SMALLEST</text>
               </g>
 
-              <g data-anim="" style="animation-name: mOrder">
-                <rect x="620" y="196" width="168" height="96" rx="10"
+              <g data-anim="" style="animation-name: k6e">
+                <rect class="hl-strip" x="171" y="81" width="358" height="34"/>
+                <rect class="hl-strip" x="171" y="365" width="358" height="34"/>
+                <text class="read" font-size="17" x="350" y="104" text-anchor="middle">+ &#190;&#8243;</text>
+                <text class="read" font-size="17" x="350" y="388" text-anchor="middle">+ &#190;&#8243;</text>
+                <text class="lbl-s" x="350" y="504" text-anchor="middle">blade beside the head stop, and beside the bottom rail down to the sill</text>
+                <rect x="646" y="140" width="214" height="118" rx="10"
                       fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
-                <text class="lbl-s" x="704" y="220" text-anchor="middle">59 &#8542;&#8243; &#8722; &#189;&#8243;</text>
-                <text class="lbl-s" x="704" y="240" text-anchor="middle" font-weight="700">ORDER HEIGHT</text>
-                <text class="read" x="704" y="272" text-anchor="middle" font-size="26">59 &#8540;&#8243;</text>
+                <text class="lbl-s" x="753" y="170" text-anchor="middle">57 &#8542;&#8243; + &#190;&#8243; + &#190;&#8243;</text>
+                <text class="lbl-s" x="753" y="192" text-anchor="middle" font-weight="700">TIGHT OPENING</text>
+                <text class="read" x="753" y="230" text-anchor="middle" font-size="26">59 &#8540;&#8243;</text>
+              </g>
+
+              <g data-anim="" style="animation-name: k6f">
+                <rect x="646" y="284" width="214" height="118" rx="10"
+                      fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+                <text class="lbl-s" x="753" y="314" text-anchor="middle">59 &#8540;&#8243; &#8722; &#189;&#8243;</text>
+                <text class="lbl-s" x="753" y="336" text-anchor="middle" font-weight="700">ORDER HEIGHT</text>
+                <text class="read" x="753" y="374" text-anchor="middle" font-size="26">58 &#8542;&#8243;</text>
               </g>
             </svg>
           </div>
-          <figcaption><b>Same rule as the width.</b> Three readings, take the smallest, then take
-            off the half inch.</figcaption>
+          <figcaption><b>Same rule as the width.</b> Three readings, take the smallest, add back
+            what the head stop and the bottom rail are covering, then take off the half inch.</figcaption>
         </figure>
 
         <h3>Why the high point matters</h3>
@@ -241,17 +408,14 @@
               <text class="lbl-s" x="60" y="40">INTERIOR</text>
               <text class="lbl-s" x="620" y="40">EXTERIOR</text>
 
-              <!-- Head jamb reference -->
               <rect x="120" y="56" width="480" height="22"
                     fill="var(--dg-wood-dark)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
               <text class="lbl-s" x="360" y="50" text-anchor="middle">head jamb</text>
 
-              <!-- Sloped sill -->
               <path d="M120 200 L600 246 L600 276 L120 236 Z"
                     fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
               <text class="lbl-s" x="360" y="292" text-anchor="middle">the sill slopes to shed water</text>
 
-              <!-- High point marker -->
               <g data-anim="" style="animation-name: slopeHi">
                 <circle cx="132" cy="201" r="8" fill="var(--wt-good)"/>
                 <path class="dim" d="M132 78 V196" stroke="var(--wt-good)"/>
@@ -261,7 +425,6 @@
                 <text class="lbl-s" x="150" y="178">nearest the room</text>
               </g>
 
-              <!-- The wrong place -->
               <g data-anim="" style="animation-name: slopeBad">
                 <circle cx="588" cy="245" r="8" fill="var(--wt-stop)"/>
                 <path class="dim" d="M588 78 V240" stroke="var(--wt-stop)" stroke-dasharray="7 5"/>
@@ -279,10 +442,13 @@
       <hr class="rule">
 
       <section class="section">
-        <h2>3. Square — measure both diagonals</h2>
-        <p>Corner to corner, both ways. If the two numbers match, the opening is square and the
-          window will drop in and operate. If they do not, you already know you will be shimming
-          and scribing — and if it is bad enough, you order tighter to buy yourself room.</p>
+        <h2>4. Square — measure both diagonals</h2>
+        <p>Corner to corner, both ways, between the stops like everything else. You are after the
+          <em>difference</em> between the two numbers, not the numbers themselves &#8212; so the
+          stops hiding a bit at each corner does not matter here. If the two match, the opening is
+          square and the window will drop in and operate. If they do not, you already know you will
+          be shimming and scribing &#8212; and if it is bad enough, you order tighter to buy
+          yourself room.</p>
 
         <figure class="figure" data-dur="9s" data-steps="0:Square opening|1:Racked opening">
           <div class="stage">
@@ -292,7 +458,6 @@
                 they differ; a difference over half an inch means the opening needs scribing and a
                 tighter order size.</desc>
 
-              <!-- Square case -->
               <g data-anim="" style="animation-name: sqGood">
                 <rect x="80" y="60" width="300" height="230"
                       fill="var(--surface-2)" stroke="var(--dg-wood-edge)" stroke-width="3"/>
@@ -308,7 +473,6 @@
                 <text class="lbl c-good" x="430" y="200">Under &#188;&#8243; apart = fine</text>
               </g>
 
-              <!-- Racked case -->
               <g data-anim="" style="animation-name: sqBad">
                 <path d="M80 60 L380 76 L372 290 L88 278 Z"
                       fill="var(--surface-2)" stroke="var(--dg-wood-edge)" stroke-width="3"/>
@@ -346,10 +510,74 @@
       <hr class="rule">
 
       <section class="section">
-        <h2>4. Depth — will an insert even fit?</h2>
-        <p>With the parting bead out, measure from the face of the blind stop to the face of the
-          inside stop. A standard insert wants about <strong>3&#188;&#8243;</strong>. Check the
-          spec sheet for the unit you actually sell — some run as little as 2&#190;&#8243;.</p>
+        <h2>5. Depth — will an insert even fit?</h2>
+        <p>Pocket depth runs from the face of the blind stop to the face of the inside stop, and
+          you get it without pulling the parting bead. <strong>Slide the lower sash up a few
+          inches</strong> and take the reading below it, where both sash channels are clear. Butt
+          the tape&#39;s hook against the blind stop and pull back toward the inside stop &#8212;
+          the hook stands the blade up off the jamb, so it rides straight over the bead.</p>
+
+        <figure class="figure" data-dur="8s"
+                data-steps="0:The pocket|0.5:Tape rides past the bead|1:Pocket depth">
+          <div class="stage">
+            <svg viewBox="-20 0 760 380" role="img" aria-labelledby="dpT dpD">
+              <title id="dpT">Measuring pocket depth with the parting bead still in place</title>
+              <desc id="dpD">A plan section through the side jamb taken below the raised lower
+                sash, where both channels are clear. The tape hook butts against the blind stop and
+                the blade rides over the parting bead to the inside stop, reading three and a
+                quarter inches of pocket depth.</desc>
+
+              <text class="lbl-s" x="125" y="28" text-anchor="middle">blind stop</text>
+              <path class="lead" d="M125 34 V126"/>
+              <text class="lbl-s" x="238" y="28" text-anchor="middle">parting bead &#8212; stays in</text>
+              <path class="lead" d="M238 34 V126"/>
+              <text class="lbl-s" x="351" y="28" text-anchor="middle">inside stop</text>
+              <path class="lead" d="M351 34 V126"/>
+
+              <rect x="60" y="40" width="440" height="70"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2.5"/>
+              <rect x="95" y="110" width="60" height="54"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2.5"/>
+              <rect x="227" y="110" width="22" height="54"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2.5"/>
+              <rect x="321" y="110" width="60" height="54"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2.5"/>
+              <rect class="ghost" x="155" y="110" width="72" height="96"/>
+              <rect class="ghost" x="249" y="110" width="72" height="96"/>
+
+              <path class="lead" d="M500 110 H560"/>
+              <text class="lbl-s" x="566" y="102">jamb face &#8212;</text>
+              <text class="lbl-s" x="566" y="120">the floor</text>
+              <text class="lbl-s" x="566" y="138">of the pocket</text>
+              <text class="lbl-s" x="400" y="188">the sash channels are</text>
+              <text class="lbl-s" x="400" y="206">clear at this height</text>
+
+              <text class="lbl-s" x="64" y="372">&#8592; EXTERIOR</text>
+              <text class="lbl-s" x="496" y="372" text-anchor="end">INTERIOR &#8594;</text>
+
+              <g data-anim="" style="animation-name: tapeIn">
+                <path class="tape" d="M155 164 h11 v42 h-11 z"/>
+                <rect class="tape" x="159" y="172" width="162" height="20" rx="2"/>
+                <text class="lbl-s" x="370" y="316" text-anchor="middle">the hook stands the blade off the jamb, so it clears the parting bead</text>
+              </g>
+
+              <g data-anim="" style="animation-name: lateDim">
+                <path class="ext" d="M155 192 V258 M321 192 V258"/>
+                <path class="dim" d="M155 250 H321"/>
+                <path class="dim" d="M163 242 L155 250 L163 258 M313 242 L321 250 L313 258"/>
+                <rect class="chip-bg" x="190" y="210" width="96" height="38" rx="8"/>
+                <text class="read" x="238" y="236" text-anchor="middle">3 &#188;&#8243;</text>
+                <text class="lbl-s" x="238" y="284" text-anchor="middle">pocket depth</text>
+              </g>
+            </svg>
+          </div>
+          <figcaption><b>The bead stays in.</b> Take the reading below the raised sash, where both
+            channels are clear, and the tape reaches the blind stop without a thing being
+            removed.</figcaption>
+        </figure>
+
+        <p>A standard insert wants about <strong>3&#188;&#8243;</strong>. Check the spec sheet for
+          the unit you actually sell &#8212; some run as little as 2&#190;&#8243;.</p>
         <p>If the pocket will not make depth, stop. That is a full-frame replacement, and it needs
           to be priced as one <em>before</em> anyone talks to the customer about money. There is a
           drawn-out section on this in <a href="anatomy.html">Anatomy &amp; Terms</a>.</p>
@@ -358,11 +586,12 @@
       <hr class="rule">
 
       <section class="section">
-        <h2>5. The deduction — half an inch, every time</h2>
+        <h2>6. The deduction — half an inch, every time</h2>
         <p>Take <strong>&#189;&#8243; off the width and &#189;&#8243; off the height</strong>, off
-          the smallest reading in each direction. That gap is what lets you shim the unit square in
-          an opening that is not, and it is what you pack with insulation afterwards. It is not
-          slop — it is the working room the install depends on.</p>
+          the tight opening in each direction &#8212; the smallest reading <em>with the add-backs
+          already in it</em>. That gap is what lets you shim the unit square in an opening that is
+          not, and it is what you pack with insulation afterwards. It is not slop &#8212; it is the
+          working room the install depends on.</p>
 
         <figure class="figure" data-dur="1s" data-steps="0:The shim gap">
           <div class="stage">
@@ -374,7 +603,7 @@
 
               <rect x="150" y="40" width="380" height="220"
                     fill="none" stroke="var(--dg-wood-edge)" stroke-width="3"/>
-              <text class="lbl-s" x="340" y="28" text-anchor="middle">tight opening &#8212; smallest reading</text>
+              <text class="lbl-s" x="340" y="28" text-anchor="middle">tight opening &#8212; readings plus add-backs</text>
 
               <rect x="163" y="53" width="354" height="194"
                     fill="var(--dg-vinyl)" stroke="var(--dg-vinyl-edge)" stroke-width="2.5"/>
@@ -399,7 +628,7 @@
               <text class="lbl-s" x="574" y="190">then foam the gap</text>
             </svg>
           </div>
-          <figcaption><b>Half an inch off each dimension</b> leaves roughly a quarter inch a side —
+          <figcaption><b>Half an inch off each dimension</b> leaves roughly a quarter inch a side &#8212;
             enough to shim a crooked opening true, and enough to insulate properly.</figcaption>
         </figure>
 
@@ -417,12 +646,15 @@
       <hr class="rule">
 
       <section class="section">
-        <h2>6. Write it down before you leave the room</h2>
-        <p>Six readings, two diagonals, one depth, per opening — and every opening in the house is
-          its own set. Nobody remembers that walking down a ladder.</p>
+        <h2>7. Write it down before you leave the room</h2>
+        <p>Six readings, four add-backs, two diagonals and one depth, per opening &#8212; and every
+          opening in the house is its own set. Nobody remembers that walking down a ladder, and
+          nobody is coming back to check before the order goes in.</p>
         <ul class="checklist">
-          <li>Width at top, middle, bottom</li>
-          <li>Height at left, centre, right</li>
+          <li>Width between the stops at top, middle, bottom</li>
+          <li>Height between the stops at left, centre, right</li>
+          <li>Hidden behind the left stop, and behind the right stop</li>
+          <li>Hidden at the head, and at the sill</li>
           <li>Both diagonals</li>
           <li>Pocket depth</li>
           <li>A name for the opening you will still understand next week &#8212; &#8220;kitchen, over the sink&#8221;, not &#8220;window 4&#8221;</li>

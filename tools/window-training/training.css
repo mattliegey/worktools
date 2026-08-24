@@ -576,6 +576,7 @@ hr.rule {
  */
 /* Parts that STAY on the wall, so a diagram can separate "you touch this"
    (.hl, accent) from "leave it alone" at a glance. */
+.hl      { fill: var(--accent); opacity: 0.26; }
 .hl-stay { fill: var(--text-muted); opacity: 0.22; }
 
 svg .c-good   { fill: var(--wt-good); }

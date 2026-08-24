@@ -141,7 +141,8 @@
       <a class="back-link" href="./">&larr; Window Training</a>
       <p class="eyebrow">Start here</p>
       <h1 class="site-title">Measuring Worksheet</h1>
-      <p class="lede">Type the readings the way you'd write them on a scrap of wood —
+      <p class="lede">Taken off an intact window, between the stops, plus what the stops are
+        hiding. Type them the way you'd write them on a scrap of wood —
         <code>36 1/2</code>, <code>36-1/2</code>, <code>36.5</code> all work.</p>
     </header>
 
@@ -154,23 +155,37 @@
         </fieldset>
 
         <fieldset class="fieldset">
-          <legend>Width — jamb to jamb</legend>
+          <legend>Width — between the inside stops</legend>
           <div class="readings">
             <div class="reading">
               <label for="wTop">Top</label>
-              <input type="text" id="wTop" inputmode="text" autocomplete="off" placeholder="36 1/2">
+              <input type="text" id="wTop" inputmode="text" autocomplete="off" placeholder="34 1/2">
             </div>
             <div class="reading">
               <label for="wMid">Middle</label>
-              <input type="text" id="wMid" inputmode="text" autocomplete="off" placeholder="36 1/4">
+              <input type="text" id="wMid" inputmode="text" autocomplete="off" placeholder="34 1/4">
             </div>
             <div class="reading">
               <label for="wBot">Bottom</label>
-              <input type="text" id="wBot" inputmode="text" autocomplete="off" placeholder="36 3/8">
+              <input type="text" id="wBot" inputmode="text" autocomplete="off" placeholder="34 3/8">
+            </div>
+          </div>
+          <div class="readings two" style="margin-top:10px">
+            <div class="reading">
+              <label for="wAddL">Hidden behind left stop</label>
+              <input type="text" id="wAddL" inputmode="text" autocomplete="off" placeholder="3/4">
+            </div>
+            <div class="reading">
+              <label for="wAddR">Hidden behind right stop</label>
+              <input type="text" id="wAddR" inputmode="text" autocomplete="off" placeholder="3/4">
             </div>
           </div>
           <div class="result-row">
-            <span class="label">Smallest reading</span>
+            <span class="label">Smallest between the stops</span>
+            <span class="value" id="betweenW">—</span>
+          </div>
+          <div class="result-row">
+            <span class="label">Tight opening <em>(plus both add-backs)</em></span>
             <span class="value" id="tightW">—</span>
           </div>
           <div class="result-row">
@@ -181,23 +196,37 @@
         </fieldset>
 
         <fieldset class="fieldset">
-          <legend>Height — head jamb to the sill's high point</legend>
+          <legend>Height — head stop to the sill's high point</legend>
           <div class="readings">
             <div class="reading">
               <label for="hLeft">Left</label>
-              <input type="text" id="hLeft" inputmode="text" autocomplete="off" placeholder="60">
+              <input type="text" id="hLeft" inputmode="text" autocomplete="off" placeholder="58">
             </div>
             <div class="reading">
               <label for="hCtr">Centre</label>
-              <input type="text" id="hCtr" inputmode="text" autocomplete="off" placeholder="59 7/8">
+              <input type="text" id="hCtr" inputmode="text" autocomplete="off" placeholder="57 7/8">
             </div>
             <div class="reading">
               <label for="hRight">Right</label>
-              <input type="text" id="hRight" inputmode="text" autocomplete="off" placeholder="60 1/8">
+              <input type="text" id="hRight" inputmode="text" autocomplete="off" placeholder="58 1/8">
+            </div>
+          </div>
+          <div class="readings two" style="margin-top:10px">
+            <div class="reading">
+              <label for="hAddT">Hidden at the head</label>
+              <input type="text" id="hAddT" inputmode="text" autocomplete="off" placeholder="3/4">
+            </div>
+            <div class="reading">
+              <label for="hAddB">Hidden at the sill</label>
+              <input type="text" id="hAddB" inputmode="text" autocomplete="off" placeholder="3/4">
             </div>
           </div>
           <div class="result-row">
-            <span class="label">Smallest reading</span>
+            <span class="label">Smallest between the stops</span>
+            <span class="value" id="betweenH">—</span>
+          </div>
+          <div class="result-row">
+            <span class="label">Tight opening <em>(plus both add-backs)</em></span>
             <span class="value" id="tightH">—</span>
           </div>
           <div class="result-row">
@@ -214,7 +243,7 @@
         </div>
 
         <fieldset class="fieldset">
-          <legend>Square — corner to corner</legend>
+          <legend>Square — corner to corner, between the stops</legend>
           <div class="readings two">
             <div class="reading">
               <label for="diag1">Diagonal 1</label>
@@ -287,8 +316,9 @@
           <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a5 5 0 0 0-3 9v2.2c0 .4.3.8.8.8h4.4c.5 0 .8-.4.8-.8V10A5 5 0 0 0 8 1m-2 14h4v.4c0 .3-.3.6-.6.6H6.6a.6.6 0 0 1-.6-.6z"/></svg>
           Not sure where these numbers come from?
         </div>
-        <p><a href="measure.html">How to measure</a> walks through all six readings, the diagonals,
-          and the depth, with the tape drawn on the wall.</p>
+        <p><a href="measure.html">How to measure</a> walks through the six readings, the
+          add-back behind each stop, the diagonals and the depth — all of it taken on a
+          window that is still in one piece.</p>
       </div>
 
       <nav class="pager">

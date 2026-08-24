@@ -4,15 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Path B: Changing Out an Old Insert — Window Training — WorkTools</title>
-  <meta name="description" content="Removing an older vinyl or aluminum replacement window back to the original wood frame, and why you cannot measure until it is out.">
+  <meta name="description" content="Install day on Path B: removing an older vinyl or aluminum replacement window back to the original wood frame, and why the opening is bigger than it looks when you measure it.">
   <link rel="stylesheet" href="../../assets/style.css">
   <link rel="stylesheet" href="training.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232f6fed' stroke-width='2'><rect x='3' y='3' width='18' height='18' rx='1.5'/><path d='M12 3v18M3 12h18'/></svg>">
   <style>
-    /* Fig 1 — the trap: measuring before the old insert is out */
-    @keyframes trapWrong { 0% { opacity: 1; } 50%, 100% { opacity: 0; } }
-    @keyframes trapRight { 0% { opacity: 0; } 50%, 100% { opacity: 1; } }
-    @keyframes trapGap { 0%, 50% { opacity: 0; } 100% { opacity: 1; } }
+    /* Fig 1 — the trap: reading between the stops and stopping there */
+    @keyframes trapBlade { 0% { opacity: 0; } 50%, 100% { opacity: 1; } }
+    @keyframes trapTotal { 0%, 50% { opacity: 0; } 100% { opacity: 1; } }
 
     /* Fig 2 — stripping the old unit out */
     @keyframes coverOff { 0% { transform: translateX(0); opacity: 1; } 20%, 100% { transform: translateX(-60px); opacity: 0; } }
@@ -31,6 +30,8 @@
     .chip-bg { fill: var(--surface); stroke: var(--accent); stroke-width: 2; }
     .chip-bg.bad { stroke: var(--wt-stop); }
     .tool  { fill: var(--dg-metal); stroke: var(--dg-line); stroke-width: 1.4; }
+    .blade { fill: var(--dg-metal); stroke: var(--dg-line); stroke-width: 1.1; }
+    .hl-strip { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2; }
     .grip  { fill: var(--wt-stop); stroke: var(--dg-line); stroke-width: 1.2; }
     .frame-grp { transform-box: fill-box; transform-origin: center; }
   </style>
@@ -42,8 +43,8 @@
       <p class="eyebrow"><span class="badge path-b">Path B</span></p>
       <h1 class="site-title">Changing Out an Old Insert</h1>
       <p class="lede">The original sashes went years ago and somebody put a vinyl or aluminum
-        unit in their place. That unit has to come <em>all</em> the way out before you measure
-        anything.</p>
+        unit in their place. You are ordering for the <em>wood</em> frame behind it &#8212; so the
+        opening is bigger than anything you can see.</p>
     </header>
 
     <main>
@@ -53,25 +54,31 @@
           The mistake this whole page exists to prevent
         </div>
         <p>The old insert has a frame of its own, and that frame is <strong>inside</strong> the
-          original wood one. Measure while it is still there and you are measuring the old vinyl,
-          not the opening. The window comes back an inch or more too small, and there is nothing
-          to do with it but eat it.</p>
+          original wood one. Read between the stops, write that number down and stop there, and
+          you have measured the old vinyl instead of the opening. The window comes back an inch or
+          more too small, and there is nothing to do with it but eat it.</p>
+        <p>You do not have to pull anything out to avoid it. <strong>Slide a blade in beside each
+          stop, through the caulk, until it lands on the original wood jamb</strong>, and add what
+          it reads to your between-stops number. On these openings that add-back is bigger than on
+          Path&nbsp;A, because the old unit&#39;s frame is buried in there too.</p>
       </div>
 
       <section class="section">
-        <h2>Why the opening gets bigger</h2>
-        <p>Two frames, one opening. Pull the inner one and you get its wall thickness back on
-          every side &#8212; typically <strong>&#190;&#8243; to 1&#188;&#8243; on the width</strong>,
-          and the same again on the height.</p>
+        <h2>Why the opening is bigger than it looks</h2>
+        <p>Two frames, one opening. The inner one goes in the skip on install day, and you get its
+          wall thickness back on every side &#8212; typically <strong>&#190;&#8243; to
+          1&#188;&#8243; on the width</strong>, and the same again on the height. Your tape cannot
+          see any of it. The blade can.</p>
 
         <figure class="figure" data-dur="11s"
-                data-steps="0:Measuring the old vinyl|0.5:Old unit gone|1:What you gained">
+                data-steps="0:Between the stops|0.5:Blade it to the jamb|1:The real opening">
           <div class="stage">
             <svg viewBox="-20 0 800 430" role="img" aria-labelledby="tT tD">
               <title id="tT">Why measuring before removing the old insert reads short</title>
-              <desc id="tD">With the old insert still fitted, the tape reads the inside of the old
-                vinyl frame. Once it is removed the opening is measured to the original wood jambs,
-                which is roughly an inch wider.</desc>
+              <desc id="tD">With the old insert still fitted, the tape between the inside stops
+                reads the old vinyl frame at 34 and a half inches. A blade slid in beside each stop
+                finds another seven eighths of an inch of opening on each side, giving the real
+                wood jamb to wood jamb dimension of 36 and a quarter inches.</desc>
 
               <!-- original wood frame, always present -->
               <rect x="120" y="30" width="520" height="360" rx="3"
@@ -81,42 +88,53 @@
                     stroke="var(--dg-wood-edge)" stroke-width="2"/>
               <rect x="190" y="100" width="380" height="220" fill="var(--surface-2)"/>
 
-              <!-- WRONG: old insert still in, tape reads its inside face -->
-              <g data-anim="" style="animation-name: trapWrong">
-                <path d="M190 100 H570 V320 H190 Z M244 132 H516 V288 H244 Z"
-                      fill="var(--dg-vinyl)" fill-rule="evenodd"
-                      stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
-                <rect x="244" y="132" width="272" height="156"
-                      fill="var(--dg-glass)" stroke="var(--dg-glass-edge)" stroke-width="1.4"/>
-                <text class="lbl-s" x="380" y="122" text-anchor="middle">old vinyl insert &#8212; still fitted</text>
+              <!-- The old insert, still fitted, with the wood stops holding it in -->
+              <path d="M190 100 H570 V320 H190 Z M244 132 H516 V288 H244 Z"
+                    fill="var(--dg-vinyl)" fill-rule="evenodd"
+                    stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
+              <rect x="244" y="132" width="272" height="156"
+                    fill="var(--dg-glass)" stroke="var(--dg-glass-edge)" stroke-width="1.4"/>
+              <rect x="230" y="100" width="14" height="220"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="1.5"/>
+              <rect x="516" y="100" width="14" height="220"
+                    fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="1.5"/>
+              <text class="lbl-s" x="380" y="122" text-anchor="middle">old vinyl insert &#8212; still fitted</text>
 
-                <path class="dim-bad" d="M244 210 H516"/>
-                <path class="dim-bad" d="M252 202 L244 210 L252 218 M508 202 L516 210 L508 218"/>
-                <rect class="chip-bg bad" x="326" y="186" width="108" height="34" rx="8"/>
-                <text class="read c-stop" x="380" y="210" text-anchor="middle">34 &#189;&#8243;</text>
-                <text class="lbl c-stop" x="380" y="256" text-anchor="middle">WRONG &#8212; this is the old vinyl</text>
+              <!-- What the tape can reach -->
+              <path class="dim-bad" d="M244 180 H516"/>
+              <path class="dim-bad" d="M252 172 L244 180 L252 188 M508 172 L516 180 L508 188"/>
+              <rect class="chip-bg bad" x="326" y="156" width="108" height="34" rx="8"/>
+              <text class="read c-stop" x="380" y="180" text-anchor="middle">34 &#189;&#8243;</text>
+              <text class="lbl c-stop" x="380" y="146" text-anchor="middle">BETWEEN THE STOPS</text>
+              <text class="lbl c-stop" x="380" y="212" text-anchor="middle">not the opening</text>
+
+              <!-- The blade finding the wood jamb behind each stop -->
+              <g data-anim="" style="animation-name: trapBlade">
+                <rect class="hl-strip" x="191" y="101" width="52" height="218"/>
+                <rect class="hl-strip" x="517" y="101" width="52" height="218"/>
+                <rect class="blade" x="192" y="228" width="66" height="7" rx="1"/>
+                <rect class="blade" x="502" y="228" width="66" height="7" rx="1"/>
+                <text class="read" font-size="16" x="217" y="290" text-anchor="middle"
+                      transform="rotate(-90 217 290)">+ &#8542;&#8243;</text>
+                <text class="read" font-size="16" x="543" y="290" text-anchor="middle"
+                      transform="rotate(-90 543 290)">+ &#8542;&#8243;</text>
+                <text class="lbl-s" x="380" y="412" text-anchor="middle">the blade goes through the caulk and stops on the original wood jamb</text>
               </g>
 
-              <!-- RIGHT: old unit gone, measure the wood -->
-              <g data-anim="" style="animation-name: trapRight">
-                <path class="dim" d="M190 210 H570"/>
-                <path class="dim" d="M198 202 L190 210 L198 218 M562 202 L570 210 L562 218"/>
-                <rect class="chip-bg" x="326" y="186" width="108" height="34" rx="8"/>
-                <text class="read" x="380" y="210" text-anchor="middle">36 &#188;&#8243;</text>
-                <text class="lbl c-good" x="380" y="256" text-anchor="middle">RIGHT &#8212; wood jamb to wood jamb</text>
-              </g>
-
-              <!-- the difference -->
-              <g data-anim="" style="animation-name: trapGap">
-                <rect x="190" y="100" width="54" height="220" fill="var(--wt-stop)" opacity="0.24"/>
-                <rect x="516" y="100" width="54" height="220" fill="var(--wt-stop)" opacity="0.24"/>
-                <text class="lbl c-stop" x="380" y="412" text-anchor="middle">
-                  1 &#190;&#8243; of opening you would have thrown away</text>
+              <!-- The number you actually order from -->
+              <g data-anim="" style="animation-name: trapTotal">
+                <path class="dim" d="M190 254 H570"/>
+                <path class="dim" d="M198 246 L190 254 L198 262 M562 246 L570 254 L562 262"/>
+                <rect class="chip-bg" x="326" y="230" width="108" height="34" rx="8"/>
+                <text class="read" x="380" y="254" text-anchor="middle">36 &#188;&#8243;</text>
+                <text class="lbl c-good" x="380" y="296" text-anchor="middle">34 &#189;&#8243; + &#8542;&#8243; + &#8542;&#8243;</text>
+                <text class="lbl c-good" x="380" y="316" text-anchor="middle">wood jamb to wood jamb</text>
               </g>
             </svg>
           </div>
-          <figcaption><b>Same hole, two very different numbers.</b> Everything on the measuring
-            page assumes bare wood. Get the old unit out first, then measure.</figcaption>
+          <figcaption><b>Same hole, two very different numbers.</b> The one your tape can reach
+            is not the one you order from. Blade beside each stop, add both readings on, and you
+            get the wood-to-wood dimension without pulling a thing.</figcaption>
         </figure>
       </section>
 
@@ -259,9 +277,10 @@
           <li>Scrape the old caulk off the jamb faces so the new unit sits flat</li>
           <li>Pull every leftover screw, shim and nail</li>
           <li>Check whether the old install removed the parting bead and blind stop, or just buried them &#8212; anything left in the pocket changes your depth</li>
+          <li>Compare the bare opening with the numbers you ordered from. This is where you find out whether the blade found the whole story</li>
           <li>Probe the sill and jamb bottoms with an awl. Old inserts leak at the sill, and that is exactly where you will find the damage</li>
           <li>Look for water staining on the interior casing &#8212; it tells you the last one failed and why</li>
-          <li>Fill, sand, and prime bare wood before you measure</li>
+          <li>Fill, sand, and prime bare wood before the new unit goes in</li>
         </ul>
 
         <div class="callout stop">
@@ -277,20 +296,22 @@
       </div>
 
       <div class="step" data-step="4">
-        <h3>Now — and only now — measure</h3>
+        <h3>Check the opening against the window that came</h3>
         <p>Old unit gone, foam out, caulk scraped, wood sound and primed. The opening in front of
-          you is a different size than the one you started the morning with, and this is the one
-          that counts.</p>
+          you is the one the blade was predicting weeks ago. Run a tape across the bare wood
+          before you unwrap anything &#8212; the unit should sit about &#189;&#8243; under it in
+          both directions. If it does not, work out why now, while the old window is still on site
+          and could go back in.</p>
         <div class="link-grid">
+          <a class="link-card" href="install.html">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 21h18M6 21V9l6-5 6 5v12"/><path d="M10 21v-6h4v6"/></svg>
+            <span><strong>Setting the new window</strong>
+            <span>Dry fit, shim square, fasten, insulate, seal, trim, and test.</span></span>
+          </a>
           <a class="link-card" href="measure.html">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 8h20v8H2z"/><path d="M6 8v4M10 8v6M14 8v4M18 8v6"/></svg>
             <span><strong>How to measure</strong>
-            <span>Three widths, three heights, both diagonals, the depth.</span></span>
-          </a>
-          <a class="link-card" href="worksheet.html">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="2.5" width="16" height="19" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
-            <span><strong>Worksheet</strong>
-            <span>Punch the readings in, get the order size.</span></span>
+            <span>Where those numbers came from, weeks before today.</span></span>
           </a>
         </div>
       </div>

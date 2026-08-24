@@ -1,9 +1,11 @@
 /*
  * Window Training — measuring worksheet.
  *
- * Takes the six readings, two diagonals and the pocket depth for one opening,
- * and turns them into an order size. Two things matter more than the
- * arithmetic:
+ * Takes the six between-stops readings, the four add-backs, two diagonals and
+ * the pocket depth for one opening, and turns them into an order size. All of
+ * it comes off an undisturbed window, so the tape only ever reaches between the
+ * inside stops; the add-backs are what those stops were covering. Two things
+ * matter more than the arithmetic:
  *
  *   1. Carpenters type fractions. Every input accepts 36 1/2, 36-1/2, 36.5,
  *      3' 0 1/2", or a bare 36, and every output comes back as inches and a
@@ -115,6 +117,8 @@
 
   var WIDTH_IDS = ["wTop", "wMid", "wBot"];
   var HEIGHT_IDS = ["hLeft", "hCtr", "hRight"];
+  var ADD_W_IDS = ["wAddL", "wAddR"];
+  var ADD_H_IDS = ["hAddT", "hAddB"];
 
   function readGroup(ids) {
     var vals = [];
@@ -133,6 +137,31 @@
       }
     });
     return { values: vals, bad: anyBad };
+  }
+
+  /*
+   * The add-backs: what each stop is hiding, found by sliding a blade in beside
+   * it until it lands on the jamb. A blank one counts as zero so that openings
+   * saved before this field existed still load and print.
+   */
+  function readAdd(ids) {
+    var sum = 0, given = 0, anyBad = false;
+    ids.forEach(function (id) {
+      var el = $(id);
+      if (!el) return;
+      var raw = el.value.trim();
+      if (!raw) { el.classList.remove("bad"); return; }
+      var v = parseInches(raw);
+      if (v == null || v < 0) {
+        el.classList.add("bad");
+        anyBad = true;
+      } else {
+        el.classList.remove("bad");
+        sum += v;
+        given += 1;
+      }
+    });
+    return { sum: sum, given: given, bad: anyBad };
   }
 
   function setResult(id, text, state) {
@@ -156,22 +185,31 @@
   function recalc() {
     var w = readGroup(WIDTH_IDS);
     var h = readGroup(HEIGHT_IDS);
+    var addW = readAdd(ADD_W_IDS);
+    var addH = readAdd(ADD_H_IDS);
 
     // ---- Width
-    var tightW = w.values.length ? Math.min.apply(null, w.values) : null;
+    var betweenW = w.values.length ? Math.min.apply(null, w.values) : null;
+    var tightW = betweenW == null ? null : betweenW + addW.sum;
     var orderW = tightW == null ? null : roundDownTo(tightW - DEDUCT_W, ROUND_TO);
+    setResult("betweenW", formatInches(betweenW));
     setResult("tightW", formatInches(tightW));
     setResult("orderW", formatInches(orderW), orderW != null ? "big" : "");
 
     if (tightW == null) {
-      setNote("wNote", w.bad ? "That reading did not parse — try <code>36 1/2</code>."
+      setNote("wNote", w.bad ? "That reading did not parse — try <code>34 1/2</code>."
                              : "Enter at least one width reading.", w.bad ? "bad" : "");
     } else {
-      var spreadW = Math.max.apply(null, w.values) - tightW;
+      var spreadW = Math.max.apply(null, w.values) - betweenW;
       var wMsg = "Smallest of " + w.values.length + " reading" + (w.values.length > 1 ? "s" : "") +
-                 ", less ½″, rounded down to the nearest eighth.";
+                 " plus " + formatInches(addW.sum) + " behind the stops, less ½″, " +
+                 "rounded down to the nearest eighth.";
       if (w.values.length < 3) {
         setNote("wNote", wMsg + " <b>Take all three</b> — jambs bow.", "warn");
+      } else if (addW.given < 2) {
+        setNote("wNote", wMsg + " <b>No add-back on " +
+                (addW.given ? "one side" : "either side") + "</b> — blade beside each stop, or " +
+                "you order short by whatever they are hiding.", "warn");
       } else if (spreadW >= 0.5) {
         setNote("wNote", wMsg + " Your readings vary by " + formatInches(spreadW) +
                 " — that jamb is bowed, expect to shim hard.", "warn");
@@ -181,20 +219,27 @@
     }
 
     // ---- Height
-    var tightH = h.values.length ? Math.min.apply(null, h.values) : null;
+    var betweenH = h.values.length ? Math.min.apply(null, h.values) : null;
+    var tightH = betweenH == null ? null : betweenH + addH.sum;
     var orderH = tightH == null ? null : roundDownTo(tightH - DEDUCT_H, ROUND_TO);
+    setResult("betweenH", formatInches(betweenH));
     setResult("tightH", formatInches(tightH));
     setResult("orderH", formatInches(orderH), orderH != null ? "big" : "");
 
     if (tightH == null) {
-      setNote("hNote", h.bad ? "That reading did not parse — try <code>59 7/8</code>."
+      setNote("hNote", h.bad ? "That reading did not parse — try <code>57 7/8</code>."
                              : "Enter at least one height reading.", h.bad ? "bad" : "");
     } else {
-      var spreadH = Math.max.apply(null, h.values) - tightH;
+      var spreadH = Math.max.apply(null, h.values) - betweenH;
       var hMsg = "Smallest of " + h.values.length + " reading" + (h.values.length > 1 ? "s" : "") +
-                 ", less ½″, rounded down to the nearest eighth.";
+                 " plus " + formatInches(addH.sum) + " at the head and sill, less ½″, " +
+                 "rounded down to the nearest eighth.";
       if (h.values.length < 3) {
         setNote("hNote", hMsg + " <b>Take all three</b> — sills settle.", "warn");
+      } else if (addH.given < 2) {
+        setNote("hNote", hMsg + " <b>" + (addH.given ? "Only one add-back entered"
+                : "No add-back at the head or the sill") + "</b> — blade it both places, or " +
+                "you order short.", "warn");
       } else if (spreadH >= 0.5) {
         setNote("hNote", hMsg + " Your readings vary by " + formatInches(spreadH) +
                 " — check you measured to the sill's high point.", "warn");
@@ -245,7 +290,8 @@
         depthOK ? "good" : "bad");
     } else {
       setResult("depthOut", "—");
-      setNote("depthNote", "Measure blind stop to inside stop, with the parting bead out.", "");
+      setNote("depthNote", "Measure blind stop to inside stop. The tape hook rides past the " +
+                            "parting bead — nothing comes out.", "");
     }
 
     // ---- Headline
@@ -259,11 +305,14 @@
     current = {
       name: $("openingName").value.trim(),
       w: WIDTH_IDS.map(function (id) { return $(id).value.trim(); }),
+      wAdd: ADD_W_IDS.map(function (id) { return $(id).value.trim(); }),
       h: HEIGHT_IDS.map(function (id) { return $(id).value.trim(); }),
+      hAdd: ADD_H_IDS.map(function (id) { return $(id).value.trim(); }),
       d1: $("diag1").value.trim(),
       d2: $("diag2").value.trim(),
       depth: $("depth").value.trim(),
       depthNeed: $("depthNeed").value.trim(),
+      betweenW: betweenW, betweenH: betweenH,
       tightW: tightW, tightH: tightH,
       orderW: orderW, orderH: orderH,
       delta: delta, depthOK: depthOK,
@@ -352,6 +401,10 @@
     $("openingName").value = o.name || "";
     WIDTH_IDS.forEach(function (id, i) { $(id).value = (o.w && o.w[i]) || ""; });
     HEIGHT_IDS.forEach(function (id, i) { $(id).value = (o.h && o.h[i]) || ""; });
+    // Openings saved before the add-back existed simply come back blank, which
+    // reads as zero and reproduces the number they were saved with.
+    ADD_W_IDS.forEach(function (id, i) { $(id).value = (o.wAdd && o.wAdd[i]) || ""; });
+    ADD_H_IDS.forEach(function (id, i) { $(id).value = (o.hAdd && o.hAdd[i]) || ""; });
     $("diag1").value = o.d1 || "";
     $("diag2").value = o.d2 || "";
     $("depth").value = o.depth || "";
@@ -363,7 +416,7 @@
 
   function clearForm() {
     ["openingName", "diag1", "diag2", "depth", "openingNotes"]
-      .concat(WIDTH_IDS, HEIGHT_IDS)
+      .concat(WIDTH_IDS, HEIGHT_IDS, ADD_W_IDS, ADD_H_IDS)
       .forEach(function (id) { $(id).value = ""; $(id).classList.remove("bad"); });
     recalc();
     $("openingName").focus();
@@ -374,7 +427,7 @@
   function init() {
     if (!$("wTop")) return;
 
-    var inputs = WIDTH_IDS.concat(HEIGHT_IDS,
+    var inputs = WIDTH_IDS.concat(HEIGHT_IDS, ADD_W_IDS, ADD_H_IDS,
       ["diag1", "diag2", "depth", "depthNeed", "openingName", "openingNotes"]);
 
     inputs.forEach(function (id) {
