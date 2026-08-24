@@ -25,12 +25,11 @@
     @keyframes secStopGone { 0%, 66.7% { opacity: 0; } 83.3% { opacity: 1; } 100% { opacity: 0; } }
     @keyframes secNewIn { 0%, 83.3% { opacity: 0; } 100% { opacity: 1; } }
 
-    /* Fig 4 — vertical section: what the adapter and the expander actually do */
-    @keyframes vsBare  { 0% { opacity: 1; } 33.3%, 100% { opacity: 0; } }
-    @keyframes vsAdapt { 0% { transform: translateX(-110px); opacity: 0; } 12% { opacity: 1; } 33.3%, 100% { transform: translateX(0); opacity: 1; } }
-    @keyframes vsUnit  { 0%, 33.3% { transform: translateY(-30px); opacity: 0; } 46% { opacity: 1; } 66.7%, 100% { transform: translateY(0); opacity: 1; } }
-    @keyframes vsGap   { 0%, 33.3% { opacity: 0; } 66.7% { opacity: 1; } 100% { opacity: 0; } }
-    @keyframes vsExp   { 0%, 66.7% { transform: translateY(44px); opacity: 0; } 80% { opacity: 1; } 100% { transform: translateY(0); opacity: 1; } }
+    /* Fig 4 — vertical section: the two gaps the unit leaves, and what closes them */
+    @keyframes vsVoid { 0% { opacity: 1; } 50%, 100% { opacity: 0; } }
+    @keyframes vsGap  { 0%, 50% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes vsExt  { 0% { transform: translateX(70px); opacity: 0; } 14% { opacity: 1; } 50%, 100% { transform: translateX(0); opacity: 1; } }
+    @keyframes vsExp  { 0%, 50% { transform: translateY(52px); opacity: 0; } 64% { opacity: 1; } 100% { transform: translateY(0); opacity: 1; } }
 
     .lbl  { font-size: 15px; fill: var(--text); font-weight: 600; }
     .lbl-s{ font-size: 13px; fill: var(--text-muted); }
@@ -409,9 +408,9 @@
           <div class="stage">
             <svg viewBox="-60 0 880 340" role="img" aria-labelledby="insT insD">
               <title id="insT">Parts of a vinyl insert window</title>
-              <desc id="insD">The insert has an integral vinyl frame, a head expander at the top
-                that closes the gap to the head jamb, and a sloped sill angle adapter at the
-                bottom that matches the old sill's slope.</desc>
+              <desc id="insD">The insert has an integral vinyl frame, an optional head expander
+                at the top that closes the gap to the head jamb, and a sill extender at the
+                bottom that hangs down to hide the open space under the unit's sill.</desc>
 
               <!-- Old frame ghost -->
               <path d="M250 30 H560 V300 H250 Z M282 62 H528 V268 H282 Z"
@@ -423,7 +422,8 @@
                     fill="var(--dg-metal)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
               <path class="lead" d="M180 72 H286"/><circle class="dot" cx="286" cy="72" r="4"/>
               <text class="lbl" x="174" y="68" text-anchor="end">Head expander</text>
-              <text class="lbl-s" x="174" y="86" text-anchor="end">what it does only shows in section</text>
+              <text class="lbl-s" x="174" y="86" text-anchor="end">an upside-down U packed with</text>
+              <text class="lbl-s" x="174" y="104" text-anchor="end">fiberglass — and it is optional</text>
 
               <!-- Insert frame -->
               <path d="M290 82 H520 V246 H290 Z M310 102 H500 V226 H310 Z"
@@ -445,117 +445,128 @@
               <text class="lbl" x="606" y="196">Screw holes</text>
               <text class="lbl-s" x="606" y="214">pre-drilled, hidden by the stop</text>
 
-              <!-- Sill angle adapter. Drawn as a plain band because this is a
-                   face-on elevation: the adapter's slope runs front to back, so
-                   it is not visible from here. Mirrors the head expander, which
-                   does the same job at the top of the opening. -->
+              <!-- Sill extender. A vertical fin hanging the full width below the
+                   unit's sill, so face-on it really is just a band. What it is
+                   hiding only shows in section. -->
               <rect x="290" y="246" width="230" height="22"
                     fill="var(--dg-metal)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
               <path class="lead" d="M180 257 H286"/><circle class="dot" cx="286" cy="257" r="4"/>
-              <text class="lbl" x="174" y="253" text-anchor="end">Sill angle adapter</text>
-              <text class="lbl-s" x="174" y="271" text-anchor="end">also a section job — its slope</text>
-              <text class="lbl-s" x="174" y="289" text-anchor="end">runs front to back</text>
+              <text class="lbl" x="174" y="253" text-anchor="end">Sill extender</text>
+              <text class="lbl-s" x="174" y="271" text-anchor="end">hangs below the unit&#39;s sill to</text>
+              <text class="lbl-s" x="174" y="289" text-anchor="end">hide the open space under it</text>
             </svg>
           </div>
           <figcaption><b>An insert is sized to the pocket, not to the rough opening.</b> The
-            expander and sill adapter absorb the small differences — they are not there to make
-            up for a bad measurement. Face-on, both of them are just bands: the next drawing cuts
-            through the window to show what they are for.</figcaption>
+            extender and the expander close what is left over — they are not there to make up
+            for a bad measurement. Face-on, both of them are just bands: the next drawing cuts
+            through the window to show what each one is actually hiding.</figcaption>
         </figure>
 
-        <h3>Why the expander and the adapter exist</h3>
-        <p>Neither part makes sense head-on. The old sill <strong>slopes front to back</strong> and
-          the new unit has a flat bottom, so something has to sit between them. And the unit is
-          made shorter than the opening, so there is <strong>a gap left at the head</strong> that
-          has to be closed. Cut the window down the middle and both problems are obvious.</p>
+        <h3>What the extender and the expander are actually for</h3>
+        <p>The unit does not fill the opening, and it was never meant to. It sits on the old sill
+          at the <strong>inside</strong> edge and the rest of its sill is out over thin air, because
+          the old sill slopes away underneath it. The height clearance you deducted ends up as a
+          gap at the head. Neither of those shows face-on. Cut the window down the middle and both
+          are obvious — along with the two pieces of trim that deal with them.</p>
 
-        <figure class="figure" data-dur="9s"
-                data-steps="0:The old opening|0.333:Sill adapter in|0.667:Unit set on it|1:Head expander up">
+        <figure class="figure" data-dur="8s"
+                data-steps="0:Unit set on the sill|0.5:Sill extender on|1:Head expander in">
           <div class="stage">
-            <svg viewBox="-20 0 900 570" role="img" aria-labelledby="vsT vsD">
+            <svg viewBox="-20 0 940 580" role="img" aria-labelledby="vsT vsD">
               <title id="vsT">Vertical section through an insert in the old frame</title>
               <desc id="vsD">A section cut down through the window, interior on the left and
-                exterior on the right. The old sill slopes down toward the exterior, so nothing
-                flat can sit on it. A sill angle adapter, sloped on its underside and level on
-                top, goes on first and gives the new unit a flat bed. The unit sits on that,
-                leaving a gap between its head and the old head jamb. The head expander then
-                slides up out of the unit's head to close that gap. Clearances are drawn much
-                larger than they are in life.</desc>
+                exterior on the right. The unit's sill is flat and lands on the high, interior
+                edge of the sloped old sill, so the outer part of its sill sits over open air. The
+                sill extender is a vertical fin that clips into the accessory groove on the unit
+                and hangs down to hide that opening; it has detents along its length so it can be
+                snapped to whatever height the opening needs. At the head, the clearance the unit
+                was ordered short by leaves a gap, closed by an optional head expander shaped like
+                an upside-down U and packed with fiberglass. Clearances are drawn much larger than
+                they are in life.</desc>
 
               <text class="lbl-s" x="200" y="28">&#8592; INTERIOR</text>
               <text class="lbl-s" x="690" y="28" text-anchor="end">EXTERIOR &#8594;</text>
 
               <rect x="200" y="52" width="490" height="44"
                     fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
-              <path class="lead" d="M194 74 H236"/><circle class="dot" cx="236" cy="74" r="4"/>
-              <text class="lbl-s" x="188" y="70" text-anchor="end">old head jamb</text>
+              <path class="lead" d="M194 60 H236"/><circle class="dot" cx="236" cy="60" r="4"/>
+              <text class="lbl-s" x="188" y="46" text-anchor="end">old head jamb</text>
 
               <rect x="650" y="96" width="40" height="34"
                     fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
               <path class="lead" d="M670 113 H700 V82"/><circle class="dot" cx="670" cy="113" r="4"/>
               <text class="lbl-s" x="706" y="78">blind stop at the head</text>
 
-              <path d="M200 460 L690 502 L690 536 L200 494 Z"
+              <path d="M200 452 L690 500 L690 534 L200 486 Z"
                     fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
-              <path class="lead" d="M194 486 H240"/><circle class="dot" cx="240" cy="486" r="4"/>
-              <text class="lbl-s" x="188" y="482" text-anchor="end">old sill</text>
-              <text class="lbl-s" x="188" y="500" text-anchor="end">sloped to shed water</text>
+              <path class="lead" d="M194 470 H240"/><circle class="dot" cx="240" cy="470" r="4"/>
+              <text class="lbl-s" x="188" y="466" text-anchor="end">old sill</text>
+              <text class="lbl-s" x="188" y="484" text-anchor="end">slopes down to the outside</text>
 
-              <text class="lbl-s" x="445" y="556" text-anchor="middle">clearances drawn much larger than they are in life</text>
+              <rect x="240" y="155" width="410" height="75"
+                    fill="var(--dg-vinyl)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
+              <rect x="240" y="230" width="410" height="186"
+                    fill="var(--dg-vinyl)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
+              <rect x="256" y="246" width="378" height="154"
+                    fill="var(--dg-glass)" stroke="var(--dg-glass-edge)" stroke-width="1.4"/>
+              <rect x="240" y="416" width="410" height="40"
+                    fill="var(--dg-vinyl)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
+              <rect x="636" y="428" width="14" height="20"
+                    fill="var(--surface-2)" stroke="var(--dg-vinyl-edge)" stroke-width="1.2"/>
+              <path class="lead" d="M194 436 H300"/><circle class="dot" cx="300" cy="436" r="4"/>
+              <text class="lbl-s" x="188" y="414" text-anchor="end">the unit&#39;s sill is flat, and lands</text>
+              <text class="lbl-s" x="188" y="432" text-anchor="end">on the high inside edge</text>
 
-              <g data-anim="" style="animation-name: vsBare">
-                <path class="hl" d="M240 440 H650 V499 L240 463 Z"/>
-                <path d="M240 440 H650" stroke="var(--accent)" stroke-width="2"
-                      stroke-dasharray="8 6" fill="none"/>
-                <text class="lbl c-accent" x="445" y="426" text-anchor="middle">nothing with a flat bottom sits on this</text>
-              </g>
+              <text class="lbl-s" x="445" y="566" text-anchor="middle">clearances drawn much larger than they are in life</text>
 
-              <g data-anim="" style="animation-name: vsAdapt">
-                <path d="M240 440 H650 V499 L240 463 Z"
-                      fill="var(--dg-metal)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
-                <path class="lead" d="M194 450 H286"/><circle class="dot" cx="286" cy="450" r="4"/>
-                <text class="lbl" x="188" y="428" text-anchor="end">Sill angle adapter</text>
-                <text class="lbl-s" x="188" y="446" text-anchor="end">level on top, sloped underneath</text>
-              </g>
-
-              <g data-anim="" style="animation-name: vsUnit">
-                <rect x="240" y="140" width="410" height="75"
-                      fill="var(--dg-vinyl)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
-                <rect x="376" y="140" width="38" height="75"
-                      fill="var(--surface-2)" stroke="var(--dg-vinyl-edge)" stroke-width="1.2"/>
-                <rect x="240" y="215" width="410" height="185"
-                      fill="var(--dg-vinyl)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
-                <rect x="256" y="231" width="378" height="153"
-                      fill="var(--dg-glass)" stroke="var(--dg-glass-edge)" stroke-width="1.4"/>
-                <rect x="240" y="400" width="410" height="40"
-                      fill="var(--dg-vinyl)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
-                <path class="lead" d="M700 420 H656"/><circle class="dot" cx="656" cy="420" r="4"/>
-                <text class="lbl-s" x="706" y="416">the unit sits flat</text>
-                <text class="lbl-s" x="706" y="434">on the adapter</text>
+              <g data-anim="" style="animation-name: vsVoid">
+                <path class="hl" d="M240 456 H650 V496 Z"/>
+                <path d="M240 456 H650 V496 Z" fill="none" stroke="var(--accent)"
+                      stroke-width="2" stroke-dasharray="8 6"/>
+                <path class="lead" d="M600 480 H700"/><circle class="dot" cx="600" cy="480" r="4"/>
+                <text class="lbl c-accent" x="706" y="476">nothing under here</text>
+                <text class="lbl-s" x="706" y="494">the outer half of the unit&#39;s</text>
+                <text class="lbl-s" x="706" y="512">sill is over open air</text>
               </g>
 
               <g data-anim="" style="animation-name: vsGap">
-                <rect class="hl" x="240" y="96" width="410" height="44"/>
-                <text class="lbl c-accent" x="445" y="124" text-anchor="middle">and now there is a gap up here</text>
+                <rect class="hl" x="240" y="96" width="410" height="59"/>
+                <text class="lbl c-accent" x="445" y="132" text-anchor="middle">the height clearance ends up here</text>
+              </g>
+
+              <g data-anim="" style="animation-name: vsExt">
+                <path d="M636 428 H666 V498 H650 V448 H636 Z"
+                      fill="var(--dg-metal)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
+                <path d="M666 462 H654 M666 474 H654 M666 486 H654"
+                      stroke="var(--dg-line)" stroke-width="1.8" fill="none"/>
+                <path class="lead" d="M666 470 H700"/><circle class="dot" cx="666" cy="470" r="4"/>
+                <text class="lbl" x="706" y="452">Sill extender</text>
+                <text class="lbl-s" x="706" y="470">clips into the accessory groove</text>
+                <text class="lbl-s" x="706" y="488">and hangs down to hide it</text>
+                <text class="lbl-s" x="706" y="512">the ridges are detents &#8212; snap it</text>
+                <text class="lbl-s" x="706" y="530">off at whatever height fits</text>
               </g>
 
               <g data-anim="" style="animation-name: vsExp">
-                <path d="M240 96 H650 V140 H414 V162 H376 V140 H240 Z"
+                <rect x="264" y="120" width="362" height="35" fill="var(--dg-foam)"/>
+                <path d="M240 155 V96 H650 V155 H626 V120 H264 V155 Z"
                       fill="var(--dg-metal)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
-                <path class="lead" d="M194 109 H300"/><circle class="dot" cx="300" cy="109" r="4"/>
-                <text class="lbl" x="188" y="105" text-anchor="end">Head expander</text>
-                <text class="lbl-s" x="188" y="123" text-anchor="end">slides up out of the unit&#39;s head</text>
-                <text class="lbl-s" x="188" y="141" text-anchor="end">until it meets the head jamb</text>
-                <path class="lead" d="M700 150 H420"/><circle class="dot" cx="420" cy="150" r="4"/>
-                <text class="lbl-s" x="706" y="146">its leg stays in the</text>
-                <text class="lbl-s" x="706" y="164">head, so it telescopes</text>
+                <text class="lbl-s" x="445" y="143" text-anchor="middle">fiberglass</text>
+                <path class="lead" d="M194 108 H280"/><circle class="dot" cx="280" cy="108" r="4"/>
+                <text class="lbl" x="188" y="88" text-anchor="end">Head expander</text>
+                <text class="lbl-s" x="188" y="106" text-anchor="end">an upside-down U, packed</text>
+                <text class="lbl-s" x="188" y="124" text-anchor="end">with fiberglass</text>
+                <text class="lbl-s" x="188" y="148" text-anchor="end">optional &#8212; plenty of crews skip it</text>
+                <text class="lbl-s" x="188" y="166" text-anchor="end">and cap the outside instead</text>
               </g>
             </svg>
           </div>
-          <figcaption><b>Adapter first, unit second, expander last.</b> The adapter turns a sloped
-            sill into a level bed; the expander closes the gap the unit was deliberately made
-            short of. Both absorb <em>clearance</em>, not error — a window ordered too small
-            still ends up with a gap neither of them can reach.</figcaption>
+          <figcaption><b>Neither piece holds the window up.</b> The unit bears on the old sill at
+            its inside edge and on the shims at the jambs; the extender is a fin that hides what
+            is left open underneath, snapped to height along the detents in the extrusion. The
+            expander closes the gap at the head, and it is optional &#8212; capping the exterior in
+            aluminum does the same job from outside. Neither absorbs a bad measurement: a unit
+            ordered too small still leaves a gap neither one can reach.</figcaption>
         </figure>
       </section>
 
@@ -579,6 +590,9 @@
               <tr><td><b>Pocket</b></td><td>The clear space between blind stop and inside stop.</td><td>If it is under about 3&#188;&#8243;, an insert will not fit.</td></tr>
               <tr><td><b>Stool</b></td><td>The interior shelf — what most people call the sill.</td><td>Stays put. Your unit lands behind it, not on it.</td></tr>
               <tr><td><b>Apron</b></td><td>Trim under the stool.</td><td>Only comes off if you are replacing the stool.</td></tr>
+              <tr><td><b>Sill extender</b></td><td>A fin that clips into the accessory groove and hangs below the unit's sill.</td><td>Hides the open space left under the outer half of the sill. Detents along the extrusion let you snap it to height.</td></tr>
+              <tr><td><b>Head expander</b></td><td>An upside-down U packed with fiberglass, closing the gap at the head.</td><td>Optional. Plenty of crews leave it off and cap the exterior in aluminum instead.</td></tr>
+              <tr><td><b>Accessory groove</b></td><td>A slot running around the exterior face of the unit's frame.</td><td>What the extender, and anything else that clips on, hooks into.</td></tr>
               <tr><td><b>Insert / pocket window</b></td><td>A complete window built to drop into an existing frame.</td><td>What this whole site is about. No nailing fin, no siding work.</td></tr>
               <tr><td><b>Full frame</b></td><td>Tearing the old frame out back to the rough opening.</td><td>The fallback when the pocket is too shallow or the frame is rotten.</td></tr>
             </tbody>
