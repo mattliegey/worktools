@@ -16,13 +16,14 @@
 
     /* Fig 2 — strip the window back to a bare pocket, dimension it, then take
        the inside stop off so the new unit has a way in */
-    @keyframes secSash { 0% { opacity: 1; } 20%, 100% { opacity: 0; } }
-    @keyframes secBead { 0%, 20% { opacity: 1; } 40%, 100% { opacity: 0; } }
-    @keyframes secVoid { 0%, 40% { opacity: 0; } 60%, 100% { opacity: 1; } }
-    @keyframes secDim { 0%, 60% { opacity: 0; } 80%, 100% { opacity: 1; } }
-    @keyframes secStopOff { 0%, 80% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(58px); opacity: 0; } }
-    @keyframes secStopOn { 0%, 80% { opacity: 1; } 100% { opacity: 0; } }
-    @keyframes secStopGone { 0%, 80% { opacity: 0; } 100% { opacity: 1; } }
+    @keyframes secSash { 0% { opacity: 1; } 16.7%, 100% { opacity: 0; } }
+    @keyframes secBead { 0%, 16.7% { opacity: 1; } 33.3%, 100% { opacity: 0; } }
+    @keyframes secVoid { 0%, 33.3% { opacity: 0; } 50%, 83.3% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes secDim { 0%, 50% { opacity: 0; } 66.7%, 83.3% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes secStopOff { 0%, 66.7% { transform: translateY(0); opacity: 1; } 83.3%, 100% { transform: translateY(58px); opacity: 0; } }
+    @keyframes secStopOn { 0%, 66.7% { opacity: 1; } 83.3%, 100% { opacity: 0; } }
+    @keyframes secStopGone { 0%, 66.7% { opacity: 0; } 83.3% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes secNewIn { 0%, 83.3% { opacity: 0; } 100% { opacity: 1; } }
 
     .lbl  { font-size: 15px; fill: var(--text); font-weight: 600; }
     .lbl-s{ font-size: 13px; fill: var(--text-muted); }
@@ -196,8 +197,8 @@
           <strong>pocket</strong> — the slot your new insert has to live in. If it is too
           shallow, an insert will not work here at all.</p>
 
-        <figure class="figure" data-dur="12s"
-                data-steps="0:As it stands|0.2:Sashes out|0.4:Parting bead out|0.6:The pocket|0.8:Pocket depth|1:Inside stop off">
+        <figure class="figure" data-dur="14s"
+                data-steps="0:As it stands|0.167:Sashes out|0.333:Parting bead out|0.5:The pocket|0.667:Pocket depth|0.833:Inside stop off|1:New window in">
           <div class="stage">
             <svg viewBox="0 0 760 400" role="img" aria-labelledby="secT secD">
               <title id="secT">Horizontal section through a window jamb</title>
@@ -205,8 +206,10 @@
                 then the upper sash channel, the parting bead, the lower sash channel, and the
                 inside stop at the interior. Removing the sashes and parting bead leaves the
                 pocket, whose depth is measured between the blind stop and the inside stop.
-                Finally the inside stop comes off, opening the pocket to the room so the new
-                insert can go in; the stop is refitted over it afterwards.</desc>
+                The inside stop then comes off, opening the pocket to the room. The new insert
+                is set into the pocket tight against the blind stop, shimmed and screwed through
+                its jamb into the old one, the gap around it filled with low-expansion foam, and
+                the inside stop refitted over the joint.</desc>
 
               <!-- Orientation labels -->
               <text class="lbl-s" x="30" y="46">EXTERIOR</text>
@@ -284,6 +287,67 @@
                       font-size="19">THE POCKET</text>
               </g>
 
+              <!-- Stage 7 — the new unit set, shimmed, foamed and closed in -->
+              <g data-anim="" style="animation-name: secNewIn">
+                <!-- foam packing the gap between the two frames -->
+                <rect x="204" y="112" width="22" height="170" fill="var(--dg-foam)"/>
+                <!-- shims, tapered, at each fixing -->
+                <path d="M204 134 L226 130 L226 154 L204 158 Z"
+                      fill="var(--dg-wood-dark)" stroke="var(--dg-wood-edge)" stroke-width="1.8"/>
+                <path d="M204 234 L226 230 L226 254 L204 258 Z"
+                      fill="var(--dg-wood-dark)" stroke="var(--dg-wood-edge)" stroke-width="1.8"/>
+                <!-- the insert's own jamb, hollow vinyl, butted to the blind stop -->
+                <path d="M208 96 H270 V282 H226 V112 H208 Z"
+                      fill="var(--dg-vinyl)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
+                <path d="M216 104 H262 V274 H234 V120 H216 Z"
+                      fill="none" stroke="var(--dg-vinyl-edge)" stroke-width="1.2"/>
+                <!-- the new sashes running in it -->
+                <rect x="270" y="98" width="150" height="86"
+                      fill="var(--dg-vinyl)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
+                <text class="lbl-s" x="345" y="146" text-anchor="middle">new upper sash</text>
+                <rect x="270" y="194" width="150" height="86"
+                      fill="var(--dg-vinyl)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
+                <text class="lbl-s" x="345" y="242" text-anchor="middle">new lower sash</text>
+                <!-- screwed through the insert jamb and the shim into the old jamb -->
+                <path d="M258 146 H180" stroke="var(--dg-line)" stroke-width="3" fill="none"/>
+                <circle cx="258" cy="146" r="5" fill="var(--dg-line)"/>
+                <path d="M258 246 H180" stroke="var(--dg-line)" stroke-width="3" fill="none"/>
+                <circle cx="258" cy="246" r="5" fill="var(--dg-line)"/>
+                <!-- inside stop back on, hiding the joint -->
+                <rect x="204" y="286" width="30" height="40"
+                      fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
+
+                <circle cx="248" cy="190" r="11" fill="var(--accent)"/>
+                <text x="248" y="195" text-anchor="middle" font-size="14" font-weight="700"
+                      fill="var(--surface)">1</text>
+                <circle cx="215" cy="144" r="11" fill="var(--accent)"/>
+                <text x="215" y="149" text-anchor="middle" font-size="14" font-weight="700"
+                      fill="var(--surface)">2</text>
+                <circle cx="215" cy="200" r="11" fill="var(--accent)"/>
+                <text x="215" y="205" text-anchor="middle" font-size="14" font-weight="700"
+                      fill="var(--surface)">3</text>
+                <circle cx="219" cy="306" r="11" fill="var(--accent)"/>
+                <text x="219" y="311" text-anchor="middle" font-size="14" font-weight="700"
+                      fill="var(--surface)">4</text>
+
+                <circle cx="464" cy="112" r="11" fill="var(--accent)"/>
+                <text x="464" y="117" text-anchor="middle" font-size="14" font-weight="700"
+                      fill="var(--surface)">1</text>
+                <text class="lbl-s" x="484" y="117">New insert, tight to the blind stop</text>
+                <circle cx="464" cy="152" r="11" fill="var(--accent)"/>
+                <text x="464" y="157" text-anchor="middle" font-size="14" font-weight="700"
+                      fill="var(--surface)">2</text>
+                <text class="lbl-s" x="484" y="157">Shim and screw at every fixing</text>
+                <circle cx="464" cy="192" r="11" fill="var(--accent)"/>
+                <text x="464" y="197" text-anchor="middle" font-size="14" font-weight="700"
+                      fill="var(--surface)">3</text>
+                <text class="lbl-s" x="484" y="197">Low-expansion foam in the gap</text>
+                <circle cx="464" cy="232" r="11" fill="var(--accent)"/>
+                <text x="464" y="237" text-anchor="middle" font-size="14" font-weight="700"
+                      fill="var(--surface)">4</text>
+                <text class="lbl-s" x="484" y="237">Stop back on over the joint</text>
+              </g>
+
               <!-- Pocket depth dimension -->
               <g data-anim="" style="animation-name: secDim">
                 <path class="dim" d="M470 94 V286"/>
@@ -307,7 +371,12 @@
             off before the new unit can go in</b>, and back on over it once the window is set. On
             the wall it is actually the <em>first</em> thing off, because nothing else moves until
             it does — it is shown last here only because it is the last thing standing
-            between the pocket and the room.</figcaption>
+            between the pocket and the room.
+            <br><br>The seventh stage is the same section with the job done: the new unit set tight
+            to the blind stop, shimmed and screwed through its jamb into the old one, the gap
+            foamed, and the stop back on over the joint. Compare it with the first stage —
+            same frame, same wall, a whole window swapped inside it. Each step is drawn out on
+            <a href="install.html">Setting the new window</a>.</figcaption>
         </figure>
 
         <div class="callout stop">
