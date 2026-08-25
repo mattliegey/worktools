@@ -296,16 +296,17 @@
               <!-- Stage 7 — the new unit set, shimmed, foamed and closed in -->
               <g data-anim="" style="animation-name: secNewIn">
                 <!-- foam packing the gap between the two frames -->
-                <rect x="204" y="112" width="22" height="170" fill="var(--dg-foam)"/>
-                <!-- shims, tapered, at each fixing -->
-                <path d="M204 134 L226 130 L226 154 L204 158 Z"
-                      fill="var(--dg-wood-dark)" stroke="var(--dg-wood-edge)" stroke-width="1.8"/>
-                <path d="M204 234 L226 230 L226 254 L204 258 Z"
-                      fill="var(--dg-wood-dark)" stroke="var(--dg-wood-edge)" stroke-width="1.8"/>
-                <!-- the insert's own jamb, hollow vinyl, butted to the blind stop -->
-                <path d="M208 96 H270 V282 H226 V112 H208 Z"
+                <rect x="204" y="94" width="14" height="188" fill="var(--dg-foam)"/>
+                <!-- shims, filling the gap old jamb to new frame, at each fixing -->
+                <rect x="204" y="134" width="14" height="24"
+                      fill="var(--dg-wood-dark)" stroke="var(--dg-wood-edge)" stroke-width="1.6"/>
+                <rect x="204" y="234" width="14" height="24"
+                      fill="var(--dg-wood-dark)" stroke="var(--dg-wood-edge)" stroke-width="1.6"/>
+                <!-- the insert's own jamb: a plain rectangle, its outer end
+                     nestled up behind the blind stop -->
+                <rect x="218" y="94" width="52" height="188"
                       fill="var(--dg-vinyl)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
-                <path d="M216 104 H262 V274 H234 V120 H216 Z"
+                <rect x="226" y="102" width="36" height="172"
                       fill="none" stroke="var(--dg-vinyl-edge)" stroke-width="1.2"/>
                 <!-- the new sashes running in it -->
                 <rect x="270" y="98" width="150" height="86"
@@ -315,22 +316,22 @@
                       fill="var(--dg-vinyl)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
                 <text class="lbl-s" x="345" y="242" text-anchor="middle">new lower sash</text>
                 <!-- screwed through the insert jamb and the shim into the old jamb -->
-                <path d="M258 146 H180" stroke="var(--dg-line)" stroke-width="3" fill="none"/>
-                <circle cx="258" cy="146" r="5" fill="var(--dg-line)"/>
-                <path d="M258 246 H180" stroke="var(--dg-line)" stroke-width="3" fill="none"/>
-                <circle cx="258" cy="246" r="5" fill="var(--dg-line)"/>
+                <path d="M264 146 H180" stroke="var(--dg-line)" stroke-width="3" fill="none"/>
+                <circle cx="264" cy="146" r="5" fill="var(--dg-line)"/>
+                <path d="M264 246 H180" stroke="var(--dg-line)" stroke-width="3" fill="none"/>
+                <circle cx="264" cy="246" r="5" fill="var(--dg-line)"/>
                 <!-- inside stop back on, hiding the joint -->
                 <rect x="204" y="286" width="30" height="40"
                       fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
 
-                <circle cx="248" cy="190" r="11" fill="var(--accent)"/>
-                <text x="248" y="195" text-anchor="middle" font-size="14" font-weight="700"
+                <circle cx="244" cy="190" r="11" fill="var(--accent)"/>
+                <text x="244" y="195" text-anchor="middle" font-size="14" font-weight="700"
                       fill="var(--surface)">1</text>
-                <circle cx="215" cy="144" r="11" fill="var(--accent)"/>
-                <text x="215" y="149" text-anchor="middle" font-size="14" font-weight="700"
+                <circle cx="234" cy="146" r="11" fill="var(--accent)"/>
+                <text x="234" y="151" text-anchor="middle" font-size="14" font-weight="700"
                       fill="var(--surface)">2</text>
-                <circle cx="215" cy="200" r="11" fill="var(--accent)"/>
-                <text x="215" y="205" text-anchor="middle" font-size="14" font-weight="700"
+                <circle cx="211" cy="204" r="11" fill="var(--accent)"/>
+                <text x="211" y="209" text-anchor="middle" font-size="14" font-weight="700"
                       fill="var(--surface)">3</text>
                 <circle cx="219" cy="306" r="11" fill="var(--accent)"/>
                 <text x="219" y="311" text-anchor="middle" font-size="14" font-weight="700"
