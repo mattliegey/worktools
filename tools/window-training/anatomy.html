@@ -29,7 +29,7 @@
     @keyframes vsVoid { 0% { opacity: 1; } 50%, 100% { opacity: 0; } }
     @keyframes vsGap  { 0%, 50% { opacity: 1; } 100% { opacity: 0; } }
     @keyframes vsExt  { 0% { transform: translateX(70px); opacity: 0; } 14% { opacity: 1; } 50%, 100% { transform: translateX(0); opacity: 1; } }
-    @keyframes vsExp  { 0%, 50% { transform: translateY(44px); opacity: 0; } 64% { opacity: 1; } 100% { transform: translateY(0); opacity: 1; } }
+    @keyframes vsExp  { 0%, 50% { transform: translateY(24px); opacity: 0; } 64% { opacity: 1; } 100% { transform: translateY(0); opacity: 1; } }
 
     .lbl  { font-size: 15px; fill: var(--text); font-weight: 600; }
     .lbl-s{ font-size: 13px; fill: var(--text-muted); }
@@ -475,87 +475,93 @@
             <svg viewBox="-20 0 940 600" role="img" aria-labelledby="vsT vsD">
               <title id="vsT">Side view through an insert sitting in the old frame</title>
               <desc id="vsD">A side view cut through the window, interior on the left and exterior
-                on the right. The new unit is drawn as a plain vertical strip of vinyl frame. Its
-                sill is flat and lands on the high, interior edge of the sloped old sill, so the
-                outer part of it sits over open air. The sill extender is a vertical fin that clips
-                into the accessory groove on the unit and hangs down to hide that opening; it has
-                detents along its length so it can be snapped to whatever height the opening needs.
-                At the head, the clearance the unit was ordered short by leaves a gap, closed by an
-                optional head expander shaped like an upside-down U and packed with fiberglass.
-                Clearances are drawn much larger than they are in life.</desc>
+                on the right. The new unit is a plain vertical strip of hollow vinyl frame running
+                nearly the full height of the opening, its top tucked up behind the blind stop at
+                the head. Its sill is flat and lands on the high, interior edge of the sloped old
+                sill, so the outer part of it sits over open air. The sill extender is a thin
+                vertical fin that clips into the accessory groove on the unit and hangs down to
+                hide that opening; it has detents along its length so it can be snapped to
+                whatever height the opening needs. At the head, the small clearance the unit was
+                ordered short by leaves a narrow gap, closed by an optional head expander shaped
+                like an upside-down U and packed with fiberglass. Clearances are drawn larger than
+                they are in life.</desc>
 
-              <text class="lbl-s" x="360" y="28">&#8592; INTERIOR</text>
-              <text class="lbl-s" x="640" y="28" text-anchor="end">EXTERIOR &#8594;</text>
+              <text class="lbl-s" x="380" y="28">&#8592; INTERIOR</text>
+              <text class="lbl-s" x="620" y="28" text-anchor="end">EXTERIOR &#8594;</text>
 
-              <rect x="360" y="52" width="240" height="44"
+              <rect x="380" y="52" width="200" height="44"
                     fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
-              <path class="lead" d="M354 74 H396"/><circle class="dot" cx="396" cy="74" r="4"/>
-              <text class="lbl-s" x="348" y="70" text-anchor="end">old head jamb</text>
+              <path class="lead" d="M374 66 H416"/><circle class="dot" cx="416" cy="66" r="4"/>
+              <text class="lbl-s" x="368" y="48" text-anchor="end">old head jamb</text>
 
-              <rect x="560" y="96" width="40" height="34"
+              <rect x="540" y="96" width="40" height="50"
                     fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
-              <path class="lead" d="M580 113 H660"/><circle class="dot" cx="580" cy="113" r="4"/>
-              <text class="lbl-s" x="666" y="109">blind stop at the head</text>
+              <path class="lead" d="M560 121 H640"/><circle class="dot" cx="560" cy="121" r="4"/>
+              <text class="lbl-s" x="646" y="117">blind stop at the head</text>
+              <text class="lbl-s" x="646" y="135">the unit tucks up behind it</text>
 
-              <path d="M360 450 L640 520 L640 552 L360 482 Z"
+              <path d="M380 450 L620 517 L620 549 L380 482 Z"
                     fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="2"/>
-              <path class="lead" d="M354 474 H400"/><circle class="dot" cx="400" cy="474" r="4"/>
-              <text class="lbl-s" x="348" y="487" text-anchor="end">old sill</text>
-              <text class="lbl-s" x="348" y="505" text-anchor="end">slopes down to the outside</text>
+              <path class="lead" d="M374 472 H420"/><circle class="dot" cx="420" cy="472" r="4"/>
+              <text class="lbl-s" x="368" y="487" text-anchor="end">old sill</text>
+              <text class="lbl-s" x="368" y="505" text-anchor="end">slopes down to the outside</text>
 
-              <rect x="420" y="140" width="140" height="325"
-                    fill="var(--dg-vinyl)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
+              <rect x="440" y="120" width="100" height="347"
+                    fill="var(--dg-vinyl)" stroke="var(--dg-vinyl-edge)" stroke-width="2.5"/>
+              <path d="M472 128 V459 M508 128 V459" stroke="var(--dg-vinyl-edge)"
+                    stroke-width="1.6" fill="none"/>
+              <path d="M448 128 H532 M448 459 H532" stroke="var(--dg-vinyl-edge)"
+                    stroke-width="1.6" fill="none"/>
               <text class="lbl-s" x="490" y="300" text-anchor="middle"
                     transform="rotate(-90 490 300)">the new unit&#39;s frame</text>
-              <rect x="546" y="437" width="14" height="20"
+              <rect x="528" y="442" width="12" height="14"
                     fill="var(--surface-2)" stroke="var(--dg-vinyl-edge)" stroke-width="1.2"/>
-              <path class="lead" d="M354 420 H426 V458"/><circle class="dot" cx="426" cy="458" r="4"/>
-              <text class="lbl-s" x="348" y="398" text-anchor="end">its sill is flat, and lands</text>
-              <text class="lbl-s" x="348" y="416" text-anchor="end">on the high inside edge</text>
+              <path class="lead" d="M374 420 H446 V460"/><circle class="dot" cx="446" cy="460" r="4"/>
+              <text class="lbl-s" x="368" y="398" text-anchor="end">its sill is flat, and lands</text>
+              <text class="lbl-s" x="368" y="416" text-anchor="end">on the high inside edge</text>
 
-              <text class="lbl-s" x="500" y="586" text-anchor="middle">clearances drawn much larger than they are in life</text>
+              <text class="lbl-s" x="500" y="586" text-anchor="middle">clearances drawn larger than they are in life</text>
 
               <g data-anim="" style="animation-name: vsVoid">
-                <path class="hl" d="M420 465 H560 V500 Z"/>
-                <path d="M420 465 H560 V500 Z" fill="none" stroke="var(--accent)"
+                <path class="hl" d="M440 467 H540 V495 Z"/>
+                <path d="M440 467 H540 V495 Z" fill="none" stroke="var(--accent)"
                       stroke-width="2" stroke-dasharray="8 6"/>
-                <path class="lead" d="M530 482 H660"/><circle class="dot" cx="530" cy="482" r="4"/>
-                <text class="lbl c-accent" x="666" y="478">nothing under here</text>
-                <text class="lbl-s" x="666" y="496">the outer part of the unit&#39;s</text>
-                <text class="lbl-s" x="666" y="514">sill is over open air</text>
+                <path class="lead" d="M505 483 H640"/><circle class="dot" cx="505" cy="483" r="4"/>
+                <text class="lbl c-accent" x="646" y="479">nothing under here</text>
+                <text class="lbl-s" x="646" y="497">the outer part of the unit&#39;s</text>
+                <text class="lbl-s" x="646" y="515">sill is over open air</text>
               </g>
 
               <g data-anim="" style="animation-name: vsGap">
-                <rect class="hl" x="420" y="96" width="140" height="44"/>
-                <path class="lead" d="M354 118 H418"/><circle class="dot" cx="418" cy="118" r="4"/>
-                <text class="lbl c-accent" x="348" y="100" text-anchor="end">the height clearance</text>
-                <text class="lbl c-accent" x="348" y="118" text-anchor="end">ends up here</text>
+                <rect class="hl" x="440" y="96" width="100" height="24"/>
+                <path class="lead" d="M374 108 H438"/><circle class="dot" cx="438" cy="108" r="4"/>
+                <text class="lbl c-accent" x="368" y="90" text-anchor="end">the height clearance</text>
+                <text class="lbl c-accent" x="368" y="108" text-anchor="end">ends up here</text>
               </g>
 
               <g data-anim="" style="animation-name: vsExt">
-                <path d="M546 437 H576 V504 H560 V457 H546 Z"
-                      fill="var(--dg-metal)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
-                <path d="M576 472 H565 M576 488 H565"
-                      stroke="var(--dg-line)" stroke-width="1.8" fill="none"/>
-                <path class="lead" d="M576 476 H660"/><circle class="dot" cx="576" cy="476" r="4"/>
-                <text class="lbl" x="666" y="442">Sill extender</text>
-                <text class="lbl-s" x="666" y="460">clips into the accessory groove</text>
-                <text class="lbl-s" x="666" y="478">and hangs down to hide it</text>
-                <text class="lbl-s" x="666" y="502">the ridges are detents &#8212; snap it</text>
-                <text class="lbl-s" x="666" y="520">off at whatever height fits</text>
+                <path d="M528 442 H549 V496 H540 V456 H528 Z"
+                      fill="var(--dg-metal)" stroke="var(--dg-vinyl-edge)" stroke-width="1.8"/>
+                <path d="M549 470 H543 M549 482 H543"
+                      stroke="var(--dg-line)" stroke-width="1.6" fill="none"/>
+                <path class="lead" d="M549 476 H640"/><circle class="dot" cx="549" cy="476" r="4"/>
+                <text class="lbl" x="646" y="442">Sill extender</text>
+                <text class="lbl-s" x="646" y="460">clips into the accessory groove</text>
+                <text class="lbl-s" x="646" y="478">and hangs down to hide it</text>
+                <text class="lbl-s" x="646" y="502">the ridges are detents &#8212; snap it</text>
+                <text class="lbl-s" x="646" y="520">off at whatever height fits</text>
               </g>
 
               <g data-anim="" style="animation-name: vsExp">
-                <rect x="436" y="114" width="108" height="26" fill="var(--dg-foam)"/>
-                <path d="M420 140 V96 H560 V140 H544 V114 H436 V140 Z"
-                      fill="var(--dg-metal)" stroke="var(--dg-vinyl-edge)" stroke-width="2"/>
-                <text class="lbl-s" x="490" y="132" text-anchor="middle">fiberglass</text>
-                <path class="lead" d="M354 105 H470"/><circle class="dot" cx="470" cy="105" r="4"/>
-                <text class="lbl" x="348" y="100" text-anchor="end">Head expander</text>
-                <text class="lbl-s" x="348" y="118" text-anchor="end">an upside-down U, packed</text>
-                <text class="lbl-s" x="348" y="136" text-anchor="end">with fiberglass</text>
-                <text class="lbl-s" x="348" y="160" text-anchor="end">optional &#8212; plenty of crews skip it</text>
-                <text class="lbl-s" x="348" y="178" text-anchor="end">and cap the outside instead</text>
+                <rect x="454" y="106" width="72" height="14" fill="var(--dg-foam)"/>
+                <path d="M440 120 V96 H540 V120 H526 V106 H454 V120 Z"
+                      fill="var(--dg-metal)" stroke="var(--dg-vinyl-edge)" stroke-width="1.8"/>
+                <path class="lead" d="M374 101 H480"/><circle class="dot" cx="480" cy="101" r="4"/>
+                <text class="lbl" x="368" y="84" text-anchor="end">Head expander</text>
+                <text class="lbl-s" x="368" y="102" text-anchor="end">a small upside-down U, packed</text>
+                <text class="lbl-s" x="368" y="120" text-anchor="end">with fiberglass</text>
+                <text class="lbl-s" x="368" y="144" text-anchor="end">optional &#8212; plenty of crews skip it</text>
+                <text class="lbl-s" x="368" y="162" text-anchor="end">and cap the outside instead</text>
               </g>
             </svg>
           </div>
