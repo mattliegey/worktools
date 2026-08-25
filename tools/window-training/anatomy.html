@@ -297,11 +297,14 @@
               <g data-anim="" style="animation-name: secNewIn">
                 <!-- foam packing the gap between the two frames -->
                 <rect x="204" y="94" width="14" height="188" fill="var(--dg-foam)"/>
-                <!-- shims, filling the gap old jamb to new frame, at each fixing -->
-                <rect x="204" y="134" width="14" height="24"
-                      fill="var(--dg-wood-dark)" stroke="var(--dg-wood-edge)" stroke-width="1.6"/>
-                <rect x="204" y="234" width="14" height="24"
-                      fill="var(--dg-wood-dark)" stroke="var(--dg-wood-edge)" stroke-width="1.6"/>
+                <!-- shims: an opposing pair of wedges at each fixing, slid past
+                     each other to fill the gap old jamb to new frame -->
+                <path d="M204 134 H218 L204 158 Z" fill="var(--dg-wood-dark)" stroke="var(--dg-wood-edge)" stroke-width="1.2"/>
+                <path d="M218 134 V158 H204 Z" fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="1.2"/>
+                <path d="M218 134 L204 158" stroke="var(--dg-wood-edge)" stroke-width="1.2" fill="none"/>
+                <path d="M204 234 H218 L204 258 Z" fill="var(--dg-wood-dark)" stroke="var(--dg-wood-edge)" stroke-width="1.2"/>
+                <path d="M218 234 V258 H204 Z" fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="1.2"/>
+                <path d="M218 234 L204 258" stroke="var(--dg-wood-edge)" stroke-width="1.2" fill="none"/>
                 <!-- the insert's own jamb: a plain rectangle, its outer end
                      nestled up behind the blind stop -->
                 <rect x="218" y="94" width="52" height="188"
