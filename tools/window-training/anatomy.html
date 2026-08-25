@@ -295,16 +295,14 @@
 
               <!-- Stage 7 — the new unit set, shimmed, foamed and closed in -->
               <g data-anim="" style="animation-name: secNewIn">
-                <!-- foam packing the gap between the two frames -->
-                <rect x="204" y="94" width="14" height="188" fill="var(--dg-foam)"/>
-                <!-- shims: an opposing pair of wedges at each fixing, slid past
-                     each other to fill the gap old jamb to new frame -->
-                <path d="M204 134 H218 L204 158 Z" fill="var(--dg-wood-dark)" stroke="var(--dg-wood-edge)" stroke-width="1.2"/>
-                <path d="M218 134 V158 H204 Z" fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="1.2"/>
-                <path d="M218 134 L204 158" stroke="var(--dg-wood-edge)" stroke-width="1.2" fill="none"/>
-                <path d="M204 234 H218 L204 258 Z" fill="var(--dg-wood-dark)" stroke="var(--dg-wood-edge)" stroke-width="1.2"/>
-                <path d="M218 234 V258 H204 Z" fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="1.2"/>
-                <path d="M218 234 L204 258" stroke="var(--dg-wood-edge)" stroke-width="1.2" fill="none"/>
+                <!-- low-expansion foam, squeezed out at each mouth of the gap -->
+                <path d="M204 94 H218 Q210 86 204 90 Z" fill="var(--dg-foam)"/>
+                <path d="M204 282 H218 Q210 290 204 286 Z" fill="var(--dg-foam)"/>
+                <!-- shims: one opposing pair the full length of the frame, two
+                     tapered wedges slid past each other to fill the whole gap -->
+                <path d="M204 94 H218 L204 282 Z" fill="var(--dg-wood-dark)" stroke="var(--dg-wood-edge)" stroke-width="1.2"/>
+                <path d="M218 94 V282 H204 Z" fill="var(--dg-wood)" stroke="var(--dg-wood-edge)" stroke-width="1.2"/>
+                <path d="M218 94 L204 282" stroke="var(--dg-wood-edge)" stroke-width="1.2" fill="none"/>
                 <!-- the insert's own jamb: a plain rectangle, its outer end
                      nestled up behind the blind stop -->
                 <rect x="218" y="94" width="52" height="188"
@@ -333,8 +331,8 @@
                 <circle cx="234" cy="146" r="11" fill="var(--accent)"/>
                 <text x="234" y="151" text-anchor="middle" font-size="14" font-weight="700"
                       fill="var(--surface)">2</text>
-                <circle cx="211" cy="204" r="11" fill="var(--accent)"/>
-                <text x="211" y="209" text-anchor="middle" font-size="14" font-weight="700"
+                <circle cx="210" cy="89" r="11" fill="var(--accent)"/>
+                <text x="210" y="94" text-anchor="middle" font-size="14" font-weight="700"
                       fill="var(--surface)">3</text>
                 <circle cx="219" cy="306" r="11" fill="var(--accent)"/>
                 <text x="219" y="311" text-anchor="middle" font-size="14" font-weight="700"
